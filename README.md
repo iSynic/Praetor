@@ -10,6 +10,14 @@ game's own files, with every byte the editor does not own kept exactly as it was
 Praetor is a native Godot application over a Rust library. It does not include the game or any of its art: it reads
 the player's own installation of The New Centurions.
 
+## Downloads
+
+Each [release](https://github.com/iSynic/Praetor/releases) has a Windows build, a Linux build (x86_64) and a macOS build
+(universal, signed ad hoc and not notarised: if macOS refuses to open it, run `xattr -dr com.apple.quarantine Praetor.app`
+once). Play from here needs the Newer Centurions runtime for your system beside the editor and is available only where
+that runtime exists. On Linux and macOS the editor keeps its settings, its artwork cache and the monster vault in your user
+data folder.
+
 ## Using it
 
 1. Put Praetor in the folder that holds your New Centurions 1.3.2 installation (and Newer Centurions, to play what you

@@ -22,12 +22,34 @@ var _launches := 0
 const ADAPTER_INTERFACE := 16
 
 
+## The name of one of the package's programs on this system: Windows adds .exe.
+static func program(name: String) -> String:
+	return name + (".exe" if OS.get_name() == "Windows" else "")
+
+
+## The folder the player thinks of as the editor's: on macOS the one that holds Praetor.app, elsewhere the folder of the
+## program.
+static func application_folder() -> String:
+	var folder := OS.get_executable_path().get_base_dir()
+	if OS.get_name() == "macOS" and folder.ends_with(".app/Contents/MacOS"): return folder.get_base_dir().get_base_dir().get_base_dir()
+	return folder
+
+
+## A copy of the editor that is not on Windows keeps what it writes (the artwork cache, the settings and the vault) in the
+## user's data folder, because the folder it runs from may be read-only (a macOS app that has been moved by Gatekeeper is).
+## The adapter reads these two variables, and so does the checklist of the folder.
+static func use_user_folders() -> void:
+	if OS.get_name() == "Windows" or OS.has_feature("editor"): return
+	if OS.get_environment("CENTURIONS_CACHE_DIR").is_empty(): OS.set_environment("CENTURIONS_CACHE_DIR", OS.get_user_data_dir().path_join("artwork-cache"))
+	if OS.get_environment("CENTURIONS_SETTINGS_FILE").is_empty(): OS.set_environment("CENTURIONS_SETTINGS_FILE", OS.get_user_data_dir().path_join("settings.json"))
+
+
 static func adapter_path() -> String:
 	var configured := OS.get_environment("CENTURIONS_ADAPTER")
 	if not configured.is_empty(): return configured
-	var beside := OS.get_executable_path().get_base_dir().path_join("centurions-adapter.exe")
+	var beside := OS.get_executable_path().get_base_dir().path_join(program("centurions-adapter"))
 	if FileAccess.file_exists(beside): return beside
-	return ProjectSettings.globalize_path("res://../target/release/centurions-adapter.exe").simplify_path()
+	return ProjectSettings.globalize_path("res://../target/release/" + program("centurions-adapter")).simplify_path()
 
 
 ## The adapter to launch. Run from the Godot editor, a copy is launched so that building the adapter again never
@@ -39,7 +61,7 @@ func _launch_path() -> String:
 	DirAccess.make_dir_recursive_absolute(folder)
 	for old in DirAccess.get_files_at(folder): DirAccess.remove_absolute(folder.path_join(old))
 	_launches += 1
-	var copy := folder.path_join("centurions-adapter-%d-%d.exe" % [OS.get_process_id(), _launches])
+	var copy := folder.path_join(program("centurions-adapter-%d-%d" % [OS.get_process_id(), _launches]))
 	if DirAccess.copy_absolute(path, copy) != OK: return path
 	return ProjectSettings.globalize_path(copy)
 
@@ -47,6 +69,7 @@ func _launch_path() -> String:
 func start() -> Dictionary:
 	stop()
 	revision = 0
+	use_user_folders()
 	_reader = preload("res://src/native_json_line_reader.gd").new()
 	_process = OS.execute_with_pipe(_launch_path(), PackedStringArray(), true)
 	if not _process.has("stdio"):

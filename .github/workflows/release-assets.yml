@@ -1,0 +1,139 @@
+name: Release assets
+
+# Builds Praetor for Linux and macOS and attaches the builds to a release. Run it by hand for an existing release
+# (Actions, Release assets, Run workflow, and name the tag), or let it run when a release is published.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: The release to add the Linux and macOS builds to
+        required: true
+        default: v0.3.0
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+env:
+  GODOT_VERSION: "4.7.1"
+  TAG: ${{ inputs.tag || github.event.release.tag_name }}
+
+jobs:
+  check:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rust
+        run: |
+          rustup update stable
+          rustc --version
+      - name: Test
+        run: cargo test --workspace
+
+  linux:
+    name: Linux x86_64
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rust
+        run: rustup update stable
+      - name: Build the adapter and the command-line tool
+        run: cargo build --release -p centurions-editor
+      - name: Godot and its export templates
+        run: |
+          BASE="https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable"
+          curl -fsSL -O "$BASE/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          curl -fsSL -O "$BASE/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          curl -fsSL -O "$BASE/SHA512-SUMS.txt"
+          sha512sum -c --ignore-missing SHA512-SUMS.txt
+          unzip -q "Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          mkdir -p "$HOME/.local/share/godot/export_templates"
+          unzip -q "Godot_v${GODOT_VERSION}-stable_export_templates.tpz" -d templates
+          mv templates/templates "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+      - name: Export
+        run: |
+          GODOT="./Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$GODOT" --headless --path godot --import
+          mkdir -p artifacts/linux-editor
+          "$GODOT" --headless --path godot --export-release "Linux" ../artifacts/linux-editor/Praetor.x86_64
+      - name: Package
+        run: |
+          GODOT="$PWD/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          VERSION="${TAG#v}"
+          NAME="Praetor-${VERSION}-linux-x86_64"
+          mkdir -p "dist/$NAME"
+          cp artifacts/linux-editor/Praetor.x86_64 target/release/centurions-adapter target/release/centurions-editor "dist/$NAME/"
+          cp LICENSE NOTICE README.md "dist/$NAME/"
+          cp -r docs "dist/$NAME/docs"
+          "$GODOT" --headless --path godot --script res://tools/export_licenses.gd -- "$PWD/dist/$NAME"
+          chmod +x "dist/$NAME/Praetor.x86_64" "dist/$NAME/centurions-adapter" "dist/$NAME/centurions-editor"
+          tar -C dist -czf "$NAME.tar.gz" "$NAME"
+          sha256sum "$NAME.tar.gz"
+      - name: Attach to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" Praetor-*-linux-x86_64.tar.gz --clobber --repo "$GITHUB_REPOSITORY"
+
+  macos:
+    name: macOS universal
+    needs: check
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rust
+        run: |
+          rustup update stable
+          rustup target add aarch64-apple-darwin x86_64-apple-darwin
+      - name: Build the adapter and the command-line tool for both processors
+        run: |
+          cargo build --release -p centurions-editor --target aarch64-apple-darwin
+          cargo build --release -p centurions-editor --target x86_64-apple-darwin
+          mkdir -p universal
+          for tool in centurions-adapter centurions-editor; do
+            lipo -create -output "universal/$tool" \
+              "target/aarch64-apple-darwin/release/$tool" "target/x86_64-apple-darwin/release/$tool"
+          done
+          lipo -info universal/centurions-adapter
+      - name: Godot and its export templates
+        run: |
+          BASE="https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable"
+          curl -fsSL -O "$BASE/Godot_v${GODOT_VERSION}-stable_macos.universal.zip"
+          curl -fsSL -O "$BASE/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          curl -fsSL -O "$BASE/SHA512-SUMS.txt"
+          grep -E "macos.universal.zip|export_templates.tpz" SHA512-SUMS.txt | grep -v mono | shasum -a 512 -c -
+          unzip -q "Godot_v${GODOT_VERSION}-stable_macos.universal.zip"
+          mkdir -p "$HOME/Library/Application Support/Godot/export_templates"
+          unzip -q "Godot_v${GODOT_VERSION}-stable_export_templates.tpz" -d templates
+          mv templates/templates "$HOME/Library/Application Support/Godot/export_templates/${GODOT_VERSION}.stable"
+      - name: Export
+        run: |
+          GODOT="$PWD/Godot.app/Contents/MacOS/Godot"
+          "$GODOT" --headless --path godot --import
+          mkdir -p artifacts/macos-editor
+          "$GODOT" --headless --path godot --export-release "macOS" ../artifacts/macos-editor/Praetor.zip
+      - name: Package
+        run: |
+          GODOT="$PWD/Godot.app/Contents/MacOS/Godot"
+          VERSION="${TAG#v}"
+          NAME="Praetor-${VERSION}-macos-universal"
+          mkdir -p "dist/$NAME"
+          ditto -x -k artifacts/macos-editor/Praetor.zip "dist/$NAME"
+          APP="dist/$NAME/Praetor.app"
+          # The adapter and the command-line tool sit beside the program inside the app, where the editor looks for them.
+          cp universal/centurions-adapter universal/centurions-editor "$APP/Contents/MacOS/"
+          chmod +x "$APP/Contents/MacOS/"*
+          # Signed ad hoc, so that the processor of a Mac with Apple silicon will run it; it is not notarised.
+          codesign --force --deep --sign - "$APP"
+          codesign --verify --deep --strict "$APP"
+          cp LICENSE NOTICE README.md "dist/$NAME/"
+          cp -r docs "dist/$NAME/docs"
+          "$GODOT" --headless --path godot --script res://tools/export_licenses.gd -- "$PWD/dist/$NAME"
+          ditto -c -k --keepParent "dist/$NAME" "$NAME.zip"
+          shasum -a 256 "$NAME.zip"
+      - name: Attach to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" Praetor-*-macos-universal.zip --clobber --repo "$GITHUB_REPOSITORY"

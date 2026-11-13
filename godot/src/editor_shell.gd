@@ -243,7 +243,7 @@ func refresh_recents() -> void:
 ## The folder a new checkpoint or export goes under unless the author picked one.
 func default_output_parent() -> String:
 	var chosen := str(settings.get_value("output_parent"))
-	return chosen if not chosen.is_empty() else bridge.adapter_path().get_base_dir()
+	return chosen if not chosen.is_empty() else Bridge.application_folder()
 
 
 ## Sends an operation to the adapter once any operation under way has finished, so pages that load together never refuse each other.

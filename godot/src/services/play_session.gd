@@ -6,6 +6,7 @@ extends RefCounted
 ## save the next command starts from.
 signal changed
 
+const Bridge = preload("res://src/native_bridge.gd")
 const SELECTED := [0, 1, 2, 3, 4, 5]
 const MAX_STEPS := 200
 
@@ -41,7 +42,7 @@ func unavailable() -> String:
 
 
 func tool_path() -> String:
-	return shell.folder.path_join("centurions-tools.exe")
+	return shell.folder.path_join(Bridge.program("centurions-tools"))
 
 
 ## The commands that enter the mission and walk to `cell` one step at a time.
