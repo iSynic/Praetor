@@ -1,0 +1,116 @@
+{
+  "authority": "Original Centurions instructions; reconstruction record views are provisional structural evidence",
+  "license": "GPL-3.0-or-later for adapted graphics decoder; original decompilation is consulted only",
+  "inputs": [
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\001400e4.c",
+      "sha256": "818c53366394ce3361a5b2e6d2b2b271ea1cd922f73519eb385f40d751302951",
+      "decision": "Read-only control-flow / record geometry evidence; no Realmz compatibility assumed"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\00134d9e.c",
+      "sha256": "a01594053d13f3037ca8fef5af7ba6b66ae51a4fa0aff292c794e8a1b35c1a30",
+      "decision": "Read-only control-flow / record geometry evidence; no Realmz compatibility assumed"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\0014a02c.c",
+      "sha256": "42695633fa7a5c17e426807a6aeca70dd1f4a67072ccf0e0bf9110c39da1a67f",
+      "decision": "Read-only control-flow / record geometry evidence; no Realmz compatibility assumed"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\0010f1c4.c",
+      "sha256": "67cb6060373cfaa2a6064393150318498052e98a79b3ac8452db3e370673d80b",
+      "decision": "Read-only control-flow / record geometry evidence; no Realmz compatibility assumed"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\crates\\content\\src\\records\\story.rs",
+      "sha256": "19a091109f2faeab7639a6add921f29b3e1779958a8ef9ffb40f8ed37f834b0c",
+      "decision": "Read-only control-flow / record geometry evidence; no Realmz compatibility assumed"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\crates\\content\\src\\records\\story_destination.rs",
+      "sha256": "5e80f6a2878846c7730584818f76b391d3e8152247964b7d8e911300d3b2b65d",
+      "decision": "Read-only control-flow / record geometry evidence; no Realmz compatibility assumed"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\crates\\content\\src\\records\\exploration_tables.rs",
+      "sha256": "f7687e192b2020cae2226596125fc9a2cddae9cfafa1b4fb80e2081103128cd6",
+      "decision": "Read-only control-flow / record geometry evidence; no Realmz compatibility assumed"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\crates\\content\\src\\records\\typed_encounter.rs",
+      "sha256": "2077d1938609ae3917deaee446f793cfac583981f9e5a1b2a89293c7b3dab107",
+      "decision": "Read-only control-flow / record geometry evidence; no Realmz compatibility assumed"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\crates\\content\\src\\tile_sets.rs",
+      "sha256": "30b59b14fa7b690d41ad04b460df893a4827417eac1b43e380bfcf3d60e15081",
+      "decision": "Read-only control-flow / record geometry evidence; no Realmz compatibility assumed"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\crates\\core\\src\\story.rs",
+      "sha256": "1fef0b5e11aa47b3bc3f5027e7ed70480ce95e95bc2e686fa09a6c9665b46917",
+      "decision": "Read-only control-flow / record geometry evidence; no Realmz compatibility assumed"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\0010950e.c",
+      "sha256": "450e0a5b7f1e1d51d1b5907a02ea4e4a74d49b32f3f5428fb6bbd29391193f5f",
+      "decision": "Read-only original field/caller investigation; decoded combat browsing is read-only"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\00121596.c",
+      "sha256": "cd19a9b85c6f950fa07123e33233777ca0802eaf02e1da495ba4c68f0e85009f",
+      "decision": "Read-only original field/caller investigation; decoded combat browsing is read-only"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\0012185a.c",
+      "sha256": "45493176b23ed45fcacce4fe44ed9af540cf0236d8ef45a095e92ca05004a1ca",
+      "decision": "Read-only original field/caller investigation; decoded combat browsing is read-only"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\00114378.c",
+      "sha256": "3301e94b8f30f90eadbf8d40b07c55a03553bf8a88f22f13b81248e36ceb66ec",
+      "decision": "Read-only original field/caller investigation; decoded combat browsing is read-only"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\0011d406.c",
+      "sha256": "445d3ee952b5997beca983f3bea17b9a12c9d46880d4fa246be00f0e9d4bbbf1",
+      "decision": "Read-only original field/caller investigation; decoded combat browsing is read-only"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\crates\\content\\src\\combat.rs",
+      "sha256": "1b11a0c83aeb29c15908f270eeb83c9e850d463ccbfd6087208c3017e1fc2b68",
+      "decision": "Read-only original field/caller investigation; decoded combat browsing is read-only"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\crates\\content\\src\\records\\monster.rs",
+      "sha256": "b9f5f45ddd11fe73b106267e0b67ce3af3ed9a6e8666d14d0a79642a44f50a49",
+      "decision": "Read-only original field/caller investigation; decoded combat browsing is read-only"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\001047f8.c",
+      "sha256": "2205436e6058a5515a3d038d43b80895b8e205117a14525ed140242c3a62ea48",
+      "decision": "Read-only connected-mission field evidence; no source copied. Original instruction probes and replay have separate receipts."
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\00133f3e.c",
+      "sha256": "d871953284997b2e8c3abcc1ed205c4c6ce73e875193ac5fa08e38ada7a2dd5d",
+      "decision": "Read-only connected-mission field evidence; no source copied. Original instruction probes and replay have separate receipts."
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\analysis\\reconstruction\\application-actions-1\\00151e24.c",
+      "sha256": "3395f86af95aa5acdf2117cb449e398c19d78d3a3630d2c80c182b37635a9665",
+      "decision": "Read-only connected-mission field evidence; no source copied. Original instruction probes and replay have separate receipts."
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\crates\\content\\src\\records\\story_effects.rs",
+      "sha256": "1b4c4b5f65bcde4661f1feee42bf02809558fc2d7050a3831767bbe81311636d",
+      "decision": "Read-only connected-mission field evidence; no source copied. Original instruction probes and replay have separate receipts."
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\crates\\core\\src\\combat\\rewards.rs",
+      "sha256": "08048d9edfbe3bde900ebb94e6565d4baa12e2986f9921dc2b87eb5333c802f8",
+      "decision": "Read-only connected-mission field evidence; no source copied. Original instruction probes and replay have separate receipts."
+    }
+  ]
+}

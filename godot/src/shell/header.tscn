@@ -1,0 +1,208 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/shell/header.gd" id="1"]
+[ext_resource type="Script" path="res://src/widgets/icon_button.gd" id="2"]
+[ext_resource type="Script" path="res://src/widgets/glyph.gd" id="3"]
+[ext_resource type="Script" path="res://src/widgets/kbd_button.gd" id="4"]
+
+[node name="Header" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 48)
+theme_type_variation = &"HeaderBar"
+script = ExtResource("1")
+
+[node name="CommandBar" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Brand" type="HBoxContainer" parent="CommandBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+theme_override_constants/separation = 12
+
+[node name="GuideMark" type="Button" parent="CommandBar/Brand"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Open the guide to the editor"
+theme_type_variation = &"GhostButton"
+flat = true
+expand_icon = true
+
+[node name="Title" type="VBoxContainer" parent="CommandBar/Brand"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="ApplicationName" type="Label" parent="CommandBar/Brand/Title"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Strong"
+text = "Praetor"
+
+[node name="ProjectTitle" type="Label" parent="CommandBar/Brand/Title"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Dim"
+theme_override_font_sizes/font_size = 11
+text = "Open a project to begin"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Menus" type="HBoxContainer" parent="CommandBar"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MenuFile" type="MenuButton" parent="CommandBar/Menus"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "File"
+switch_on_hover = true
+
+[node name="MenuEdit" type="MenuButton" parent="CommandBar/Menus"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Edit"
+switch_on_hover = true
+
+[node name="MenuView" type="MenuButton" parent="CommandBar/Menus"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "View"
+switch_on_hover = true
+
+[node name="MenuMap" type="MenuButton" parent="CommandBar/Menus"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Map"
+switch_on_hover = true
+
+[node name="MenuPlay" type="MenuButton" parent="CommandBar/Menus"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play"
+switch_on_hover = true
+
+[node name="MenuHelp" type="MenuButton" parent="CommandBar/Menus"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Help"
+switch_on_hover = true
+
+[node name="HistoryBack" type="Button" parent="CommandBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+disabled = true
+script = ExtResource("2")
+glyph = "back"
+
+[node name="HistoryForward" type="Button" parent="CommandBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+disabled = true
+script = ExtResource("2")
+glyph = "forward"
+
+[node name="Breadcrumb" type="Label" parent="CommandBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+theme_type_variation = &"Caption"
+text = "PROJECTS"
+clip_text = true
+
+[node name="GoTo" type="PanelContainer" parent="CommandBar"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.6)
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 1.2
+theme_type_variation = &"InputPanel"
+
+[node name="Row" type="HBoxContainer" parent="CommandBar/GoTo"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Search" type="Control" parent="CommandBar/GoTo/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("3")
+glyph = "search"
+color = Color(0.36862746, 0.42352942, 0.48235294, 1)
+extent = 15.0
+
+[node name="GoToPlaceholder" type="Label" parent="CommandBar/GoTo/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Dim"
+text = "Go to map, trigger, story, message or cell…"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Key" type="Label" parent="CommandBar/GoTo/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"Kbd"
+text = "Ctrl K"
+
+[node name="Gap" type="Control" parent="CommandBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Undo" type="Button" parent="CommandBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Undo"
+disabled = true
+script = ExtResource("2")
+glyph = "undo"
+
+[node name="Redo" type="Button" parent="CommandBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Redo"
+disabled = true
+script = ExtResource("2")
+glyph = "redo"
+
+[node name="Check" type="Button" parent="CommandBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("4")
+hint = "Ctrl ."
+disabled = true
+text = "Check"
+
+[node name="Save" type="Button" parent="CommandBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("4")
+hint = "Ctrl S"
+tooltip_text = "Save a new checkpoint"
+disabled = true
+text = "Save"
+
+[node name="PlayFromHere" type="Button" parent="CommandBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("4")
+hint = "F5"
+theme_type_variation = &"PrimaryButton"
+disabled = true
+text = "Play from here"

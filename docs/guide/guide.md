@@ -1,0 +1,429 @@
+# Praetor
+
+Guide to the Scenario Editor
+
+This guide shows you how to build a scenario for the New Centurions with Praetor, the Scenario Editor. It explains what each page of the editor is for, what the pieces of a scenario are called, and how they fit together. It describes the game as the 1.3.2 release plays it. The codes you put in a script are explained step by step in the scripting codes manual, and the editor's Code Helper shows the same entries beside the step you are working on.
+
+## Getting Started
+
+O.K. You have the editor open and you want to jump right in. Go ahead, but take it one step at a time. A scenario is a lot of small pieces that point at each other, and it is easy to lose the thread if you start everywhere at once.
+
+### What is Praetor?
+
+Praetor is the one application you need to change a New Centurions scenario: its maps, its scripts, its texts, its battles and monsters, its rewards, items and shops, and the pictures, icons and sounds it uses. Everything you do is checked against what the 1.3.2 game really does, so what you see in the editor is what the player will get.
+
+The editor never changes the files you started from. It works on a **project**, a folder of its own. You can save the project as often as you like, and when you are happy you **export** it as a scenario folder that the game can play.
+
+### Where the editor lives
+
+Put the editor in the same folder as the New Centurions 1.3.2 game and the Newer Centurions release. It finds them there, so there is nothing to point it at. It uses the game's own pictures, icons and sounds, and it uses the game itself to let you play what you have built. If the game is not found, everything still works except **Play**, and the status bar tells you so.
+
+### Starting a project
+
+The first page you see is the **Project** page. It offers three ways to begin.
+
+![Figure 1.0 · The Project page. Import level, Open checkpoint and New from template, with the projects you have opened before.](shot:project)
+
+1) **New from template.** Pick this to start a scenario of your own. Give it a name, choose a template and tell the editor where to put the project. The template is an unchanged mission pack with your name on it, so you start with a working scenario and change it from there.
+
+2) **Import level.** Pick this to open a scenario that already exists, for example to learn from it. The editor reads the scenario folder into a new project. The folder you read from is never changed.
+
+3) **Open checkpoint.** Pick this to go on with a project you saved before. The Recent list on the Project page remembers the ones you have opened.
+
+NOTE: **Save** does not overwrite anything. Every Save writes a new checkpoint to a folder you choose, and **Export** writes a new native level folder. Your original scenario and your original warriors and saved games are never touched.
+
+### Applying and discarding
+
+Most pages let you change a value and then **Apply** it. Until you apply, the change is a draft: the page shows a small mark, and **Apply edits** and **Discard** at the bottom of the window light up. Apply puts all the drafts into the project as one step you can undo. Discard throws them away.
+
+Use the arrows in the header to undo and redo. Each Apply, each stroke of the paintbrush and each placed trigger is one step.
+
+NOTE: If you try to leave a page or close the project with drafts that are not applied, the editor asks you what to do. Enter always takes the safe choice.
+
+## Finding Your Way
+
+The window has the same parts everywhere, so you only have to learn them once.
+
+![Figure 2.0 · The Maps page. The header across the top, the rail down the left, the page in the middle, the Problems dock and the status bar below.](shot:maps)
+
+**The header** holds the menus (File, Edit, View, Map, Play and Help), the arrows to go back and forward, the Go to box, undo and redo, and the buttons **Check**, **Save** and **Play from here**. The badge at the far left, the Centurions shield, opens this guide.
+
+**The rail** runs down the left edge. Each icon is a page, and the small number on it is how many records that page holds. The pages are grouped the way you build a scenario:
+
+- **World:** Maps, Stages, Calendar and Notes.
+- **Story:** Triggers, Stories, Encounters, Messages and Texts.
+- **Combat:** Battles and Monsters.
+- **Records:** Rewards, Items, Shops and Resources.
+- **Release:** Problems and Export.
+
+**The Problems dock** sits below the page. It lists what the editor found wrong or doubtful in your scenario, one line each, and **Go** takes you to the spot. Its other tabs are **Find**, which lists every place that uses a record, and **Play log**.
+
+**The status bar** shows what the editor just did, with a green dot when it worked, orange when it is waiting for you and red when it did not happen.
+
+### Go to
+
+Press Ctrl K (or click the Go to box) and type what you are looking for: a map, a trigger, a story, a message, the words of a scrolling text, or a cell. A prefix narrows the search to one kind of record. Choose a line and the editor takes you straight to it.
+
+### Wide and narrow windows
+
+The editor needs a window at least 1200 by 720 pixels. When the window is narrow the key hints beside the buttons are dropped. Nothing else changes.
+
+## Anatomy of the Maps Page
+
+Though this chapter is about maps, you will learn a whole lot more than just painting land here. The Maps page is where triggers, regions and the place where each mission starts live too.
+
+![Figure 3.0 · A map with its tools along the top, the palette and layers at the left, and the inspector at the right.](shot:maps)
+
+### Maps and levels
+
+A **map** is a square of land 90 cells wide and 90 cells tall. A scenario has one or more maps, and every map belongs to the scenario as a whole: a trigger on one map can send the squad to any other. The list at the top left names them, with how many triggers each one holds. The **+** button beside the title adds a map, and **Map ▸ Remove the last map** removes the last one. You can have up to 20 maps.
+
+When you add a map the editor asks what it should start from: a blank map filled with one tile, or a copy of another map. A copy can bring along the floor, the objects, the triggers and the regions, and the editor shows you what it will add before you confirm.
+
+**The coordinate system.** Think of the map as a 90 by 90 grid, with 0, 0 at the upper left corner. The first number is the column, counted from the left, and the second is the row, counted from the top. Hover over a cell and the readout in the corner of the map shows where you are.
+
+### The tools
+
+The row of tools across the top of the map works like a paint program. Each tool has a key, shown beside its name.
+
+- **Select (V)** inspects a cell. The inspector at the right shows what is on it.
+- **Sample (I)** picks the tile under the pointer as your brush.
+- **Paint (B)**, **Line (L)**, **Rectangle (R)** and **Fill (G)** lay down the brush. Each stroke is one undo step.
+- **Trigger (T)** places a walking trigger on a cell.
+- **Region (E)** drags out a region.
+- **Start (S)** chooses where a mission begins.
+- **Erase (X)** removes what you click.
+
+The **Layer** list says what Paint and Fill change.
+
+### The palette
+
+The palette at the left holds the tiles you paint with. **Floor** shows the tiles of the map's terrain set, **Icons** the small pictures that stand in a cell, and **Objects** the buildings. Alt-click a tile on the map to pick it up. Choose another terrain for the whole map from the **Map** tab of the inspector.
+
+NOTE: Objects are drawn over the floor and the party walks through them. A building is a picture; to keep the party out of a place, put walls in the floor.
+
+### Layers and overlays
+
+The three switches under **Layers** hide the floor, the objects and the walking triggers while you work. **Overlays** at the top of the map turns on the labels for triggers, regions, the start of each mission and your selection. **Zoom** shows the map at one, two or three times its size, **Grid** draws the cell lines, and the overview at the corner shows where you are on the whole map.
+
+### The inspector
+
+The tabs on the right say what you are looking at.
+
+- **Cell** tells you what is on the selected cell: its floor, its object, and the trigger standing on it if there is one. **New at selected cell** places a trigger there.
+- **Map** shows the look of the map.
+- **Regions** lists the regions of the map and lets you move and resize them.
+- **Stage** shows where each mission starts.
+
+![Figure 3.1 · Choosing the floor of a map from its terrain sets.](shot:map-choose-floor)
+
+### Regions
+
+A **region** is a rectangle of the map. It is like a trigger, but instead of one cell it covers many: wherever the squad walks inside the rectangle the region may fire its story, and it can start random battles. Each map has up to 20 regions. Drag one out with the Region tool, then use the Regions tab to move it, resize it and set its story and its chance.
+
+![Figure 3.2 · A region dragged out on the map, with its settings.](shot:map-region-tool)
+
+### Secret cells
+
+A cell can be a **secret**. Select it and choose its state in the **Secret** card of the Cell tab: **Normal**, **Hidden secret** or **Revealed secret**. A hidden secret adds 3000 to the cell's number, which is what the game's search looks for: after each step the squad takes, the game searches the nine cells around the squad, finds a hidden cell by chance, takes 1000 off its number and says "You have found a secret area". A revealed secret is a cell a search has already found, with 2000 added.
+
+The **Secret cells** overlay (in the **Overlays** menu and under **Layers**) shows them on the map: the tile stays visible and a big S stands over it, red for a hidden secret and orange for a revealed one. Switch the overlay off and the map shows only the floor.
+
+A **secret entrance** is a walking trigger on a hidden cell. A trigger fires whether or not the cell has been found.
+
+NOTE: The game draws a floor number above 300 as nothing, found or not, and walks it as the map's own tile. A secret therefore looks like a gap in the picture and walks like the rest of the map; put the clue in a message or a picture rather than in the cell. The Problems dock warns about cells numbered from 301 to 1999, which nothing in the editor marks as secret.
+
+## Anatomy of a Trigger
+
+Triggers are the meat of any scenario. This is where most of what the squad meets is scripted.
+
+A **walking trigger** stands on one cell of a map. Each time the squad steps on that cell the game rolls the trigger's chance, and if the roll passes, the trigger's script runs: it shows a message, starts a battle, opens a shop, gives a reward, changes the map. Each map holds up to 100 walking triggers.
+
+To place one, choose the **Trigger** tool and click a cell, or select a cell and press **New at selected cell**. Double-click a trigger to open it in the Triggers page.
+
+![Figure 4.0 · The Triggers page, showing a walking trigger.](shot:script-walking)
+
+A trigger has three parts.
+
+**Placement** says where the trigger is: its map and its cell. You move a trigger on the map, not here.
+
+**Activation** holds the **chance**, the percent chance that the trigger fires each time the squad walks on it. Most triggers are 0 or 100. It also shows the trigger's **gate**, the number made from its map and cell that links the cell to the trigger.
+
+**After the steps** says where the squad stands when the script has finished. If it is the same cell, the squad stays put. If it is another cell, or another map, the squad walks there, and that is how a cave leads to another map or a door leads into a castle.
+
+Underneath is the script itself.
+
+### Ordered steps
+
+A script is a list of up to eight **steps**, shown as cards. The game runs them in order from the first. Each card shows the step's number, its code and its name, and under it what it uses: a message and its first words, a sound number, a battle. You can drag a card by its handle to move it, or use **Move up** and **Move down** in the form.
+
+Click a card to open the step in the form beside it. Every step has a **code**, which says what to do, and an **ID**, which says with what. **Choose action** opens a list of every code the editor can write, grouped by what it does, with a description of the one you have chosen. Pick one and the form shows exactly what its ID means.
+
+![Figure 4.1 · Choose action. The codes are grouped by what they do; the right-hand side shows what the chosen code takes and what the step looked like before.](shot:script-choose-action)
+
+NOTE: The change you make in the form is a draft until you press Apply. The step card shows a dot while it is drafted.
+
+### What the colours mean
+
+Each step card is filled with a colour for what the step does, with a stronger bar at its left edge, so you can read a script at a glance. An empty slot is only faintly tinted.
+
+| Colour | What the step does |
+|---|---|
+| Blue | Shows a message |
+| Violet | Opens an encounter |
+| Orange | Starts or changes a battle |
+| Yellow | Tests something and branches |
+| Teal | Runs another script, jumps or ends the script |
+| Pink | Picks warriors |
+| Red | Heals, hurts or changes the state of warriors |
+| Brown | Changes belongings and credits |
+| Periwinkle | Changes the map and the squad's position |
+| Mint | Changes time and light |
+| Lilac | Sets mission flags and values |
+| Amber | Opens or changes a shop |
+| Cyan | Plays a sound or shows a picture |
+| Green | Gives rewards |
+| Lime | Adds, removes or suspends allies |
+| Grey | A slot the editor preserves as it is |
+
+A small padlock on a card means the editor shows the step but does not write it; it keeps the bytes exactly as they are.
+
+### Extra Codes
+
+Many codes need more than one number. Those codes use their ID to name an **Extra Codes** record, a row of five numbers, and the form shows the five numbers with their names. An Extra Codes record can be shared by as many steps as you like. When you change a shared row, every step that uses it changes. If a step needs numbers of its own, give it a row of its own first.
+
+For example, Code 2 starts a battle. You might think all it needs is the number of the battle, but there is more to say about a battle: a range to choose from, a sound before the fight, a text before the fight, and what the reward is. The five numbers of the Extra Codes row hold all of that.
+
+### The Code Helper
+
+Press **F1**, or click **Code helper**, and a drawer opens at the right with the entry for the step you are on, taken from the scripting codes manual: what its ID is, what it does, what its options and Extra Codes mean, what to watch for, and an example. The drawer follows the step you select. Close it with F1 again.
+
+![Figure 4.2 · The Code Helper beside a step.](shot:script-code-helper)
+
+### Technical details
+
+Below the form, **Technical details** shows the bytes of the step's row, which of them the step owns, and a legend. You will rarely need it, but it is how you check what the editor will write.
+
+![Figure 4.3 · Technical details: the 42 bytes of a trigger's row, and the bytes the step owns.](shot:script-technical-details)
+
+## Anatomy of a Story
+
+A **story** is a script that is not attached to a place. It has the same eight steps as a trigger, and it runs when something else calls for it: a mission that begins, a calendar entry, a region, the end of a battle round, a monster's death, or another script.
+
+Where a walking trigger answers "what happens when the squad steps here?", a story answers "what happens when this is called?". Because stories have a number and no place, you can share one scene between many places: write the scene once as a story and point at it from everywhere that needs it.
+
+![Figure 5.0 · A story. Its eight steps are shown the same way as a trigger's.](shot:script-story)
+
+The **Stories** tab of the Triggers page lists every story with its first step and how many of its eight steps are used.
+
+### Scripts do not call each other
+
+A script that sends the squad to another script does not come back. There are no gosubs in the New Centurions. A branch is a one way ticket, and the script you branch to goes on from its own first step. To carry a scene past eight steps, make the eighth step of one story a **Code 39**, which replaces the running script with another story, and so on down the chain. To come back to where you were, set a mission flag before you leave and test it when the squad returns.
+
+NOTE: **Find** (Ctrl Shift F) lists every step that names a story, so you can see who calls it before you change it. **View flow** draws the scripts as a graph of what goes where.
+
+### Where stories are used
+
+- A mission's **start script** is a story (see Stages).
+- A **calendar entry** runs a story on its day.
+- A **region** runs a story as the squad walks through it.
+- A battle's **round stories** and a monster's **death script** are stories that run during the fight.
+- **Code 39** replaces the running script with a story, and **Code 7** makes a map event run a different story from then on.
+
+## Anatomy of an Encounter
+
+An **encounter** is a scene that stops the game and asks the player something. There are two kinds. Both are opened from a script by a code, and both keep their own scripts for each answer.
+
+### Simple encounters
+
+A **simple encounter** (the **Choices** tab of the Triggers page, where the editor names them choice encounters) shows a message and up to four choices. The player clicks one, and the script of that choice runs.
+
+![Figure 6.0 · A simple encounter. The prompt and the four choices are at the left; each choice has its own script of eight steps.](shot:script-choice)
+
+To use one, put a **Code 4** step in a trigger or a story, with the number of the encounter as its ID.
+
+The **Prompt** card holds the message the player reads: its number and its words, and you can edit both here. The **Choices** card holds the four labels the player clicks, numbered 1 to 4. Type in them directly. A label is at most 79 characters, and a choice left empty is not shown. Each of the four columns on the right is the script that runs when its choice is picked, so Choice 1 runs the steps of Branch 0, Choice 2 the steps of Branch 1, and so on.
+
+NOTE: The labels of a simple encounter do not fill in names. A choice that contains a ^ and a digit shows the caret and the digit exactly as you wrote them. Put names in the prompt, not in the choices.
+
+The encounter plays a sound when it opens and can limit how many times the squad may visit it. If the player cancels, the squad steps back to where it came from.
+
+### Typed encounters
+
+A **typed encounter** (the **Typed** tab) answers to what the player does or types, up to a number of tries. It is for riddles, passwords and doors that open for the right word. It has a prompt, four branches of eight steps each, and its **Selectors**: the physical choice, the password and the number of attempts. **Conditions…** opens the window where you set them and write the labels the player sees.
+
+![Figure 6.1 · A typed encounter.](shot:script-typed)
+
+To use one, put a **Code 5** step in a trigger or a story, with the number of the typed encounter as its ID. When the player runs out of tries on the last visit, the encounter takes its timeout result. Cancelling steps the squad back one square.
+
+### Getting out
+
+An encounter stays on the screen while its scripts run. **Code 34** leaves the encounter and carries on with the step after the one that opened it. **Code 35** and **Code 41** remove a choice from a simple encounter so it cannot be picked again, and **Code 44** removes a branch of a typed encounter.
+
+### Moving between the branches
+
+Click any step of any branch and the form below shows it. The cards of the four branches work like the steps of any other script.
+
+![Figure 6.2 · A step of the third branch, selected.](shot:script-choice-branch)
+
+## Messages and Texts
+
+A **message** is a short text the game shows in its window: what the squad sees, hears or is told. Messages are numbered, and a step with Code 1 shows the one its ID names. A message holds at most 255 characters in the Mac Roman character set.
+
+![Figure 7.0 · The Messages page. Each message has a number; the list at the left can be filtered by its words or by a ^ token.](shot:messages)
+
+### Names in messages
+
+A message can name your warriors. Put a caret and a digit in the text, and the game replaces them with a warrior's name when the message is shown. ^1 to ^6 stand for the first to the sixth warrior of the squad; if that warrior has fallen, the name of the last warrior standing is used. ^9 names the warrior chosen by the most recent pick. The Code Helper's last card lists all of this.
+
+### Find and replace
+
+The panel at the right of the Messages page finds a word in every message and drafts the replacement. The editor checks every replacement against the 255-byte limit before it drafts it.
+
+### Scrolling texts
+
+A **text** is a long passage the game scrolls on the screen, such as a briefing or a story. The Texts page lists the texts, shows how they will look, and lets you change their words. Its filter looks in the whole of every text, not only in the words each begins with, and shows the words around the match. A step with Code 62 shows a text.
+
+![Figure 7.1 · The Texts page.](shot:texts)
+
+## Battles, Monsters and Rewards
+
+### Battles
+
+A **battle** is a grid of monsters and the place where the squad starts. The Battles page shows the grid, 26 cells by 26 cells, with each monster as a small picture. Click a cell to see its monster, **Place** to put the monster in the Monster box on the cell, and **Erase** to clear it.
+
+![Figure 8.0 · The Battles page. The grid is a population layout: where each monster stands when the fight begins.](shot:combat)
+
+The cards at the right hold the rest: the message shown before the fight and when it is won, the column and row where the squad starts, and the **round stories** that run as the rounds go by. The **Roster** lists each kind of monster in the battle and how many.
+
+A battle is started by a step in a script. **Code 2** starts one, or one chosen from a range, with an optional sound and text.
+
+### Monsters
+
+A **monster** is one kind of creature. The Monsters page lists them all and shows each one's picture and name; **Used by** shows where a monster is used. A scenario brings its own monsters: the game reads them from the scenario's own files, not from its own, so a new scenario has only the monsters you give it.
+
+To make a new monster, select the one that is closest and press **Duplicate**. The copy is added after the last monster, up to 256 in all, and carries the original's fields and description. Then change what you need on its tabs: **Overview** (name, icon, size, side, body and behaviour), **Attacks**, **Spells**, **Items**, **Saves**, **Sounds** and **Conditions**. The **Description** card holds the words the game's Archives show for the monster, up to 255 bytes. A monster appears in the Archives unless "Left out of the bestiary menu" is set; the editor removes the scenario's saved bestiary list when you add a monster or change a name, so the game builds a new one.
+
+![Figure 8.1 · The Monsters page.](shot:records)
+
+### The monster vault
+
+The vault is a store of monsters shared by every scenario you open. It holds two kinds. **Stock** monsters are those of the game's own scenarios, read from the game and always there; they cannot be removed. **Added** monsters are the ones you keep beside the editor. Use it the way you would keep a favourite monster: **Add to vault** on the Monsters page keeps the monster you are looking at, and **Add all to vault** keeps every named monster of the scenario (one already in the vault is skipped). Open the **Vault** tab beside **Scenario** to see what you have kept, with each monster's picture, where it came from, its description and its body.
+
+Choose one or several (Ctrl or Shift), and **Copy to scenario** adds them after the scenario's last monster, with their fields, their descriptions and their icons: an icon the scenario and the game do not hold is imported with the monster, and when a different picture already has the icon's number the monster takes the next free number. **Populate scenario…** copies every vault monster the scenario lacks, or those from one scenario. A copy is one undo step. A monster's spells, drops and stories name records by number, so check them after copying. **Remove from vault** takes added monsters out of the vault (a stock monster cannot be removed) and leaves any copies in scenarios alone. A monster the game already has is not added a second time.
+
+### Rewards
+
+A **reward** is what the squad earns: credits, experience and items. The Rewards page lists them. **Payout** holds the credits and the experience. A number below zero gives up to that many at random. **Booty** lists the items, each with a level that steers the random item that comes with it.
+
+![Figure 8.2 · A reward.](shot:rewards)
+
+A reward is given by **Code 10**, which gives one outright, or by a battle's own rules when it is won.
+
+## Items and Shops
+
+### Items
+
+The Items page lists the items of the game and of your scenario. The game's own items keep their names and pictures; your scenario's items, from number 800 on, can have a name of their own. A name is checked against the length the game can show.
+
+![Figure 9.0 · The Items page.](shot:items)
+
+### Shops
+
+A **shop** is a list of things the squad can buy. The Shops page lists the shops of your scenario and shows each one's stock by category, with the quantity of each item.
+
+![Figure 9.1 · A shop. Each slot is an item and how many the shop has.](shot:shops)
+
+The **Prices** card holds one number: the percent of the standard price the shop charges. 100 is the standard price, and a lower number is a bargain. A shop is opened by a step with **Code 6**.
+
+## Stages, the Calendar and Notes
+
+### Stages
+
+A **stage** is a mission: one of the entries in the game's Mission menu. A stage has a **name**, an **arrival** (the map and cell where the squad lands when the mission begins) and a **start script**, the story that runs first.
+
+![Figure 10.0 · A stage.](shot:stages)
+
+The first stage is special: its arrival is also the place the game's first mission begins. **Pick on map** lets you click the cell on the map instead of typing it, and **Play from stage start** plays the stage from its beginning.
+
+### The Calendar
+
+The **calendar** is a list of things that happen on certain days. Each entry has a day, a number of days it repeats after, a chance, and the story it runs. It can be limited to a place, to an item the squad holds, and to a mission flag. The game checks the calendar each time the day turns over at midnight and runs the entries that are due, in order. The first entry that fails its chance, its item or its flag ends the check for that day.
+
+![Figure 10.1 · The Calendar. The rail at the left lists the entries.](shot:calendar)
+
+### Notes
+
+A **note** is a page of the Maps and Notes menu. It can show a part of a map with marks on it, a picture, or a scrolling text, and the words that go with it. A script gives a note to the squad with **Code 29**; from then on it is on the menu, ticked, and the player can read it again whenever they like. Notes are numbered 0 to 18.
+
+![Figure 10.2 · A note: the section of the map the note shows, with the marks laid over it.](shot:notes)
+
+## Pictures, Icons and Sounds
+
+The **Resources** page shows every picture, icon and sound the scenario holds and those it uses from the game. The tabs choose what to show, and the chips choose between **This scenario**, **The game** and **Both**.
+
+![Figure 11.0 · The Resources page.](shot:resources)
+
+Click one to see it at its true size, who it comes from, and what number it has. **Import file…** adds a picture, an icon or a sound of your own: the editor shows what it will do to the file (the number of colours, the size) before it changes anything. **Remove from the scenario** takes one of your own out again. The game's own resources cannot be removed, but you can replace one in your scenario by giving yours the same number.
+
+NOTE: Use a number the game does not already use for a new picture, icon or sound, unless you mean to replace one.
+
+## Checking Your Work
+
+### Problems
+
+**Check** (Ctrl .) goes through the whole scenario and lists what it finds in the Problems dock: a step that names a message, battle or story that does not exist, a trigger whose chance can never fire, a text that is too long for the game, a calendar entry the game would never reach. Each line has a **Go** button.
+
+![Figure 12.0 · The Problems dock. Each finding says what is wrong and where.](shot:problems-dock)
+
+A warning is not an error. A warning tells you something the game would do that you may not mean; an error tells you the game could not do what the scenario asks.
+
+### Find uses
+
+Select a record and press Ctrl Shift F, or use **Callers** on a record's page, and the **Find** tab lists every step and record that names it. Use it before you change or delete something to see what depends on it.
+
+![Figure 12.1 · Find uses.](shot:find-uses)
+
+### View flow
+
+**View flow** opens a window of its own that draws the scripts reached from the record you are on as a graph. Drag to pan, scroll to zoom, and **Fit** shows the whole thing. Click a step to select it in the editor.
+
+![Figure 12.2 · View flow.](shot:flow)
+
+## Playing and Exporting
+
+### Play from here
+
+**Play from here** (F5) starts the game at the cell you have selected on the map, so you can try a trigger without walking there from the beginning. The Play log in the Problems dock shows what happened. **Stop** (Shift F5) ends the session.
+
+NOTE: Play uses the game found beside the editor. When it is not found the button is dimmed and the status bar says why.
+
+### Export
+
+When you are ready to give your scenario to someone, open **Export**. The page shows what the project has changed since you started, where the files will go and what will be written. Choose a folder and a name; the editor writes a native scenario folder, and the result window compares it byte for byte with the files you started from, so you can see exactly what changed.
+
+![Figure 13.0 · The Export page.](shot:export)
+
+To play the exported scenario, put its folder in the game's Scenarios folder and add its name to the Mission menu.
+
+## Frequently Asked Questions
+
+**Q: I changed something and nothing happened.** A change is a draft until you press Apply. Look for the mark on the tab and for **Apply edits** at the bottom of the window.
+
+**Q: A step has a padlock and I cannot edit it.** The editor shows it but does not write it. It keeps the bytes as they are. The scripting manual's last chapter lists the numbers the game skips.
+
+**Q: A step does nothing in the game.** The game skips a step whose number it does not handle. The Code Helper says so when you select one. Check the number first.
+
+**Q: Can I undo?** Yes. The arrows in the header undo and redo every Apply, every paint stroke and every placed trigger, as far back as the project goes.
+
+**Q: Will I damage the original scenario?** No. The editor works on a project of its own, writes a new folder on every Save and Export, and never writes to the files you started from.
+
+**Q: How do I find which scripts use a message?** Select it and press **Callers**.
+
+**Q: How many triggers can one map have?** 100, numbered 0 to 99. A map holds up to 20 regions, and the Maps and Notes menu holds notes 0 to 18.
+
+**Q: Why does a message get cut off?** A message holds at most 255 bytes. The counter under the text shows how many you have used.
+
+**Q: What is a "stage", a "story" and an "encounter"?** A stage is a mission: its name, where it starts and the story it runs first. A story is a script with a number, run by something else. An encounter is a scene that stops the game and asks the player something.
+
+**Q: Where do I learn what each code does?** In the Code Helper (F1), and in the scripting codes manual.

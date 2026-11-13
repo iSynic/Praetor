@@ -1,0 +1,5238 @@
+{
+ "_provenance": {
+  "source": "docs/scripting-codes.md of the reconstruction",
+  "revision": "746f87fc",
+  "title": "New Centurions Scripting Codes",
+  "tool": "tools/build_script_manual.py"
+ },
+ "intro": [
+  {
+   "p": "This manual describes the scripting codes you can use when you build a New Centurions scenario: what each code does, what its Extra Codes mean, and the small details that decide whether your scripts behave the way you meant. It describes the game as the 1.3.2 release plays it."
+  }
+ ],
+ "codes": [
+  {
+   "code": -32,
+   "title": "Enter the clinic",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Takes the party into the clinic screen at once, with prices scaled by a percentage you choose. An optional sound plays and an optional text is shown first."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Clinic price percentage\n2) Sound (0 for none)\n3) Text number (0 for none)",
+      "1) 100 gives the clinic's normal prices. Higher values make treatment dearer, lower values cheaper.",
+      "2) A sound number played as the party walks in. 0 plays nothing.",
+      "3) A text number shown before the clinic opens. The clinic screen appears when the player dismisses the text. 0 shows no text and opens the clinic straight away."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Entering the clinic gathers the credits each warrior carries into the party's purse, even if the player buys nothing. When the player leaves the clinic, the script carries on with the step after this one."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A field hospital at the end of a bridge fight. Extra Codes 40 holds 50, 2200, 310: treatment costs half price, sound 2200 plays, text 310 (\"The medic waves you in\") is shown, and then the clinic opens."
+     ]
+    }
+   ]
+  },
+  {
+   "code": -14,
+   "title": "Pick warriors, then invert the picks",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The number of warriors to pick. The sign of the ID decides whether fallen warriors can be picked (see Options)."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Works like Code 14, except that when the player has finished, every warrior who was picked becomes unpicked and every warrior who was not picked becomes picked."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "The sign of the ID works as in Code 14."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Use it to say \"the rest of you\": ask the player to pick the one warrior who stays behind to guard the gate, and the steps that follow then act on everyone else. Names in later texts follow the same rules as for Code 14."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "ID 1. The player picks Marcus to stand watch. Marcus ends up unpicked and the other five warriors end up picked, so a following Code 15 hurts everyone but Marcus."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "The sign of the ID is subject to the Caution under Code 14."
+     ]
+    }
+   ]
+  },
+  {
+   "code": -12,
+   "title": "Clear objects from an area of a map",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Removes every placed object from a rectangle of cells on any map of the scenario. The terrain under the objects is left alone. Use it to take away a gate, a barrel or a campfire once the story has moved past it."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Map number\n2) Left column of the rectangle\n3) Right column of the rectangle\n4) Top row of the rectangle\n5) Bottom row of the rectangle",
+      "1) The map to change. It does not have to be the map the party is standing on.",
+      "2) and 3) Columns run from 0 to 89. The left column must not be greater than the right column, or nothing happens.",
+      "4) and 5) Rows run from 0 to 89. The top row must not be greater than the bottom row, or nothing happens."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The change is saved with the map, and the map the party is on is then reloaded and redrawn, so the player sees the objects vanish at once if they were in view. This code clears objects only. To change terrain tiles use Code 12."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A toll gate stands on map 4 at columns 20 to 21, row 33. Once the party pays, a Code -12 with E-Codes 4, 20, 21, 33, 33 removes the gate and the road is open."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 1,
+   "title": "Show text",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "A text number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Shows the text and waits for the player to dismiss it."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "The game passes a negative ID on to its text routine unchanged. What it does was not confirmed, so use a positive ID."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Names inside the text can be filled in as it is shown. ^1 to ^6 stand for the first to sixth warrior of the squad. If that warrior is down, the name of the last warrior still standing is used instead. ^9 stands for the warrior chosen by the most recent pick (Code 14, -14 or 31) and keeps that name until the next pick. Code 3 takes its question text from the step before it, so a Code 3 step normally follows a Code 1 step."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "ID 12 shows text 12, \"^1 spots a trip wire across the corridor.\" The first warrior's name appears in place of ^1."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 2,
+   "title": "Battle",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Plays an optional sound, shows an optional text, then starts a battle. The script resumes after the battle."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Battle number (or the lowest of a range)\n2) Highest battle number (0 for a single battle)\n3) Sound (0 for none)\n4) Text shown before the battle (0 for none)\n5) Reward mode",
+      "1) The battle to fight.",
+      "2) If this is 0, the battle in E-Code 1 is fought. Otherwise a battle number from E-Code 1 to E-Code 2 is chosen at random, both ends included.",
+      "3) A sound number played before the fight.",
+      "4) A text number shown before the fight.",
+      "5) 0 gives the normal rewards. 5 gives victory points only. The effect of any other value was not confirmed; test it in your scenario before relying on it."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Code 100 pays the rewards itself. Once it has run in a battle's script, this code does not pay them a second time."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A bandit ambush. Extra Codes 7 holds 14, 17, 1500, 88, 0: one of battles 14 to 17 is chosen, sound 1500 plays, text 88 is shown, and the normal rewards follow a victory."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 3,
+   "title": "Ask a yes/no question",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Asks the player a question and acts on the answer. The question text is the text of the step just before this one, so that step is normally a Code 1."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Which answer triggers the outcome\n2) Outcome\n3) Outcome number\n4) Label of the left button\n5) Label of the right button",
+      "1) 0 means the outcome happens when the player answers yes (and the script carries on if the answer is no). Any other value means the outcome happens on no (and the script carries on after yes).",
+      "2) What the triggering answer does: 0 moves the party back one step and ends the script, 1 replaces the script, 2 jumps into a branch of the simple encounter now running, 3 jumps into a branch of the typed encounter now running, 4 ends the script. Any other value carries on with the next step.",
+      "3) For outcome 1, the number of the script that takes over. For outcomes 2 and 3, the branch to run, 0 to 3. Not used by the other outcomes.",
+      "4) and 5) Text numbers for the two button labels. 0 gives \"Yes\" and \"No\"."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Outcome 2 or 3 uses the encounter of that kind that is on screen. Without one the game uses whatever branch data it last held, so use these outcomes only inside such an encounter."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A toll bridge. Step 1 is Code 1 with the toll keeper's demand, step 2 is Code 3 with Extra Codes 30 holding 1, 1, 12, 0, 0. If the player answers no, script 12 (the guards draw swords) replaces this one. If yes, the script carries on to the payment step."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 4,
+   "title": "Simple encounter",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "A simple encounter number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Shows the encounter's text with up to four choices. The choice the player makes runs that choice's own short script of eight steps."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The encounter sound plays when it opens. The encounter can limit the number of visits. If the player cancels, the party steps back to where it came from. Codes 35 and 41 remove choices from a simple encounter and Code 34 leaves it."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "ID 6 opens simple encounter 6, \"The Strange Console\", with the choices Touch it, Scan it, Smash it and Leave."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 5,
+   "title": "Typed encounter",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "A typed encounter number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Opens an encounter that answers to what the player does or types, up to the maximum number of tries the encounter allows."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "When the player runs out of tries on the last visit, the encounter takes its timeout result. Cancelling steps the party back one square. Code 34 leaves the encounter and Code 44 removes one of its branches."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "ID 3 opens typed encounter 3, a locked door that opens when the right word is typed."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 6,
+   "title": "Open a shop",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "A shop number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Loads the shop and, for a zero or negative ID, opens the shop window straight away."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "A zero or negative ID opens the shop window at once, using the number without its sign. A positive ID only makes that shop the current one, so the party reaches it through the shop control while it stays there."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Opening a shop this way removes any limit set by Code 111, whatever the sign of the ID, even when no window opens. The script resumes when the player leaves the shop."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "ID -4 opens shop 4, a quartermaster's tent, as soon as the step runs."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 7,
+   "title": "Replace a map event's script",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Overwrites the eight steps of a map event, or of one branch of an encounter, with the steps of another script."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Map number (-1 for a simple encounter, -2 for a typed encounter)\n2) Event number or encounter number\n3) Script holding the new steps\n4) Not used\n5) Branch of the encounter to replace (encounters only)",
+      "1) The map holding the event. -1 and -2 replace a branch of an encounter instead.",
+      "2) For a map, an event number from 0 to 99. For -1 and -2, the encounter number.",
+      "3) The script whose eight steps become the event's new steps.",
+      "5) For encounters, the branch to replace, 0 to 3. Stay inside this range."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The change is kept for the rest of the game. For a map event, its chance of running is not changed."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "After the player cuts the rope bridge, Extra Codes 52 holds 3, 14, 90, 0, 0: event 14 on map 3 now runs script 90, \"the bridge is gone\", instead of its old script."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 8,
+   "title": "Run another map event's steps",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An event number on the current map."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Copies the eight steps of that event over the running script and starts again from the first step."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The steps are copied from the event as it stands now, including any change made by Code 7. The ID must not be negative. The chance of the event is not copied. Before the script starts again, the game tests the chance of the running event once more: if it is below 1 the script ends, and otherwise a roll of 1 to 100 above the chance ends the script without a word. Give an event that uses Code 8 a chance of 100."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Three fountains all use the same event. Each fountain's own event has a chance of 100 and holds one Code 8 step with ID 20, so changing event 20 changes all of them. Event 20 ends with Code 24 so that the fountains can be used again."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 9,
+   "title": "Play a sound",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "A sound number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Plays the sound and goes on to the next step."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "The game passes a negative ID on to its sound routine unchanged. What it does was not confirmed, so use a positive ID."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "ID 4100 plays a door slamming just before a battle step."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 10,
+   "title": "Give treasure",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "A treasure number from the scenario's treasure list."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Opens the treasure window for that treasure so the party can take it."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The script resumes when the player closes the window."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "ID 22 opens treasure 22, the cache behind the false wall."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 11,
+   "title": "Give victory points",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The number of victory points."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Shares the victory points among the party and opens the treasure window that shows them."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "ID 150 awards 150 victory points for solving the vault puzzle."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 12,
+   "title": "Change a tile",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Replaces one tile on a map, either the floor tile or the object on it."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Map number\n2) Column (x)\n3) Row (y)\n4) New tile number\n5) Layer",
+      "1) The map to change. It does not have to be the current map.",
+      "2) and 3) The tile position, 0 to 89 for each.",
+      "4) The tile that goes in. On the object layer, a number of 23000 or more has 23000 taken off before it is stored.",
+      "5) 2 changes the object layer. Any other value changes the floor layer."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Use this to open a gate, collapse a corridor or remove a barrel. Code -12 clears objects from a whole rectangle at once."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 61 holds 2, 40, 17, 305, 2: on map 2, the object at column 40, row 17 becomes tile 305 (an open gate)."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 13,
+   "title": "Change event chances",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Changes the chance that map events run when the party steps on them, for one event, for a range of events, or both."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Map number\n2) One event number (0 for none)\n3) New chance\n4) First event of a range (0 for none)\n5) Last event of the range",
+      "1) The map holding the events.",
+      "2) A single event to change, 0 to 99.",
+      "3) The new chance. A negative value switches the event off, which is how the game itself marks a spent event.",
+      "4) and 5) A range of events, both ends included. E-Code 4 must be 0 or at most E-Code 5, and both must be within 0 to 99."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 18 holds 5, 12, 100, 20, 24: on map 5, event 12 gets a 100 chance and events 20 to 24 get the same."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 14,
+   "title": "Pick warriors",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The number of warriors to pick. The sign of the ID decides whether fallen warriors can be picked (see Options)."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Clears every earlier pick and asks the player to choose that many warriors. The steps that follow can act on the picked warriors only."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "With a positive ID, only warriors who are up can be picked, and the count is lowered if fewer are available. With a negative ID, the count is its value without the sign and everyone can be picked."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Picks are cleared even if the player picks nobody. Codes 15, 17, 30 and others read the picks. Code -14 inverts the picks when the player finishes."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "ID 2: \"Choose two warriors to cross the ice.\" The next step is a Code 15 that hurts the picked pair."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "Which sign lets fallen warriors be picked, and how the count is lowered when fewer warriors are available, was not confirmed down to the last detail. Test both signs in your scenario before relying on them."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 15,
+   "title": "Heal or hurt the picked warriors",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Changes the stamina of each picked warrior by a random amount, then shows an optional text."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Multiplier\n2) Lowest random number\n3) Highest random number\n4) Sound (0 for none)\n5) Text (0 for none)",
+      "1) The random number is multiplied by this. A negative multiplier hurts.",
+      "2) and 3) A number from E-Code 2 to E-Code 3 is drawn separately for each picked warrior.",
+      "4) A sound played for each warrior affected.",
+      "5) A text shown once, after all warriors have been changed."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "A warrior brought to zero stamina or below is down, and if this takes the whole squad the mission is lost."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 9 holds -1, 3, 8, 3000, 70: each picked warrior loses 3 to 8 stamina, sound 3000 plays for each, then text 70 appears."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 16,
+   "title": "Heal or hurt the whole party",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "The same as Code 15, but every warrior is affected, not only the picked ones."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "The same five as Code 15."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "A separate random number is drawn for each warrior."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 10 holds 1, 5, 5, 0, 71: every warrior regains 5 stamina and text 71 follows."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 17,
+   "title": "Cast a scan on the picked warriors",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Casts a scan on each picked warrior as though from a scripted source, using the scan's normal effects."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Scan number\n2) Power level\n3) Saving throw adjustment\n4) Force the effect",
+      "1) The scan to cast.",
+      "2) The power level of the scan.",
+      "3) Added to each target's saving throw. Negative values make it harder to resist.",
+      "4) Any nonzero value forces the effect: the scan cannot be resisted."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "If the casting brings every warrior down, the mission is lost. Test the power level and force settings in your scenario before relying on them for a balanced effect."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 15 holds 33, 2, 0, 0: scan 33 hits each picked warrior at power 2 with their normal saving throw."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 18,
+   "title": "Cast a scan on the whole party",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "The same as Code 17, but the whole squad is picked first and then affected."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "The same four as Code 17."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The earlier picks are replaced by the whole squad."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 16 holds 33, 1, 0, 1: scan 33 strikes every warrior and cannot be resisted."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 19,
+   "title": "Show a random text",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Picks a text number at random from a range and shows it."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Lowest text number\n2) Highest text number",
+      "1) and 2) A text from E-Code 1 to E-Code 2 is chosen at random, both ends included, and shown."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 4 holds 200, 205: one of six rumours, texts 200 to 205, is shown."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 20,
+   "title": "Move the party and start the event there",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Moves the party to another place, possibly on another map, plays an optional sound and text, then starts any event on the square where it arrives."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Map number\n2) Column (x)\n3) Row (y)\n4) Sound (0 for none)\n5) Text (0 for none)",
+      "1) A negative value stays on the current map.",
+      "2) and 3) The destination square, 0 to 89. A negative value keeps the current column or row.",
+      "4) A sound played on arrival.",
+      "5) A text shown on arrival."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "If the arrival square holds an event, that event takes over the running script after the text is dismissed, so the steps after Code 20 never run. The event first passes its own chance test. Place the party on a square with no event to just move it."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 25 holds 6, 10, 80, 2400, 0: the party appears on map 6 at column 10, row 80, and sound 2400 plays."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 21,
+   "title": "Branch if the party has an item",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Looks for an item anywhere in the party's packs, takes one path if it is found, and another if it is not."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Item number\n2) Where to go if the item is found\n3) What to do if it is not found\n4) Target if the item is found\n5) Script to run if it is not found",
+      "1) The item to look for.",
+      "2) 0 replaces the script with script E-Code 4, 1 opens simple encounter E-Code 4, 2 opens typed encounter E-Code 4. Any other value carries on.",
+      "3) 0 replaces the script with script E-Code 5. 3 ends the script. Any other value carries on.",
+      "4) The script or encounter number for E-Code 2.",
+      "5) The script number used when E-Code 3 is 0."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The item is not taken. Code 22 removes it."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A locked vault. Extra Codes 40 holds 77, 0, 0, 50, 51: if someone carries item 77 (the brass key), script 50 (the door opens) runs, otherwise script 51 (the door stays shut)."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 22,
+   "title": "Change items held by the party",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Removes an item, changes its charges, or swaps it for another item."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Item number\n2) How many to affect\n3) Action\n4) Charges to add\n5) Replacement item",
+      "1) The item to look for in the packs.",
+      "2) The most copies affected.",
+      "3) 1 removes the item. 2 adds charges. 3 replaces the item with the item in E-Code 5.",
+      "4) For action 2, the charges added. A negative number drains charges. An item left with no charges that is meant to be discarded when empty is removed.",
+      "5) For action 3, the item that replaces it."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Worn items are taken off properly when they are removed or replaced. Test the empty-item behaviour in your scenario before relying on it."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 33 holds 77, 1, 1, 0, 0: one copy of item 77 (the brass key) is removed from whoever carries it."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 23,
+   "title": "Change a region's random battles",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Changes how often random battles occur in one region of a map, and which battles they can be."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Map number\n2) Region number\n3) New encounter chance\n4) New lowest battle number\n5) New highest battle number",
+      "1) The map holding the region. It does not have to be the current map.",
+      "2) The region, 0 to 19.",
+      "3) The new chance of a random battle. It always replaces the old value.",
+      "4) and 5) The new lowest and highest battle numbers. A negative value leaves that limit as it was."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Set E-Code 3 to 0 to make a region quiet. Test the chance scale in your scenario before relying on exact odds."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 12 holds 1, 4, 0, -1, -1: region 4 on map 1 has no more random battles."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 24,
+   "title": "End the script and keep the event",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Ends the script. The map event that started it is kept, so it can run again."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "A script started by a map event that runs out of steps, with no encounter on screen, leaves the event spent: its chance becomes -1 and it does not run again. Use Code 24 for events the party may visit more than once. \"Moving Between Scripts\" lists the steps that leave a script at once without marking the event. Code 24 also clears an encounter that is on screen."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A merchant's stall event ends with Code 24 so the party can come back."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 25,
+   "title": "Remember the party's position for the event",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Notes the square the party is on so that, when the script finishes, the event is stored with that position."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The script does not end here; the steps after it still run. Inside an encounter's choice it also stops the encounter from being shown again when the script ends. Test this code in your scenario before relying on it."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A trap event uses Code 25 before a teleport step."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 26,
+   "title": "Wait for a click",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Shows a small \"Click Mouse\" box with a sound and waits for the player to click."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Use it to pace a sequence of pictures or sounds."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Between two Code 27 steps that show pictures, a Code 26 lets the player look at the first."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 27,
+   "title": "Show a picture",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "A picture number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Draws the picture, centred in the 320 by 320 look area, replacing what was there."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The picture must exist in the scenario or in the game's shared data. The game does not handle a missing picture, so check every picture number."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "ID 600 shows picture 600, a portrait of the warlord."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 28,
+   "title": "Redraw the screen",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Redraws the main view."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Use it after a picture to return to the map."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "After Code 27 and Code 26, a Code 28 brings back the map."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 29,
+   "title": "Give or show a map note",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "A note number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Gives the party the note, and either announces it or shows it right away."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "With a positive ID, a short \"gained\" message flashes and the note can be viewed later from the notes menu. With a negative ID, the note is shown at once and the script waits until the player closes it."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The note number is the ID without its sign."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "ID -3 gives the party the old map, note 3, and shows it immediately."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 30,
+   "title": "Pick warriors by a test",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Narrows the picked warriors to those who pass a test of a special skill or an attribute."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Special skill number or attribute number\n2) Kind of test\n3) Who is tested\n4) Invert the result\n5) Attribute threshold",
+      "1) For a special skill test, the skill number. For an attribute test, 0 to 6: Brawn, Knowledge, Judgement, Quickness, Coordination, Vitality, Psionics.",
+      "2) 0 tests a special skill. Any other value tests the attribute.",
+      "3) 1 tests the whole squad. 2 tests every warrior with stamina above 0. Any other value tests only those already picked.",
+      "4) Any nonzero value picks the warriors who failed and drops those who passed. Warriors who were not tested are picked too, because every warrior's pick is turned round.",
+      "5) An attribute test passes when the attribute is above this number."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "A special skill test rolls 1 to 100 and passes when the roll is not above the skill plus its bonus. The skill value is read from the warrior whose place in the squad matches this step's place in the script, which is not always the warrior under test; test this in your scenario before relying on it. An attribute test uses no dice."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 8 holds 0, 1, 1, 0, 14: everyone is tested, and those with Brawn above 14 are picked."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 31,
+   "title": "Ask the player to pick a warrior and test them",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Asks the player to pick one living warrior, tests that warrior, and runs a different script for a pass and a fail."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Special skill number or attribute number\n2) Threshold\n3) Kind of test\n4) Script on a pass\n5) Script on a fail",
+      "1) For an attribute, 0 to 5: Brawn, Knowledge, Judgement, Quickness, Vitality, Psionics. Any other attribute number makes the script carry on without a test.",
+      "2) A special skill passes when the skill plus its bonus reaches this number. An attribute passes when it is above this number.",
+      "3) 0 tests a special skill. Any other value tests the attribute.",
+      "4) and 5) The script that replaces this one."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "There are no dice. The warrior chosen is the one named by ^9 in later texts."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 5 holds 0, 12, 0, 60, 61: the player picks the one who tries to pick the lock; if their lockpicking skill and bonus reach 12, script 60 runs, otherwise script 61."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 33,
+   "title": "Charge credits and branch",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Tries to take credits from the party. Depending on whether it can, the script goes on or jumps."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Cost in credits\n2) Condition\n3) Jump type\n4) Jump target\n5) Step to start at in the target",
+      "1) The amount to take. It comes from the party's purse first, then from the credits warriors carry. If the party cannot pay, nothing is taken and the game warns that the party cannot pay.",
+      "2) 0 jumps if the party could not pay. 1 jumps if it did pay. 2 always jumps. -1 goes straight to the eighth step of this script if the party could not pay (the script otherwise goes on). Other values never jump.",
+      "3) The standard jump: -1 runs the eighth step of this script next. 0 replaces the script with script E-Code 4. 1 runs a branch of the simple encounter now running, and 2 a branch of the typed encounter now running, with E-Code 4 as the branch number (0 to 3). 3 ends the script, keeps the event and clears the encounter, like Code 24. Other values do not jump.",
+      "4) The script number, or the branch number for jump types 1 and 2.",
+      "5) For jump types 1 and 2, the step to start from, counted from 0: 0 is the first step and 7 the eighth."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The standard jump is used in the same way by Codes 38 and 42."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A toll bridge. Extra Codes 71 holds 25, 0, 0, 90, 0: if the party cannot pay 25 credits, script 90 (the guards bar the way) replaces this one."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 34,
+   "title": "Leave the encounter",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Leaves the simple or typed encounter now running and carries on with the step after the one that opened it."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Use it only in a script that runs from an encounter opened with Code 4 or Code 5. It puts back the copy of the script saved when the encounter opened (see \"Moving Between Scripts\"); with no encounter open there is no copy to trust, so do not use it elsewhere."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A \"Walk away\" choice in a simple encounter runs a script whose only step is Code 34."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 35,
+   "title": "Remove a choice from the running simple encounter",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The choice to remove, 1 to 4."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Blanks that choice in the simple encounter now running and shows the encounter again."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The change is kept. It only works inside a simple encounter."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "After the player takes the idol, a Code 35 with ID 2 removes the \"Take the idol\" choice."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 36,
+   "title": "Take or return the party's belongings",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "Nonzero to take, 0 to return."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Takes all the party's items and credits and stores them, or gives them back."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "A nonzero ID does nothing if goods are already stored. 0 does nothing if nothing is stored."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Taking shows a message and drops every item the warriors have, including worn ones. Returning puts the items back and re-wears what was worn, then opens the treasure window if at least one item came back. Returned credits alone open no window."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Prisoners being searched: Code 36 with ID 1 at the cell door, and Code 36 with ID 0 once the party escapes."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 38,
+   "title": "Branch if the party has an item (standard jump)",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Checks whether the party carries an item and jumps accordingly."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Item number\n2) Condition\n3) Jump type\n4) Jump target\n5) Step to start at in the target",
+      "1) The item to look for.",
+      "2) 0 jumps if the item is not carried. 1 jumps if it is. 2 always jumps. Other values never jump.",
+      "3) to 5) The standard jump described in Code 33."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 44 holds 90, 0, 0, 12, 0: if nobody has item 90 (the pass), script 12 replaces this one."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 39,
+   "title": "Replace the script",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "A script number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Replaces the running script with that script and starts it from its first step."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Use it to continue a long scene beyond eight steps."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The eighth step of script 5 is Code 39 with ID 6, which carries the scene on."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 40,
+   "title": "Branch on a party condition",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Checks one of the party's lasting conditions, the timed effects that apply to the whole squad, and jumps if it is set or clear."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Jump when set or clear\n2) Jump type\n3) Target\n4) Condition number",
+      "1) 1 jumps if the condition is present. 2 jumps if it is absent. Other values never jump.",
+      "2) 1 replaces the script with script E-Code 3. 2 opens simple encounter E-Code 3. 3 opens typed encounter E-Code 3. Any other value ends the script.",
+      "3) The script or encounter number.",
+      "4) The index of the party condition to test, counted from 0. Index 0 is the party's light."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 6 holds 2, 1, 40, 0: if condition 0 (the party's light) is absent, script 40 runs."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 41,
+   "title": "Remove a choice from any simple encounter",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Blanks a choice of a stored simple encounter, which need not be the one running."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Simple encounter number\n2) Choice number",
+      "1) The encounter to change.",
+      "2) The choice to blank, 1 to 4. Use only these values."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The change is kept for the rest of the game."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 7 holds 12, 3: choice 3 of encounter 12 can no longer be picked."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 42,
+   "title": "Branch on a percent chance",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Rolls a chance. If it succeeds, the script ends or jumps. If not, it carries on."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Chance percent\n2) What a success does\n3) Jump type\n4) Jump target\n5) Step to start at in the target",
+      "1) The roll is 1 to 100 and succeeds when it is not above this number. 100 always succeeds and 0 never does.",
+      "2) -2 ends the script, and the event is spent as when the steps run out. 1 uses the standard jump from E-Codes 3 to 5. 2 ends the script and keeps the event, but unlike Code 24 it does not clear an encounter that is on screen. Other values carry on.",
+      "3) to 5) The standard jump described in Code 33."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Extra Codes 20 holds 30, 1, 0, 70, 0: with a 30 percent chance, script 70 replaces this one."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 43,
+   "title": "Give Condition",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Puts a condition (poison, blindness, and so on) on some of your warriors for a set time, or for good."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Who is affected.\n2) Condition number.\n3) Duration.\n4) Sound number.",
+      "1) 0 affects the whole squad. 1 affects only the picked warriors. 2 affects every warrior who is still alive (stamina above -10).",
+      "2) The number of the condition in the game's condition list, for example 3 for Poisoned, 27 for Blind, 28 for Diseased or 29 for Confused.",
+      "3) The number is added to the warrior's current value for that condition. A positive number is a timed condition. A negative number stays until something removes it.",
+      "4) The sound is played once for each warrior who receives the condition. Use 0 for no sound."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Before it gives anything, this code clears every running timed value of the chosen condition on every warrior in the squad, including warriors it does not select. A permanent (negative) condition is not cleared by this step, but the duration in E-Code 3 is then added to it for every warrior it selects: a permanent -1 with a duration of 6 becomes a timed 5, and a negative duration makes a permanent condition longer. Each affected warrior then shows the spell effect and the condition result."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A cursed idol blinds whoever lifts it. Use E1 = 1 after picking the warrior who touched it, E2 = 27, E3 = 6, E4 = a hissing sound. Every warrior's old blindness timer is cleared first, then only the picked warrior is blinded for 6."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 44,
+   "title": "Eliminate Typed Encounter Choice",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The number of the choice to remove, 1 to 4."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Empties one choice of the typed encounter that is on screen, so that picking it afterwards closes the encounter."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The first seven steps of the choice are cleared and its eighth step becomes Code 24, so picking the choice closes the encounter and keeps the event. Use this in a script that runs from inside a typed encounter, for example after the player has opened a chest, so the same choice cannot be repeated. The game does not check the number, so stay inside 1 to 4."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "In a typed encounter at a well, choice 2 is \"Draw water\". The script behind choice 2 gives the squad a drink and then uses code 44 with ID 2. If the player picks choice 2 again, the encounter closes."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "Whether the emptied choice is still listed in the encounter was not confirmed. Test this in your scenario before relying on it."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 45,
+   "title": "Teleport Only",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Moves the squad to another place, on this map or another one, without running the event at the arrival square."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Map number.\n2) X position.\n3) Y position.\n4) Sound number.\n5) Text number.",
+      "1) The map to move to. -1 stays on the current map.",
+      "2) The column to arrive at. -1 keeps the current column.",
+      "3) The row to arrive at. -1 keeps the current row.",
+      "4) A sound played on arrival. 0 for none.",
+      "5) A text shown on arrival. 0 for none."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Code 20 is the version that also runs the event at the arrival square. Code 45 does not. The sound and the text happen after the squad has arrived, and the script then continues with its next action."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A rope bridge drops the squad to the cave floor. Use E1 = -1, E2 = 12, E3 = 40, E4 = a crash sound, E5 = the text \"You land hard in the dark.\""
+     ]
+    }
+   ]
+  },
+  {
+   "code": 46,
+   "title": "Branch on Mission Flag",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Looks at a mission flag and, if the test matches, leaves the script for another place."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Mission flag number.\n2) When to branch.\n3) Branch type.\n4) Branch number.\n5) Start action.",
+      "1) The flag to look at.",
+      "2) 0 branches when the flag is clear. 1 branches when the flag is set. 2 always branches. Any other value never branches, and the script goes on to the next action.",
+      "3) -1 runs the eighth action of this script next. 0 goes to script E4 (starting at its first action). 1 runs the actions of choice E4 of the simple encounter on screen, starting at action E5. 2 does the same for the typed encounter on screen. 3 ends the script, keeps the event and clears the encounter, like code 24. Any other value does nothing.",
+      "4) For types 1 and 2, the choice number counted from 0 (0 to 3). For type 0, the script number.",
+      "5) For types 1 and 2, the action to start at, counted from 0: 0 is the first action and 7 the eighth."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The tail of this code, E3 to E5, is shared by codes 58 and 59 below. Types 1 and 2 only make sense in a script that was started from an encounter."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The guard lets you pass only if mission flag 17 (the signed pass) is set. Use E1 = 17, E2 = 1, E3 = 0, E4 = the number of the \"gate opens\" script."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 47,
+   "title": "Set or Clear Mission Flag",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The flag number. A positive number sets the flag. Zero or a negative number clears the flag whose number is the ID without its sign."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Sets a mission flag to 1 or clears it to 0."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "An ID of 0 clears flag 0."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Mission flags are one byte each. Code 76 uses the same flags as counters, so setting a flag here overwrites any count kept there. To set a flag that is later cleared, use a positive ID in one step and the same number with a minus sign in another."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "After the dragon dies, ID 30 sets flag 30. When the queen takes back her ring, ID -30 clears it."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 48,
+   "title": "Selected Battle",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Runs a battle with only the picked warriors fighting, and gives the rewards when it is over."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Battle number.\n2) Highest battle number.\n3) Sound number.\n4) Text number.\n5) Treasure number.",
+      "1) The battle to fight. Battle numbers work as in code 2.",
+      "2) 0 fights battle E1. Any other number picks a random battle from E1 up to E2, both included.",
+      "3) A sound played before the fight. 0 for none.",
+      "4) A text shown before the fight. 0 for none.",
+      "5) A treasure given after a victory, in addition to the normal booty. 0 for none."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Afterwards every warrior of the squad is counted as present again. If no warrior is left standing, the game shows a short message and gives out a reduced set of rewards that was not confirmed; test this in your scenario. Otherwise the normal booty comes first, then the treasure in E5. The map is reloaded afterwards."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Three scouts surprise the squad at a ford. Pick the two fastest warriors, then use E1 = 14, E2 = 0, E3 = a horn call, E4 = the ambush text, E5 = 6."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 50,
+   "title": "Pick by Race, Gender, M.O.S. or Class",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Picks the warriors who match a trait. Later codes (55, 60, 74 and others) act on them."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) What to test.\n2) Gender.\n3) Race, M.O.S. or class number.\n5) Living only.",
+      "1) 0 tests the race. 1 tests the gender. 2 tests the M.O.S. 3 tests the race class. 4 tests the M.O.S. class.",
+      "2) The gender number to pick. It is read only when E1 is 1.",
+      "3) The race number (E1 = 0), the M.O.S. number (E1 = 2), or the class number (E1 = 3 or 4).",
+      "5) 0 considers every warrior. Any other value considers only warriors with stamina above 0."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Everyone is unpicked first, so this code replaces the old group. E4 is not read. Test the gender numbers in your scenario before relying on them."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Only dwarves can read the runes. Use E1 = 0, E3 = the dwarf's race number, E5 = 1."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 51,
+   "title": "Alter Shop",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Changes a shop's prices and the stock of one item in it."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Shop number.\n2) Price change.\n3) Item number.\n4) Stock change.",
+      "1) The shop to change.",
+      "2) Added to the shop's price percentage. Use a negative number for a discount.",
+      "3) The item whose stock is changed. Every slot of the shop holding this item is changed.",
+      "4) Added to the number in stock. Only the low byte is used, and the stock is one signed byte: a result below 0 becomes 0, and a result past 127 wraps round to a negative number and so also becomes 0. Keep E4 small."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The change is saved, so it is still there the next time the squad visits."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "After the squad frees the merchant's caravan, use E1 = 4, E2 = -15, E3 = the number of healing salve, E4 = 5."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 52,
+   "title": "Pick on Test",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Picks warriors by a test on each of them."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) The test.\n2) The test value.\n3) Which warriors are tested.",
+      "1) 0 picks warriors whose movement is below E2. 1 picks warriors whose place in the squad (counted from 1) is below E2. 2 picks warriors who carry item E2. 3 picks each warrior with a chance of E2 percent. 4 picks warriors who fail a saving throw against attribute E2 (0 to 5). 5 picks warriors who fail a saving throw against resistance type E2 (0 to 8). 6 picks the warrior currently selected on screen. 7 picks warriors who are wearing item E2.",
+      "3) 0 tests every warrior. 1 tests only warriors with stamina above 0. 2 is meant to test only the already picked warriors."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Everyone is unpicked first, so mode 2 never finds anybody. Test 3 draws one random number for each warrior tested. Tests 4 and 5 draw their own numbers too. A test number above 7 picks nobody."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The ghoul's touch paralyzes the unwary. Use E1 = 4, E2 = 3 (the fourth attribute), E3 = 1. Every living warrior who fails the save is picked."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 53,
+   "title": "Pick by M.O.S.",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Picks warriors by their M.O.S., either one M.O.S. or a whole group of them."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) M.O.S. number.\n2) Group.\n3) Which warriors are tested.",
+      "1) A single M.O.S. to pick.",
+      "2) 0 for no group. 1 also picks M.O.S. 1, 3 and 4. 2 also picks M.O.S. 3, 6, 7 and 8. 3 also picks M.O.S. 2 and 5.",
+      "3) 0 tests every warrior. 1 tests only warriors with stamina above 0. 2 is meant to test only picked warriors."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Everyone is unpicked first, so mode 2 never picks anybody. E1 and E2 add together: a warrior is picked if either matches. If you only want the group, give E1 a number that no warrior has."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A priest is needed to open the vault. Use E1 = the priest's M.O.S. number, E2 = 0, E3 = 1."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 54,
+   "title": "Alter Calendar Entry",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Changes one entry of the scenario's calendar: how likely it is to run, how often, and the day it comes due."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Calendar entry number.\n2) Chance in percent.\n3) Interval in days.\n4) Reset to today.\n5) Days to add.",
+      "1) The entry to change.",
+      "2) The new chance. A negative number leaves the chance as it is.",
+      "3) The new interval. A negative number leaves the interval as it is.",
+      "4) Any value except 0 sets the entry's due day to the current game day.",
+      "5) Days added to the due day, after step 4 has been applied. A negative number adds nothing."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "An entry number past the end of the calendar is not allowed."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A wandering merchant's visit should be postponed a week after the squad robs him. Use E1 = 3, E2 = -1, E3 = -1, E4 = 1, E5 = 7."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 55,
+   "title": "Branch on Picked Warriors",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Checks how many warriors are picked and sends the script to one of two places."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) What to check.\n2) If the check fails.\n4) Script if the check passes.\n5) Script if the check fails.",
+      "1) 0 passes when at least one warrior is picked. 1 to 6 pass when the first warrior is picked. Any other number, including a negative one, passes when exactly that many warriors (without the sign) are picked.",
+      "2) 1 goes to script E5. Any other value ends the script.",
+      "4) The script to start when the check passes."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Values 1 to 6 all look only at the first warrior, not at the warrior of that number. E3 is not read."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The ferryman takes exactly two passengers. After picking two warriors, use E1 = 2, E2 = 1, E4 = the boarding script, E5 = the \"too many or too few\" script."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 56,
+   "title": "Battle with Retreat Script",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Fights a battle in which the squad may retreat, and tells the game where to go if it does."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Battle number.\n2) Highest battle number.\n3) Retreat script.\n4) Sound number.\n5) Text number.",
+      "1) The battle to fight, as in code 2.",
+      "2) 0 fights battle E1. Any other number picks a random battle from E1 to E2.",
+      "3) -1 steps the squad back to where it stood before. Any other number is a script that runs when the squad retreats.",
+      "4) A sound played before the fight. 0 for none.",
+      "5) A text shown before the fight. 0 for none."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "If the squad wins, the normal booty is given and the script goes on. If it retreats and E3 is -1, the game warns the player, plays a sound, adds 200 times the warrior's level to each warrior's remaining victory points, and steps the squad back. Test this penalty in your scenario before relying on it. If it retreats and E3 is another number, that script starts."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The squad fights its way into the arena. Use E1 = 9, E2 = 0, E3 = -1, E4 = 0, E5 = 0. If the squad runs, it is back at the gate and each warrior needs more victory points before the next level."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 57,
+   "title": "Change Map Look",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Changes the tile set used by a map, and whether the map is dark."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Look number.\n2) Dark.\n3) Map number.",
+      "1) The new tile set. Only the low byte is used.",
+      "2) The new darkness value. Only the low byte is used.",
+      "3) The map to change."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The change is saved with the map. The map the squad is on stays the current map afterwards."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "After the volcano erupts, use E1 = the ash-covered tile set, E2 = 1, E3 = the village map."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 58,
+   "title": "Branch on Difficulty",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Does something only if the game is played at a given difficulty level or harder."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Difficulty level.\n2) What to do when it passes.\n3) Branch type (as in code 46).\n4) Branch number.\n5) Start action.",
+      "1) The test passes when this number is no greater than the current difficulty level.",
+      "2) 1 uses the branch given by E3 to E5. 2 ends the script and keeps its codes. -2 ends the script. Any other value does nothing."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "E3 to E5 work as in code 46."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "An extra troll guards the bridge only on harder settings. Use E1 = 3, E2 = 1, E3 = 0, E4 = the troll script."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 59,
+   "title": "Branch on Tile",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Looks at the tile the squad stands on."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Tile number.\n2) What to do.\n3) Branch type (as in code 46).\n4) Branch number.\n5) Start action.",
+      "1) The tile number. It is not used: the test always passes.",
+      "2) 1 uses the branch given by E3 to E5. 2 ends the script and keeps its codes. -2 ends the script. Any other value does nothing."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Because the test always passes, this code behaves as an unconditional jump or end. Do not rely on E1 to tell tiles apart."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A script that must end in a hurry can use E2 = -2."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 60,
+   "title": "Drop Carried Credits",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Takes all the credits a warrior carries, for example when thieves strike."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "2) Who loses credits.",
+      "2) 0 takes the credits of every warrior. Any other value takes them only from the picked warriors."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The credits are gone, not given to anyone. E1 is not used."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A pickpocket works the crowd. Pick the warrior he robs and use E2 = 1."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 61,
+   "title": "Shift Position",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Nudges the squad's position on the map by a few squares, steady or random."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "2) Squares across (X).\n3) Squares down (Y).\n4) Random.",
+      "2) The number of squares to move across. A negative number moves the other way.",
+      "3) The number of squares to move down. A negative number moves the other way.",
+      "4) 0 moves exactly by E2 and E3. Any other value moves by a random amount: for each direction there is a fifty-fifty chance of each sign, and a random distance from 1 up to E2 across and from 1 up to E3 down. Use positive numbers there."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "E1 is not used. The map view is re-centred afterwards. No event runs at the new square."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A teleport trap misfires. Use E2 = 4, E3 = 4, E4 = 1."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 62,
+   "title": "Show Scrolling Text",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The number of the text to show."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Plays a text in the scrolling-text window."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The view is re-centred after the text. How the lines scroll and how long the text stays up are the game's own; check a long text in your scenario before relying on its pacing."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A prophecy is read from a scroll. Use the text number of the prophecy."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 63,
+   "title": "Alter Game Time",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Sets the game clock, or moves it forward."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Mode.\n2) Days.\n3) Hours.\n4) Minutes.",
+      "1) 1 sets the clock to the given day, hour and minute. 2 adds the given amounts. Any other value changes nothing.",
+      "2) The day.\n3) The hour, 0 to 23.\n4) The minute, 0 to 59."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "There is no \"keep\" value: a -1 in set mode is stored as -1. In add mode, an hour that passes 23 moves to the next day, and a minute that passes 59 moves to the next hour. The minutes are checked after the hours, so many minutes can leave the hour at 24. After the change the game runs one time update in which no time passes. If the hour reads 24, the day rolls over and calendar entries (code 54) that come due may run; check this in your scenario if you set hour 24."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The squad sleeps in the inn. Use E1 = 2, E2 = 0, E3 = 8, E4 = 0 to move the clock forward eight hours."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 64,
+   "title": "Branch on Game Time",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Goes to one script if it is early enough, another if it is late."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Day.\n2) Hour.\n3) Hour (second test).\n4) Script if on time.\n5) Script if late.",
+      "1) The last day that counts as on time.",
+      "2) The last hour that counts as on time.",
+      "3) A second hour limit, compared with the current hour the same way as E2.",
+      "4) The script to start when on time.",
+      "5) The script to start when late."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The squad is late if the current day is past E1, or the current hour is past E2, or the current hour is past E3. The hour is tested whatever the day is. A -1 does not mean \"ignore\"; it makes the test late. Set E3 to 23 if you do not want it to matter. Both targets must be real script numbers."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The bridge keeper only sees travelers on day 5 or earlier, up to hour 18. Use E1 = 5, E2 = 18, E3 = 23, E4 = the open-bridge script, E5 = the closed-bridge script."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 65,
+   "title": "Award Random Items",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Gives the squad random items from a range of item numbers."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Number of items.\n2) Lowest item number.\n3) Highest item number.",
+      "1) A positive number gives that many items. A negative number gives a random number from 1 up to the number without its sign. Use 20 or fewer.",
+      "2) Lowest item number.",
+      "3) Highest item number. Each item is chosen at random between E2 and E3, both included."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The items appear on the booty screen for the squad to take."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A treasure chest holds one to three potions. Use E1 = -3, E2 = 200, E3 = 210."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 66,
+   "title": "Allow or Forbid Camping",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "0 allows camping. Any other number forbids it."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Controls whether the squad may camp."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "A short message appears when the setting changes. Its wording is the game's own; read both messages in your scenario. The game compares the ID itself with the old setting, which is 0 or 1, so only the IDs 0 and 1 avoid a repeated message when the code runs again; use only those two."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "In the haunted mine, ID 1 forbids camping. When the squad leaves, ID 0 allows it again."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 67,
+   "title": "Branch on Item Charges",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Adds up the charges of one item over the whole squad and goes to one of two places depending on whether there are enough."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Item number.\n2) Target type.\n3) Charges needed.\n4) Target if enough.\n5) Target if not enough.",
+      "1) The item whose charges are counted. Every copy carried by every warrior is counted.",
+      "2) 0 starts script E4 or E5. 1 opens simple encounter E4 or E5. 2 opens typed encounter E4 or E5. Any other value does nothing, and the script goes on to the next action. These target types are used by every branch code below that asks for a target type.",
+      "3) The squad has enough when the total number of charges is E3 or more.",
+      "4) The target used when the squad has enough charges.",
+      "5) The target used when it does not."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "There is no \"continue the script\" value: whatever number you give is used as the target."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The lighthouse lamp needs 10 charges of oil. Use E1 = the oil flask, E2 = 0, E3 = 10, E4 = the \"lamp burns\" script, E5 = the \"lamp sputters out\" script."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 68,
+   "title": "Alter Squad Fatigue",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Changes the squad's fatigue in one step."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Mode.\n3) Percent.",
+      "1) 1 sets the fatigue to 135, the top of the fatigue scale. 2 sets it to 4, the bottom of the scale. 3 multiplies the current fatigue by the result of E3 divided by 100. Any other value changes nothing.",
+      "3) Used only in mode 3. E2, E4 and E5 are not read."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "In mode 3 the division comes first and uses whole numbers, and the fatigue is then multiplied by that result. A value from 100 to 199 leaves the fatigue as it is, 200 to 299 doubles it, and below 100 makes it 0. Outside a battle, with the main window in front, the result is held between 4 and 135 at once, so 0 becomes 4. In a battle, or when the main window is not in front, the stored value stays as it is until the game's next normal update. The fatigue bar is redrawn only when the main window is in front. This manual does not say which end of the scale means rested: look at the fatigue bar in your scenario and test modes 1 and 2 before relying on them."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A mountain spring should leave the squad at the end of the scale you have found to mean rested. Use E1 = 1 or E1 = 2 accordingly."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 69,
+   "title": "Set Psi Restrictions",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Switches on or off three limits on Psi: the squad cannot use Psi, monsters cannot use scans, and Psi points do not recover."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) The squad cannot use Psi.\n2) Monsters cannot use scans.\n3) Psi points do not recover.",
+      "1) to 3) 0 lifts the limit and 1 puts it in force. The effect of other values was not confirmed; use only 0 and 1."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The limits stay as set until another code 69 changes them. The Extra Codes are read even when the ID is 0; test that case in your scenario before relying on it."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A null-field cavern blocks all Psi. On entering use E1 = 1, E2 = 1, E3 = 1; at the exit use 0, 0, 0."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 70,
+   "title": "Save or Restore Squad Position",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Remembers where the squad stands, and later puts it back there."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Save or restore.",
+      "1) 1 saves the map, column and row of the squad. 2 restores them. Any other value does nothing."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Restoring moves the squad to the saved map and square but does not run the event there. Only one position is kept. Always save before you restore."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A trapdoor drops the squad into a pit. A script above the trapdoor saves the position with E1 = 1. When the squad climbs out, E1 = 2 puts it back."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 71,
+   "title": "Show or Hide Coordinates",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "0 shows the X and Y coordinates. 1 hides them."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Switches the position readout on or off."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The fatigue strip and coordinates are redrawn at once. Values other than 0 and 1 are not documented; test them in your scenario before relying on them."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "In a maze, ID 1 hides where the squad is, and ID 0 shows it again at the exit."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 72,
+   "title": "Branch on Range of Mission Flags",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Goes to another place only if every mission flag in a range is set."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) First flag.\n2) Last flag.\n4) Target type.\n5) Target.",
+      "1) The lowest flag number tested.",
+      "2) The highest flag number tested. Both ends are included.",
+      "4) The target type, as in code 67. Any other value does nothing.",
+      "5) The target number."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "A flag counts as set when it is not 0. If any flag in the range is clear, the script goes on to the next action. E3 is not read."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Five seals (flags 40 to 44) guard the inner gate. Use E1 = 40, E2 = 44, E4 = 0, E5 = the gate-opens script."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 73,
+   "title": "Delay",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The number of ticks to wait."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Pauses the script before its next action."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "An ID of 0 is meant to wait as long as the player's animation-delay setting; test this in your scenario."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The pause is meant to be the ID plus one tick; this was not confirmed. This manual does not give the length of a tick; time a pause on screen in your scenario before using it for dramatic timing."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Between two lines of a speech, use ID 30 and check on screen how long the pause feels."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 74,
+   "title": "Give or Take Psi Points of Picked Warriors",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Adds Psi points to, or removes them from, each picked warrior."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Rolls and direction.\n2) Lowest roll.\n3) Highest roll.\n4) Play a sound.\n5) Text number.",
+      "1) A positive number adds, a negative number takes. The size says how many rolls are made.",
+      "2) The lowest value a roll can give.",
+      "3) The highest value a roll can give. Each roll is a random number from E2 to E3, both included.",
+      "4) Any value except 0 plays a sound. The sound played is the one whose number is E2.",
+      "5) A text shown after the change. 0 for none."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Only warriors with a maximum of Psi above 0 are changed. Only the last roll for each warrior is used, not the sum, so use E1 = 1 or E1 = -1; a larger size only draws extra random numbers. Do not use 0. A warrior's Psi is held between 0 and their maximum."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A cursed shrine drains the picked warriors by 5 to 10. Use E1 = -1, E2 = 5, E3 = 10, E4 = 0, E5 = the \"you feel drained\" text."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 75,
+   "title": "Branch on Psi Points",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Goes to another place if at least one warrior has enough Psi points."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Who is tested.\n2) Psi points needed.\n3) If nobody has enough.\n4) Target type.\n5) Target.",
+      "1) 1 tests the picked warriors. 2 tests every warrior with stamina above 0 who is not under computer control. Any other value tests nobody.",
+      "2) A warrior has enough when Psi points are this number or more.",
+      "3) 1 ends the script and keeps its codes. Any other value goes on to the next action.",
+      "4) The target type, as in code 67, used when someone has enough. Any other value does nothing.",
+      "5) The target number."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The beacon needs a warrior with 20 Psi points. Use E1 = 2, E2 = 20, E3 = 0, E4 = 0, E5 = the beacon-lit script."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 76,
+   "title": "Change Mission Value",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Adds to or subtracts from a mission flag used as a counter, and may branch when the counter is high enough."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Flag number.\n2) Amount to add.\n3) Branch type.\n4) Threshold.\n5) Target.",
+      "1) The flag to change. A flag number of 100 or more is not changed; use flags 0 to 99.",
+      "2) Added to the flag. Use a negative number to subtract.",
+      "3) 1 goes to script E5. 2 opens simple encounter E5. 3 opens typed encounter E5. Any other value does nothing.",
+      "4) 0 means never branch. Otherwise the branch happens when the flag, after the change, is E4 or more.",
+      "5) The target number."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Flags hold signed numbers from -127 to 127, and the result is held within that range. These are the same flags that code 47 sets and clears."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Each bribe adds 1 to flag 12. Use E1 = 12, E2 = 1, E3 = 1, E4 = 3, E5 = the guard-relents script."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 77,
+   "title": "Branch on Mission Value",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Compares a mission flag with a number and goes to one of two places."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Flag number.\n2) Value to compare with.\n3) Target type.\n4) Target if the flag is less.\n5) Target if the flag is equal or greater.",
+      "1) The flag is read as a signed number.",
+      "2) The flag counts as \"equal or greater\" when it is E2 or more.",
+      "3) 0 starts a script. 1 opens a simple encounter. 2 opens a typed encounter. Any other value does nothing.",
+      "4) The target number used when the flag is below E2.",
+      "5) The target number used otherwise."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "A target of 0 means do not branch: the script goes on to the next action. To branch for only one outcome, leave the other target 0."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Flag 8 counts the king's goodwill. Use E1 = 8, E2 = 5, E3 = 0, E4 = the angry-king script, E5 = 0."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 81,
+   "title": "Branch on Character Condition",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Goes to one place if every chosen warrior has a condition, and to another place if not."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Condition number.\n2) Who is tested.\n4) Script if all have it.\n5) Script if not all do.",
+      "1) The condition number, as in code 43.",
+      "2) 0 tests the whole squad. -1 tests the picked warriors; if nobody is picked, the test passes. A positive number n tests only the warrior at place n counted from 0, so 1 is the second warrior; the first warrior can be tested only through 0 or -1.",
+      "4) The script to start when all tested warriors have the condition.",
+      "5) The script to start otherwise."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Any non-zero value counts as having the condition, including a permanent one. Dead warriors are included in the whole-squad test. Both targets must be real scripts. E3 is not read."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A healer sells her antidote only if the whole squad is poisoned. Use E1 = 3, E2 = 0, E4 = the sale script, E5 = the \"not everyone needs it\" script."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 84,
+   "title": "Check Registration",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "A registration check. In New Centurions it always passes."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The script goes on to the next action. You do not need to place this code."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "None needed."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 85,
+   "title": "Branch at Random",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Picks a random target number from a range and goes there."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Target type.\n2) Lowest target.\n3) Highest target.\n4) Sound number.\n5) Text number.",
+      "1) 0 starts a script. 1 opens a simple encounter. 2 opens a typed encounter. Any other value does nothing.",
+      "2) The lowest target number that can be chosen.",
+      "3) The highest target number that can be chosen, both ends included.",
+      "4) A sound played before the choice. 0 for none.",
+      "5) A text shown before the choice. 0 for none."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The sound and text come first, then one random number is drawn. Every target from E2 to E3 should exist."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Three ambush scripts are numbered 20, 21 and 22. Use E1 = 0, E2 = 20, E3 = 22, E4 = a twig-snap sound, E5 = 0."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 86,
+   "title": "Branch on Miscellaneous Test",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Tests one fact about the squad and goes to one of two places."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "A negative E2 limits tests 0, 1, 2, 5 and 6 to the picked warriors."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) The test.\n2) The value tested.\n3) Target type.\n4) Target if true.\n5) Target if false.",
+      "1) 0 asks whether a warrior of M.O.S. E2 is in the squad. 1 asks for race E2. 2 asks for gender E2. 3 asks whether the squad is aboard a boat. 4 asks whether the squad is camping. 5 asks for a warrior whose M.O.S. class is E2. 6 asks for a warrior whose race belongs to class E2. 7 asks whether the levels of all warriors added together are more than E2. 8 asks the same for the picked warriors only. Any other number counts as false.",
+      "2) The number tested. Tests 3 and 4 ignore it. The gender and class numbers are not listed in this manual; check them in your scenario before relying on them.",
+      "3) 0 starts a script. 1 opens a simple encounter. 2 opens a typed encounter.",
+      "4) The target number if the test is true.",
+      "5) The target number if it is false."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "A target of 0 means carry on with the next action. Use this to branch on only one outcome."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A ferryman refuses boats. Use E1 = 3, E3 = 0, E4 = the \"no boats\" script, E5 = 0."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 87,
+   "title": "Branch on Ally Present",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Goes to one place if a certain ally is with the squad, and to another if not."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Monster number of the ally.\n2) Target type.\n3) If absent.\n4) Target if present.\n5) Target if absent.",
+      "1) The monster number, 0 to 127.",
+      "2) 0 starts a script. 1 opens a simple encounter. 2 opens a typed encounter.",
+      "3) 0 branches to E5 when the ally is absent. Any other value goes on to the next action.",
+      "4) The target number used when the ally is present, whatever E3 says.",
+      "5) The target number used when the ally is absent and E3 is 0."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The guide Tamsin is monster 33. Use E1 = 33, E2 = 0, E3 = 0, E4 = the \"she leads the way\" script, E5 = the \"lost without a guide\" script."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 88,
+   "title": "Remove Ally",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The monster number of the ally."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Takes an ally of that monster number out of the squad."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "When an ally in one of the first five places is removed, only the next ally's record is copied into its place, and the later allies stay where they were. With three allies A, B and C, removing A leaves B in two places and C gone from the list. If two allies of that monster number stand next to each other, the second one is copied over the first and is then itself replaced: X, X, C leaves just one X in the squad, and C is lost. Removing an ally from the sixth place or later only shortens the list, so the last ally drops out. If the squad has several allies, remove from the end of the list first, and test the result in your scenario."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The wizard leaves after the tower falls. Use ID = his monster number."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 89,
+   "title": "Add Ally",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The monster number of the ally."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Adds a monster to the squad as an ally."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The ally is built from the monster's record. Its stamina is its bonus plus 1 to 8 for each hit die, and its maximum equals that stamina. For each difficulty level its psi resistance goes up by 3, each of its six saves by 7, its armor class down by 2 and its agility up by 1. An ally with a negative weapon entry is given a random weapon. A squad holds at most 20 allies; when full, a warning is shown and nobody is added."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A mercenary joins at the tavern. Use ID = the mercenary's monster number."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 90,
+   "title": "Take away victory points",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Moves victory points back off the squad. Each affected warrior's upgrade points go down by the amount, and the victory points he still has to earn go up by the same amount."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Amount of points.\n2) Who is affected.",
+      "1) The amount can be any whole number. A negative amount does the reverse and gives points back.",
+      "2) 0 affects every warrior with the full amount. 2 divides the amount by the number of warriors in the squad (whole number division, so a remainder is lost) and gives each warrior that share. Any value other than 1 and 2 acts like 0. 1 is meant to mean \"picked warriors only\", but it does not work warrior by warrior: it looks at one party-pick entry, the one that matches this step's position in the script, and then treats the whole squad alike. Either every warrior changes or none does."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Nothing is taken from a single total. The two counters simply move in opposite directions by the same amount."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A cursed idol drains the squad. E1 = 500 and E2 = 2 in a squad of four takes 125 from each warrior's upgrade points."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 91,
+   "title": "Drop all equipment",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Every warrior's pack is emptied onto the ground and the drop sound plays. The screen is refreshed afterward."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Use this for scenes such as a flooded cell where the squad loses everything. Nothing here puts the items back anywhere you can reach; give the squad new gear with another code if the story needs it."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A river crossing sweeps the squad's packs away. Run this code and follow it with a text that explains what happened."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "Test this in your scenario before relying on it for items that are cursed or locked in place."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 92,
+   "title": "Change a random-encounter rectangle",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number. The record that follows it (ID + 1) is also read."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Changes the position, the size and the chance of one random-encounter rectangle of a land, so that the places where the squad is attacked can move as the story moves on."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Land number.\n2) Rectangle number.\n3) Not used.\n4) Amount added to the rectangle's encounter chance.\n5) How the sides change.",
+      "1) The land to edit. It is saved when the change is done, and the land the squad stands in is loaded again.",
+      "2) A rectangle number from 0 to 19. The game does not check the number, so stay inside this range.",
+      "4) Added to the chance whatever E5 says. Use 0 to leave the chance alone.",
+      "5) -1 changes no sides. 0 sets the sides to the values in the second record. 1 slides the whole rectangle: E1 of the second record moves it across and E2 moves it down. 2 adds each of the four values to its own side.",
+      "The second record holds the four sides in this order: left, right, top, bottom. With mode 0 they are the new sides. With mode 2 they are added to the old ones, so negative numbers pull a side in."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The land is saved after the change, so the new rectangle stays for the rest of the game."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "After the bandit camp is cleared, set E1 = 3, E2 = 4, E4 = -30 and E5 = -1 to make the wolves of land 3's rectangle 4 (the fifth one) much less likely."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 98,
+   "title": "Require registration",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "In the original game this stopped an unregistered copy: it showed a refusal and stepped the squad back. In this game registration is always satisfied, so the code does nothing and the script goes on to the next action."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "You may put it in a scenario for compatibility. It never blocks anyone."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 99,
+   "title": "Scenario registration check",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "In the original game this ended the script when the scenario had not been registered. In this game registered behaviour applies, so the code does nothing and the script goes on to the next action."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Like code 98, it never blocks anyone."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 100,
+   "title": "End a battle and give out rewards",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The reward kind. The game doubles it before use."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Closes the battle from a script and goes through the reward flow that the ID chooses. The land is reloaded. The script then goes on to the next action, after the reward windows have been closed."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None.",
+      "The ID decides how the end of the battle is handled. 0 is the ordinary reward flow, with treasure and victory points. 1 only asks which survivors are kept and hands out no treasure or victory points. 5 recovers loot. If the squad has fled or fallen, every kind other than 1 and 5 is handled like 1."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The enemy count is brought up to the number of monsters met, so the battle counts as won. The last-picture marker is reset, which makes the next picture be drawn fresh."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A guard captain's script finishes with code 100 and ID 0 after he surrenders, so the squad collects its reward without killing the rest of the garrison."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "Only 0, 1 and 5 have been checked. Test any other ID before relying on it."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 101,
+   "title": "Back up the squad",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Puts the squad back on the square it came from, redraws the map and ends the script."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "It works anywhere, in towns and dungeons alike. Nothing after it in the script runs."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A toll bridge guard turns the squad away when it has no pass. The script tests for the pass and runs code 101 when the test fails."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 102,
+   "title": "Reset experience of picked warriors",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Sets the victory points still to be earned by each picked warrior to 1, marks every warrior active, and then runs the ordinary reward flow. The points are then shared out as a reward."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The 1 is a total to divide, not \"one level\". One warrior receiving it gets 1 point. Two receiving it get 0 each, because the whole number share is 0."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "After a shrine blessing, pick the warrior who prayed and run this code to bring his next promotion within reach."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 103,
+   "title": "Boat and camping check",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Lets the script go on only if the squad is, or is not, in a boat and camping, and can put the squad in the boat or take it out."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Boat test.\n2) Camping test.\n3) Set the boat.\n4) Not used.\n5) Not used.",
+      "1) 1 needs the squad to be in a boat. 2 needs it not to be in a boat. 0 does not test.",
+      "2) 1 needs the squad to be camping. 2 needs it not to be. 0 does not test.",
+      "3) 1 puts the squad in a boat. 2 takes it out. 0 leaves it as it is. The map is redrawn when this changes."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "When a test fails the script ends, but E3 is still applied first, because the tests and the setting are done in the same step."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A ferryman scene uses E1 = 2 and E3 = 1: it only runs on land and then puts the squad on the boat."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 104,
+   "title": "Turn random battles on or off",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "1 allows random battles. 0 stops them."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Controls whether random-encounter rectangles can start battles."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The value is kept as one byte, so IDs above 255 wrap around."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "Put ID 0 on the entry square of a safe town. Put ID 1 on its gate."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 105,
+   "title": "Suspend or restore allies",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "0 lets held-over allies take part. Any other value suspends them."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "While allies are suspended they do not fight alongside the squad and they do not join the reward and survivor choices after a battle."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Use 1 to suspend and 0 to bring the allies back. This setting is not part of the allies themselves, so they come back unchanged."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "The squad must cross a narrow ledge on its own. Use ID 1 at the foot of the ledge and ID 0 at the top."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 106,
+   "title": "Set daylight or darkness",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Makes the current land light or dark and redraws it."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Light level.\n2) Stop if unchanged.",
+      "1) 1 is light. 2 is dark.",
+      "2) Any value other than 0 ends the script when the land already has that level, so the change and its text do not repeat each time the squad steps there."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Only these two E-Codes are read."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A cave mouth sets E1 = 2 and E2 = 1 so that the lights go out once, the first time the squad enters."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 107,
+   "title": "Battle with a choice of battles",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Plays a sound and a text, fights one battle chosen by the script, and returns the squad to the land. If the squad retreats or loses, a script of your choice runs from its first action."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Battle number, or the first of a range.\n2) Last of a range.\n3) Sound number.\n4) Text number.\n5) Script to run when the battle was not won.",
+      "1) The battle to fight.",
+      "2) 0 fights E1. Any other value picks a battle at random from E1 up to E2.",
+      "3) 0 plays nothing.",
+      "4) 0 shows nothing. The text is shown before the fight and does not wait for a click.",
+      "5) The script number. It runs only when the squad retreated or lost. If the squad wins, the land is reloaded and the ordinary rewards are given."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Every warrior is marked active afterward."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A swamp ambush with E1 = 12, E2 = 15, E3 = 300 and E5 = 88: a random battle from 12 to 15, and script 88 if the squad flees."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 108,
+   "title": "Change statistics of picked warriors",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Adds a number to one statistic of every picked warrior. Each warrior's screen is refreshed afterward."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Which statistic.\n2) Amount to add.",
+      "1) The statistic:\n1 = actions per round (minimum 0).\n2 = scans per battle (minimum 1; skipped if the warrior has none).\n3 = movement per round (minimum 3).\n4 = bare-hand minimum damage (minimum 0).\n5 = most psi (minimum 0; skipped if the warrior has none).\n6 = bare-hand maximum damage (minimum 1; skipped if it is 0).\n7 = most stamina (minimum 2).\n8 = armor (minimum 0).\n9 = melee accuracy bonus (minimum 0).\n10 = missile accuracy bonus (minimum 0).\n11 = psi resistance bonus (minimum 0).\nAny other value does nothing.",
+      "2) May be negative. A result below the minimum becomes the minimum."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "For movement, psi and stamina the current value is also pulled down when it ends up above the new most. It is not raised."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A cursed spring: E1 = 7, E2 = -5 lowers every picked warrior's greatest stamina by 5."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 109,
+   "title": "Add to the mission score",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The amount, a whole number. It may be negative."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Adds the amount to the mission score kept with the game."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The score is a 16-bit signed number and wraps at its limits."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "No other effect of the score was confirmed. Test this in your scenario before relying on it."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 110,
+   "title": "Go to the next stage of the mission",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The stage, counted from 1, with a sign. The stage is the ID without its sign: 1 or -1 is the first stage. A positive ID asks the player to confirm. A negative ID goes straight on. Do not use 0, which names no stage."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Moves the squad to a new stage of the mission: the stage name is shown, the squad appears at the stage's starting land and square, and the stage's opening movie plays."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "A positive ID first asks a yes or no question. If the player says no, the map is redrawn and the script ends."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None.",
+      "Its starting land, position and optional starting script come from the scenario's stage record for that stage (stage 1 is the first record). If the stage has a starting script, it runs next."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Stamina and psi are restored to the most for every warrior except the last one in the squad. Allies held over are let go. The opening movie is the one numbered 1000 plus the stage counted from 0, so stage 1 plays movie 1000 and stage 3 plays movie 1002."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "After the last vault is opened, ID 3 asks \"go on?\" and, on yes, starts the third stage of the mission with movie 1002."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "Test this in your scenario before relying on it, particularly the restoration of the last warrior."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 111,
+   "title": "Limited shop or treasure",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Opens either a treasure with a limit, or a shop under restricted terms, depending on E1."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Treasure or shop.\n2) Limit.\n3) Limit mode.",
+      "1) A number above 0 is a treasure record. Zero or a negative number is a shop, and the shop number is the number without its sign.",
+      "2) A limit the treasure or shop uses (see E-Code 3).",
+      "3) The game stores E-Code 3 plus 1 and E-Code 2 as they stand, and opening a shop with Code 6 resets both to 0; what they limit was not confirmed. -1 gives the same stored value as an ordinary shop."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "A treasure runs the ordinary reward windows with the limit set. A shop loops between its window and the pack window until the player leaves, and the script then goes on."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A merchant's stall: Extra Codes 30 holds -7, 0, -1, so shop 7 opens under this code, and the script goes on when the player leaves."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "The exact effect of the limit and its mode on the player's own packs was not confirmed. Test this in your scenario before relying on it."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 113,
+   "title": "Set the map picture",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "The picture number, a whole number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Stores a number as the map picture and redraws the map."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "When the number is 0 the map draws the squad's marker as usual. A different number stops the marker from being drawn as usual."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "What replaces the marker was not confirmed. Test this in your scenario before relying on it."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 119,
+   "title": "Rescue after a battle",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Used in a monster's script. If every warrior of the squad has fallen, each warrior is restored to 1 stamina and taken off computer control, the fallen count is cleared, and the script and the battle end. Otherwise the monster whose script this is returns to 1 stamina, becomes neutral, and is marked so that scans pass it over."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A healer monster saves the squad from a total defeat: when the squad falls, its death script runs code 119."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "The effect of the scan mark was not confirmed. Test this in your scenario before relying on it."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 120,
+   "title": "Replace the monster in the battle",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "In a battle, changes the selected monster into another kind, or removes it."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) New monster record.\n2) Not used.\n3) Sound.\n4) Text before.\n5) Text after.",
+      "1) The monster record number to put in place. -1 removes the monster: its body is killed and the script ends.",
+      "3) 0 plays nothing.",
+      "4) 0 shows nothing. The text is shown first, with the view centred on the monster.",
+      "5) 0 shows nothing. The text is shown after the change."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The replacement keeps the old monster's side. If the new monster has a different size from the old one, the monster is not replaced and the script ends, but the old monster's own script chance has already been turned negative and the text before has been shown. A successful change builds the replacement fresh, plays the sound, and centres the view again."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A werewolf script with E1 = 41 (the beast form), E3 = 530 and E5 = the transformation text."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "Test this in your scenario to see which monster counts as the selected one when the script runs from a death or from a round."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 121,
+   "title": "Destroy monsters by category",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "In a battle, destroys every monster that belongs to all of the creature categories named."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Category.\n2) Category.\n3) Category.\n4) Category.\n5) Category.",
+      "Each is a creature category number, as set on the monster's record. 0 means the entry is not used. A monster is destroyed only when it has every category named. Category 4 is Mechanical. The game does not check the numbers, so use only categories your monster records define. A list of all zeros names no category, so it destroys every monster."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "Every monster in the battle is tested, whether it is an enemy or not and whether it is alive or not. Each destroyed monster leaves with its usual result line and sound."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A banishing relic with E1 = 4 destroys all Mechanical monsters on the field."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 122,
+   "title": "Make monsters neutral",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "In a battle, every living monster of one kind that is on a side stops being an enemy, and counts as defeated."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Monster number.\n2) Reverse.",
+      "1) The monster number to look for.",
+      "2) 0 acts on monsters that are still enemies. Any other value acts on monsters that are already neutral and takes them back off the defeated count."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "In reverse mode the monsters stay neutral. They do not become enemies again. Only the defeated count goes down."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A parley text turns the goblins of monster number 20 into onlookers: E1 = 20, E2 = 0."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 123,
+   "title": "Rout monsters",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "In a battle, makes the listed kinds of monsters turn and flee, if they are on the same side as the monster whose script is running."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) to 5) Monster numbers. 0 means the entry is not used.",
+      "Each monster of a listed number on the same side as the current monster is set to retreat, and its chance to surrender is set to 70 percent."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "When the chieftain dies, his script routs the warriors of numbers 14 and 15."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 124,
+   "title": "Add monsters to the battle",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "In a battle, adds monsters beside the current monster, with the appearing effect."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Not used.\n2) Monster record number.\n3) How many.\n4) Sound.\n5) Not used.",
+      "2) The monster record to build.",
+      "3) A negative number is a random count from 1 up to the number without its sign, drawn each time the step runs.",
+      "4) 0 plays nothing. The sound is played for each monster.",
+      "Each new monster is placed in the nearest free squares around the current monster, inside the playing field and not on solid ground. The side a new monster takes depends on what started the script: for some scripts it takes the side of the monster whose script is running, and in a round script it keeps the side its own record gives. A battle holds at most 100 monsters. If the roster is already full nothing is added. Do not ask for more monsters than the roster has room for."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A summoner's script with E2 = 8, E3 = 3 and E4 = 410 adds 3 skeletons with a sound each."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "Test this in your scenario before relying on the side the new monsters take."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 125,
+   "title": "Destroy monsters of one kind",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "In a battle, destroys living monsters of one kind, nearest first."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Monster number.\n2) How many.\n3) Distance.",
+      "1) The monster number to destroy.",
+      "2) 0 means up to 999. A negative number is a random count from 1 up to the number without its sign.",
+      "3) The furthest distance to look, measured from the monster that fell last. 0 means no limit in practice. Only monsters closer than this distance are destroyed, so 6 reaches monsters up to 5 squares away."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "The side of the monster is not considered, so allies of the same number are destroyed as well."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A purge spell script with E1 = 33, E2 = 2, E3 = 6 destroys up to 2 monsters of number 33 that are less than 6 squares from the fallen monster, nearest first."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "The starting point was only partly confirmed. Test this in your scenario."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 126,
+   "title": "Change a round script",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Used inside a battle's round script. It tests whether to switch to another script, and if so it runs the other script from its first action."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Kind of test.\n2) Round or percent.\n3) Repeat.\n4) Script.\n5) Last script of a range.",
+      "1) 0 passes once the battle is past round E2. 1 passes by chance: a percent roll is made and the step passes if the roll is not above E2. Any other value always passes.",
+      "2) The round number for kind 0, or the percent for kind 1.",
+      "3) 1 keeps the round script that holds this step, so it is tried again each round. Any other value clears that script once the step passes, so it does not come back. With 2 the new script is chosen at random from E4 to E5. With any other value E4 alone is used.",
+      "4) The script to run. With repeat 2 it is the first of the range.",
+      "5) The last of the range, read only when E3 is 2."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "When the test is not passed, which is a kind 0 test before the round is past E2 or a kind 1 roll above E2, the script ends at once. A kind 1 test never clears the script."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "E1 = 0, E2 = 4, E3 = 0, E4 = 90: from the fifth round on, script 90 takes over once."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 127,
+   "title": "Continue if a monster is present",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "A monster number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "The script goes on only if a living monster of that number is in the battle. Otherwise the script ends."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "Note",
+     "paragraphs": [
+      "It reads the monster number itself, not an Extra Codes record."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A mourning scene shown only if the old dragon, monster 77, is still alive."
+     ]
+    }
+   ]
+  },
+  {
+   "code": 128,
+   "title": "Show an animation on the map",
+   "sections": [
+    {
+     "label": "ID",
+     "paragraphs": [
+      "An Extra Codes number."
+     ]
+    },
+    {
+     "label": "Use",
+     "paragraphs": [
+      "Plays a short animation on the outdoor map, centred on one square."
+     ]
+    },
+    {
+     "label": "Options",
+     "paragraphs": [
+      "None."
+     ]
+    },
+    {
+     "label": "E-Codes",
+     "paragraphs": [
+      "1) Animation number.\n2) Column on the map.\n3) Row on the map.\n4) Size.\n5) Delay between frames.",
+      "1) The animation. Each one has eight frames.",
+      "2) and 3) Map squares of the current land.",
+      "4) The size of the effect: the side of a square, in pixels (a map square is 32 pixels wide). The square is centred on the top-left corner of the chosen map square.",
+      "5) A delay between frames."
+     ]
+    },
+    {
+     "label": "Example",
+     "paragraphs": [
+      "A lightning strike on the tower: E1 = 2, E2 = 18, E3 = 6, E4 = 64, E5 = 2."
+     ]
+    },
+    {
+     "label": "Caution",
+     "paragraphs": [
+      "The direction of the column and row and the unit of the delay were not fully confirmed. Test this in your scenario before relying on it."
+     ]
+    }
+   ]
+  }
+ ],
+ "chapters": [
+  {
+   "title": "How scripts work",
+   "blocks": [
+    {
+     "p": "Scripts drive almost everything that happens on the map that is not a plain fight: a door that asks a question, a shopkeeper, a trap, an ambush, a change in the landscape after the squad has done something. You attach a script to an event on the map, to the choices of an encounter, or to a battle. A script is a short list of **steps**. Each event or encounter record holds up to eight of them."
+    },
+    {
+     "p": "A step is two numbers: a **code** and an **ID**. The code says what to do. The ID says with what: a string number, a count, a battle number, or the number of an **Extra Codes** record."
+    },
+    {
+     "p": "The game runs a script one step after another, from the first. A step may stop the script, send it to a different step, or send it into a battle or a shop and bring it back afterwards."
+    },
+    {
+     "h": 3,
+     "t": "Extra Codes"
+    },
+    {
+     "p": "Many codes need more than one number. Those codes use their ID to name an Extra Codes record, a row of five numbers that you fill in with the editor. In this manual they are written as E-Codes and numbered 1) to 5). An Extra Codes record can be shared by as many steps as you like. Each code below lists what its five numbers mean, and when the manual says an E-Code is not used you can leave it at 0."
+    },
+    {
+     "h": 3,
+     "t": "Positive and negative IDs"
+    },
+    {
+     "p": "For several codes the sign of the ID changes the behaviour, for example whether a shop window opens at once (Code 6) or a note is shown at once (Code 29). The **Options** line of each code lists those cases."
+    },
+    {
+     "h": 3,
+     "t": "Numbers the game does not know"
+    },
+    {
+     "p": "Not every number is a code. If a step has a number that the game does not handle, the step is skipped and the script goes on to the next step. Nothing is shown and nothing is reported. The last chapter lists the numbers that do nothing. A typing error in a code number is therefore easy to miss: if a step seems to be ignored, check its number first."
+    },
+    {
+     "h": 3,
+     "t": "Reading a code's entry"
+    },
+    {
+     "p": "Each code has the same layout. **ID** tells you what to put in the step's ID. **Use** says what the code does. **Options** lists special values. **E-Codes** lists the five numbers, with a numbered paragraph for each one that needs explaining. **Note** warns about side effects, and **Example** shows the code at work. Where an entry says to test something in your scenario before relying on it, the game's behaviour at that point has not been confirmed down to the last detail, and a quick test costs less than a surprise."
+    }
+   ]
+  },
+  {
+   "title": "If You Know Realmz or Divinity",
+   "blocks": [
+    {
+     "p": "New Centurions and Realmz share a scripting scaffold, and its scenario scripts will look familiar if you have used Divinity, the Realmz scenario editor. The numbers, the Extra Codes and the layout of a step are the same idea. But the game around them is different, and some things you may rely on are gone. Read this chapter before you port a script or trust an old habit."
+    },
+    {
+     "h": 3,
+     "t": "There are no GOSUBs"
+    },
+    {
+     "p": "This is the biggest change. In Divinity you could make any branching code a \"gosub\" by entering the code itself as a negative number (-40 instead of 40). The script you branched to would then finish and return to the step after the branch, and Code 111 returned from a gosub while Code 112 dropped a waiting script. New Centurions has none of this."
+    },
+    {
+     "li": [
+      "A branch is a one way ticket. The script you branch to does not return.",
+      "A negative code does not make a gosub. A step whose code is negative is skipped, and the script goes on to the next step. The only negative codes that do anything are -14, -32 and -12. -14 picks warriors and then inverts the picks (Divinity's manual does not list it); -32 and -12 are new codes of their own, not gosub forms. A negative ID is a different matter: for some codes it is a real option (see \"Positive and negative IDs\").",
+      "Code 112 is skipped.",
+      "**Code 111 does not return.** In New Centurions it opens a limited shop or treasure. A ported script that uses 111 to return will open a shop instead."
+     ]
+    },
+    {
+     "p": "To share a scene between places, to continue past eight steps, or to come back to where you were, see \"Moving Between Scripts\"."
+    },
+    {
+     "h": 3,
+     "t": "Words that mean something else"
+    },
+    {
+     "li": [
+      "**Action Point.** In Divinity this is a map event that runs a script, and an \"X-AP\" is a script that other scripts start by number. In New Centurions action points are what a warrior spends in battle on attacks, reloading and putting on items. This manual says **event** for a place on the map that runs a script, and **script** for a script started by number.",
+      "**Extra Codes.** The same idea as Divinity's E-Codes: a row of five numbers that a code names with its ID."
+     ]
+    },
+    {
+     "h": 3,
+     "t": "Numbers that mean something different"
+    },
+    {
+     "p": "These numbers do a different job here than the Divinity code of the same number. Do not carry a script across without checking each one."
+    },
+    {
+     "li": [
+      "**73** waits for a short time. In Divinity it opens a shop that accepts only some items.",
+      "**102** sets the victory points still to be earned by the picked warriors to 1 and then runs the ordinary reward flow. In Divinity it levels up the picked characters.",
+      "**111** opens a limited shop or treasure. In Divinity it returns from a gosub.",
+      "**121** destroys every monster that belongs to all the creature categories you name. In Divinity it de-animates lower undead.",
+      "**122** makes every living monster of one kind on a side neutral, so that it counts as defeated. In Divinity it causes a fumble.",
+      "**125** destroys living monsters of one kind, nearest first. In Divinity it destroys related monsters, and its options differ.",
+      "**14** picks warriors in both games, but Divinity's manual says a negative ID limits the pick to warriors who are conscious. Do not count on the sign working the same way; see the entry for Code 14."
+     ]
+    },
+    {
+     "p": "Several other codes do the same job in both games but differ in detail. 30 and 31 (the checks) and 120 (change a monster in a battle) take different Extra Codes. 100 (end a battle) uses its ID to choose the kind of reward. 126 (the round script) takes the same five numbers but starts working from a different round. Read the entry of any code you port, even when its name looks the same."
+    },
+    {
+     "h": 3,
+     "t": "Numbers that do nothing here"
+    },
+    {
+     "p": "These Divinity codes are skipped, so a script that uses them loses those steps without any message: the temple offer (32, now the clinic at -32), dungeon entry and exit (37), banking (49), the tile-parameter branch (78), turning cleric turning off and on (82 and 83), the compass and look direction codes (93 to 95), the codes that force or allow the 3D view (96 and 97), and the gosub pop (112). New Centurions has no dungeons or 3D view, so there is nothing for the dungeon codes to do."
+    },
+    {
+     "h": 3,
+     "t": "Codes that are new"
+    },
+    {
+     "p": "-12 clears objects from an area of a map. 109 adds to the mission score, 110 starts a stage of the mission, 113 stores a map picture number and 128 plays a map animation. Divinity has none of these. -32 enters the clinic, which takes the place of Divinity's temple offer (code 32)."
+    },
+    {
+     "h": 3,
+     "t": "Checks are different"
+    },
+    {
+     "p": "In Divinity a check against an attribute rolls dice. In New Centurions the attribute checks in Codes 30 and 31 compare the attribute with a number you give; only the special ability test in Code 30 rolls. The Extra Codes also differ. Read the entries for Codes 30 and 31 before you port a check."
+    },
+    {
+     "h": 3,
+     "t": "Text can name warriors"
+    },
+    {
+     "p": "Divinity text is fixed. In New Centurions a `^` and a digit in a story text is replaced with a warrior's name when the text is shown. See \"Names in text\"."
+    }
+   ]
+  },
+  {
+   "title": "Moving Between Scripts",
+   "blocks": [
+    {
+     "p": "If you are used to gosubs, note that there are none (see \"If You Know Realmz or Divinity\"). Scripts in New Centurions do not call each other and come back. When a step sends the script somewhere else, it stays there. There is no stack of waiting scripts and no \"return\" step. A step that opens a battle, a shop or a window simply finishes when it is closed, and the script goes on with the next step. The one way back is out of an encounter: Code 34 returns to the script that opened it with Code 4 or Code 5. Once you know that, everything in this chapter is easy: you move a scene along by handing it to the next script, and you share a scene by pointing many places at the same one."
+    },
+    {
+     "h": 3,
+     "t": "What a script is"
+    },
+    {
+     "p": "A script is eight steps. A map event holds one script, and so does each choice of an encounter. You can also store scripts by number, to be started by other scripts. A running script has a position: the next of its eight steps."
+    },
+    {
+     "p": "The game also keeps one saved copy of a script. Code 4 and Code 5 make it when they open an encounter. It holds the eight steps of the script as they stood then, and the position of the step that opened the encounter. Code 34 puts that copy back and carries on with the step after the one that opened the encounter. Only one copy is kept, so a Code 4 or Code 5 run from inside an encounter replaces it. Nothing else about a waiting script is remembered, and no other step goes back to it."
+    },
+    {
+     "p": "When the last step has run, the script is finished. A step that ends the script by passing the last step (for example Code 42 with E2 = -2) counts as running out of steps. If a map event started the script and no encounter is on screen, the event is then marked as spent: its chance becomes -1, so it does not run again unless Code 13 gives it a chance back. Some steps leave the script at once and do not mark the event: Code 3 with outcome 0, Code 101, a Code 8 whose chance test fails, a Code 20 whose arrival event fails its own chance test, and a battle (Code 2) that the squad loses."
+    },
+    {
+     "p": "Code 24 ends the script without marking the event, so the squad can trigger it again, and it clears an encounter that is on screen. Jump type 3 of the branch codes below does the same. Code 42 and Codes 58 and 59 with E2 = 2, and Code 75 with E3 = 1, also keep the event, but they do not clear an encounter that is on screen: while it has visits left, it may be shown again."
+    },
+    {
+     "h": 3,
+     "t": "Handing a scene to another script"
+    },
+    {
+     "p": "The codes that test something and branch each name where the script goes next. Codes 46, 58 and 59 do it with a **branch type**, a **number** and, for encounters, a **start action**:"
+    },
+    {
+     "li": [
+      "-1 goes straight to the eighth step of this script.",
+      "0 starts the script with that number from its first step.",
+      "1 and 2 jump into one of the four choices of the simple or the typed encounter that is on screen, starting at the step you give. Steps are counted from 0, so 0 is the first step and 7 is the eighth.",
+      "3 ends the script, keeps the event and clears the encounter, like Code 24."
+     ]
+    },
+    {
+     "p": "The others (for example 76 and 77) name a script, a simple encounter or a typed encounter directly; each entry lists its values. Every branch is a one way ticket. The old script does not carry on with its remaining steps afterwards. If you want a step to run after the branch, put it in the script you branch to."
+    },
+    {
+     "p": "Three more codes move a scene without a test:"
+    },
+    {
+     "li": [
+      "**Code 39** replaces the running script with another one and starts it from its first step. Use it to carry a scene past eight steps: make the eighth step of each script a Code 39 that points at the next.",
+      "**Code 8** copies the eight steps of another event on the same map over the running script and starts from the top, after testing the running event's chance again. Use it to make several places share one scene.",
+      "**Code 7** rewrites a map event, or one choice of an encounter, so that from now on it runs a different script. The change lasts the rest of the game. Use it when the story changes the world: the bridge is gone, the guard has gone home."
+     ]
+    },
+    {
+     "p": "**Example:** Three fountains on one map should all offer the same blessing. Write the blessing once as event 20 on that map, and end it with Code 24. Give each fountain's own event a chance of 100 and a single step, Code 8 with ID 20. When you later improve the blessing, you change event 20 and all three fountains change with it."
+    },
+    {
+     "h": 3,
+     "t": "Coming back to where you were"
+    },
+    {
+     "p": "Because a branch never returns, a scene that has to pick up where it left off needs a note. Use a mission flag."
+    },
+    {
+     "p": "1. Before you send the squad away, set a flag with Code 47, or bump a counter with Code 76. 2. In the script you branch to, finish what it needs to do. 3. When the squad comes back, the event that starts the scene tests the flag with Code 46 or Code 77 and goes to the script for the next part."
+    },
+    {
+     "p": "**Example:** A prisoner scene has two halves, before and after the key. The first script sets flag 14 and sends the squad into the cells. The door event tests flag 14 with Code 46: set, it starts script 61, \"the prisoner is freed\"; clear, it starts script 60, \"the door is locked\"."
+    },
+    {
+     "p": "Mission flags are one byte each and Code 76 uses the same ones as counters, so give each purpose its own flag number."
+    },
+    {
+     "h": 3,
+     "t": "Asking a question and acting on the answer"
+    },
+    {
+     "p": "Code 3 asks the player a question and then does what you chose for the answer: carry on, step the party back, replace the script, jump into an encounter choice, or end. Replacing the script (outcome 1) gives each answer its own scene, and nothing comes back afterwards. See the entry for Code 3."
+    },
+    {
+     "h": 3,
+     "t": "Limits"
+    },
+    {
+     "li": [
+      "A script is eight steps. For a longer scene, chain scripts with Code 39.",
+      "The steps of an encounter's choices keep their code in one signed byte, so a choice can hold codes from -128 to 127 only. Code 128 cannot be used in a choice; use it in a map event or a stored script."
+     ]
+    },
+    {
+     "p": "**Caution:** Test Codes 7, 8 and 39 in your scenario when the script that uses them is running from the choice of an encounter on screen. Check what the player sees as the old script is replaced."
+    },
+    {
+     "h": 3,
+     "t": "Porting"
+    },
+    {
+     "p": "If you are bringing a script from Realmz or Divinity, read \"If You Know Realmz or Divinity\" first. Check every ported script for negative codes and for Code 111 before you play it."
+    }
+   ]
+  },
+  {
+   "title": "Names in text",
+   "blocks": [
+    {
+     "p": "A story text can name your warriors. Put a caret and a digit in the text, and the game replaces both with a warrior's name when the text is shown. The name that is put in is never read again as a token. Do not end a text with a caret."
+    },
+    {
+     "p": "The digits 1 to 6 stand for the squad's warriors in their order: ^1 is the first warrior, ^2 the second, and so on up to ^6. If the warrior in that place has fallen, the name of the last warrior in the squad who still stands is used instead. If nobody stands, ^1 to ^6 show the name of the warrior in their own place, fallen as that warrior is. For a place past the end of a smaller squad the game is meant to do the same as for a fallen warrior, but that depends on the game's empty warrior records; test it in your scenario."
+    },
+    {
+     "p": "^0 follows the same rule from the other end: it is meant to give the name of the last warrior who stands. That depends on the game's empty record before the first warrior, so test ^0 in your scenario before relying on it."
+    },
+    {
+     "p": "^9 names the warrior chosen by the most recent pick, and remembers him."
+    },
+    {
+     "li": [
+      "The first text that uses ^9 after a pick takes the picked warrior who stands lowest in the squad (not necessarily the one the player clicked first). Every later text that uses ^9 names the same warrior, until the next pick begins.",
+      "A pick begins whenever the game asks the player to choose a warrior: Codes 14, -14 and 31, the choice of a warrior for a Psi action out on the map, and the choice of a warrior to bandage in a battle.",
+      "Codes 30, 50, 52 and 53 pick warriors too, but they do not begin a pick for ^9. After one of them, ^9 still names the warrior of the earlier pick.",
+      "In an unusual case, when the game's record of the warrior in the ninth place is missing, ^9 is treated like any other digit and shows the name of the last warrior who stands.",
+      "If nothing has been picked yet, test ^9 in your scenario before relying on it."
+     ]
+    },
+    {
+     "p": "^7 and ^8 are not meant for scenarios. They give the first warrior's name or the last warrior who stands."
+    },
+    {
+     "p": "The choices of a simple encounter are not filled in. A choice that contains a token shows the caret and the digit exactly as you wrote them. Put the tokens in the encounter's text, not in its choices."
+    },
+    {
+     "p": "**Example 1:** The text \"^1 tests the rope and ^2 is told to hold it.\" shows, for a squad of Brutus and Livia, \"Brutus tests the rope and Livia is told to hold it.\" If Livia has fallen, it shows \"Brutus tests the rope and Brutus is told to hold it.\", because the last warrior standing is Brutus."
+    },
+    {
+     "p": "**Example 2:** After a party pick of one warrior, the text \"^9 pulls the lever.\" and a later text \"^9 curses the stone door.\" both name the same warrior. If the script picks again, the next text that uses ^9 names the new pick."
+    },
+    {
+     "p": "**Caution:** Test ^9 in your scenario after a pick before relying on it."
+    }
+   ]
+  },
+  {
+   "title": "Numbers that do nothing",
+   "blocks": [
+    {
+     "p": "The game skips the numbers below. When a script reaches one of them the step is skipped and the script goes on to the next step. It is not an error, and nothing is shown."
+    },
+    {
+     "li": [
+      "0",
+      "32 (the clinic is Code -32), 37, 49",
+      "78, 79, 80, 82 and 83",
+      "93, 94, 95, 96 and 97",
+      "112",
+      "114, 115, 116, 117 and 118",
+      "129 and every number above it",
+      "Every negative number except -32, -14 and -12. This includes -1 to -11, -13, -15 to -31 and anything below -32."
+     ]
+    },
+    {
+     "p": "Codes 98 and 99 are handled, but they have no effect in the registered game, as their entries describe."
+    }
+   ]
+  }
+ ]
+}

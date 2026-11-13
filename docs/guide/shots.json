@@ -1,0 +1,83 @@
+{
+ "project": {
+  "from": "artifacts/guide-captures/editor/1600x900-project.png"
+ },
+ "maps": {
+  "from": "artifacts/guide-captures/editor/1600x900-maps.png"
+ },
+ "texts": {
+  "from": "artifacts/guide-captures/editor/1600x900-texts.png"
+ },
+ "messages": {
+  "from": "artifacts/guide-captures/editor/1600x900-messages.png"
+ },
+ "combat": {
+  "from": "artifacts/guide-captures/editor/1600x900-combat.png"
+ },
+ "records": {
+  "from": "artifacts/guide-captures/editor/1600x900-monsters.png"
+ },
+ "items": {
+  "from": "artifacts/guide-captures/editor/1600x900-items.png"
+ },
+ "shops": {
+  "from": "artifacts/guide-captures/editor/1600x900-shops.png"
+ },
+ "stages": {
+  "from": "artifacts/guide-captures/editor/1600x900-stages.png"
+ },
+ "calendar": {
+  "from": "artifacts/guide-captures/editor/1600x900-calendar.png"
+ },
+ "notes": {
+  "from": "artifacts/guide-captures/editor/1600x900-notes.png"
+ },
+ "resources": {
+  "from": "artifacts/guide-captures/editor/1600x900-resources.png"
+ },
+ "export": {
+  "from": "artifacts/guide-captures/editor/1600x900-export.png"
+ },
+ "rewards": {
+  "from": "artifacts/guide-captures/records/1600x900-rewards.png"
+ },
+ "map-choose-floor": {
+  "from": "artifacts/guide-captures/maps/1600x900-map-choose-floor.png"
+ },
+ "map-region-tool": {
+  "from": "artifacts/guide-captures/maps/1600x900-map-region-tool.png"
+ },
+ "script-walking": {
+  "from": "artifacts/guide-captures/scripts/1600x900-script-walking.png"
+ },
+ "script-choose-action": {
+  "from": "artifacts/guide-captures/scripts/1600x900-script-choose-action.png"
+ },
+ "script-code-helper": {
+  "from": "artifacts/guide-captures/scripts/1600x900-script-code-helper.png"
+ },
+ "script-technical-details": {
+  "from": "artifacts/guide-captures/scripts/1600x900-script-technical-details.png"
+ },
+ "script-story": {
+  "from": "artifacts/guide-captures/scripts/1600x900-script-story.png"
+ },
+ "script-choice": {
+  "from": "artifacts/guide-captures/scripts/1600x900-script-choice.png"
+ },
+ "script-typed": {
+  "from": "artifacts/guide-captures/scripts/1600x900-script-typed.png"
+ },
+ "script-choice-branch": {
+  "from": "artifacts/guide-captures/scripts/1600x900-script-choice-branch.png"
+ },
+ "problems-dock": {
+  "from": "artifacts/guide-captures/navigation/1600x900-problems-dock.png"
+ },
+ "find-uses": {
+  "from": "artifacts/guide-captures/navigation/1600x900-find-uses.png"
+ },
+ "flow": {
+  "from": "artifacts/guide-captures/navigation/1600x900-flow.png"
+ }
+}

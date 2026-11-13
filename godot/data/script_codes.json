@@ -1,0 +1,5365 @@
+{
+ "manual_commit": "746f87fcf41db2bc0a9ed24963e848f58c506f00",
+ "codes": [
+  {
+   "code": -32,
+   "name": "Enter the clinic",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Clinic price percentage",
+    "Sound (0 for none)",
+    "Text number (0 for none)",
+    null,
+    null
+   ],
+   "evidence": "source-ported",
+   "label": "Enter the clinic",
+   "family": "world",
+   "order": 100,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "text_or_zero"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": -14,
+   "name": "Pick warriors, then invert the picks",
+   "id_text": "The number of warriors to pick. The sign of the ID decides whether fallen warriors can be picked (see Options).",
+   "id_class": "direct",
+   "options": "The sign of the ID works as in Code 14.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Pick, then invert the picks",
+   "family": "party",
+   "order": 99,
+   "takes": "Count 1–6; below 0 lets fallen warriors be picked",
+   "authorable": true,
+   "id": {
+    "kind": "soft",
+    "inner": {
+     "kind": "signed_count",
+     "min": 1,
+     "max": 6
+    },
+    "hard": {
+     "kind": "signed_count",
+     "min": 1,
+     "max": 32767
+    }
+   }
+  },
+  {
+   "code": -12,
+   "name": "Clear objects from an area of a map",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Map number",
+    "Left column of the rectangle",
+    "Right column of the rectangle",
+    "Top row of the rectangle",
+    "Bottom row of the rectangle"
+   ],
+   "evidence": "native-verified",
+   "label": "Clear objects from an area of a map",
+   "family": "world",
+   "order": 101,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "map",
+     "keep_negative": false
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 89
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 89
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 89
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 89
+    }
+   ]
+  },
+  {
+   "code": 0,
+   "name": "Empty step",
+   "id_text": "",
+   "id_class": "none",
+   "options": "",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Empty slot",
+   "family": "preserved",
+   "order": 13,
+   "takes": "Nothing; the operand is retained",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 1,
+   "name": "Show text",
+   "id_text": "A text number.",
+   "id_class": "direct",
+   "options": "The game passes a negative ID on to its text routine unchanged. What it does was not confirmed, so use a positive ID.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Show message",
+   "family": "message",
+   "order": 1,
+   "link": true,
+   "takes": "Signed message ID",
+   "authorable": true,
+   "id": {
+    "kind": "record",
+    "file": "Data SD2",
+    "stride": 256,
+    "sign": "magnitude"
+   }
+  },
+  {
+   "code": 2,
+   "name": "Battle",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Battle number (or the lowest of a range)",
+    "Highest battle number (0 for a single battle)",
+    "Sound (0 for none)",
+    "Text shown before the battle (0 for none)",
+    "Reward mode"
+   ],
+   "evidence": "source-ported",
+   "label": "Ordinary battle",
+   "family": "combat",
+   "order": 4,
+   "link": true,
+   "takes": "Battle EXTRA row ID",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "battle"
+    },
+    {
+     "kind": "battle_or_zero"
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "text_or_zero"
+    },
+    {
+     "kind": "enum",
+     "values": [
+      0,
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "code": 3,
+   "name": "Ask a yes/no question",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Which answer triggers the outcome",
+    "Outcome",
+    "Outcome number",
+    "Label of the left button",
+    "Label of the right button"
+   ],
+   "evidence": "source-ported",
+   "label": "Ask a yes/no question",
+   "family": "flow",
+   "order": 103,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "text_or_zero"
+    },
+    {
+     "kind": "text_or_zero"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 2,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        2,
+        3
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 2,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 3
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 4,
+   "name": "Simple encounter",
+   "id_text": "A simple encounter number.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Choice encounter",
+   "family": "encounter",
+   "order": 2,
+   "link": true,
+   "takes": "Choice encounter ID",
+   "authorable": true,
+   "id": {
+    "kind": "record",
+    "file": "Data ED",
+    "stride": 426,
+    "sign": "nonnegative"
+   }
+  },
+  {
+   "code": 5,
+   "name": "Typed encounter",
+   "id_text": "A typed encounter number.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Typed encounter",
+   "family": "encounter",
+   "order": 3,
+   "link": true,
+   "takes": "Typed encounter ID",
+   "authorable": true,
+   "id": {
+    "kind": "record",
+    "file": "Data ED2",
+    "stride": 516,
+    "sign": "nonnegative"
+   }
+  },
+  {
+   "code": 6,
+   "name": "Open a shop",
+   "id_text": "A shop number.",
+   "id_class": "direct",
+   "options": "A zero or negative ID opens the shop window at once, using the number without its sign. A positive ID only makes that shop the current one, so the party reaches it through the shop control while it stays there.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Open a shop",
+   "family": "shop",
+   "order": 106,
+   "takes": "Shop number; 0 or below opens the shop window at once",
+   "authorable": true,
+   "id": {
+    "kind": "record",
+    "file": "Data SD",
+    "stride": 3002,
+    "sign": "magnitude"
+   }
+  },
+  {
+   "code": 7,
+   "name": "Replace a map event's script",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Map number (-1 for a simple encounter, -2 for a typed encounter)",
+    "Event number or encounter number",
+    "Script holding the new steps",
+    null,
+    "Branch of the encounter to replace (encounters only)"
+   ],
+   "evidence": "native-verified",
+   "label": "Replace a map event's script",
+   "family": "flow",
+   "order": 107,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 0,
+       "min": 0,
+       "max": 32767
+      }
+     ],
+     "then": [
+      {
+       "word": 0,
+       "kind": {
+        "kind": "map",
+        "keep_negative": false
+       }
+      },
+      {
+       "word": 1,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 99
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 0,
+       "values": [
+        -1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 1,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 3
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 0,
+       "values": [
+        -2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 1,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 3
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 8,
+   "name": "Run another map event's steps",
+   "id_text": "An event number on the current map.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Run another event's steps",
+   "family": "flow",
+   "order": 108,
+   "takes": "Event number on this map, 0 to 99",
+   "authorable": true,
+   "id": {
+    "kind": "range",
+    "min": 0,
+    "max": 99
+   }
+  },
+  {
+   "code": 9,
+   "name": "Play a sound",
+   "id_text": "A sound number.",
+   "id_class": "direct",
+   "options": "The game passes a negative ID on to its sound routine unchanged. What it does was not confirmed, so use a positive ID.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Play sound",
+   "family": "media",
+   "order": 11,
+   "takes": "Sound resource ID; below 0 waits for the sound",
+   "authorable": true,
+   "id": {
+    "kind": "sound"
+   }
+  },
+  {
+   "code": 10,
+   "name": "Give treasure",
+   "id_text": "A treasure number from the scenario's treasure list.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Explicit reward",
+   "family": "reward",
+   "order": 12,
+   "link": true,
+   "takes": "Reward row ID",
+   "authorable": true,
+   "id": {
+    "kind": "record",
+    "file": "Data TD",
+    "stride": 88,
+    "sign": "nonnegative"
+   }
+  },
+  {
+   "code": 11,
+   "name": "Give victory points",
+   "id_text": "The number of victory points.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Give victory points",
+   "family": "reward",
+   "order": 111,
+   "takes": "Number of victory points",
+   "authorable": true,
+   "id": {
+    "kind": "number"
+   }
+  },
+  {
+   "code": 12,
+   "name": "Change a tile",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Map number",
+    "Column (x)",
+    "Row (y)",
+    "New tile number",
+    "Layer"
+   ],
+   "evidence": "native-verified",
+   "label": "Change a tile",
+   "family": "world",
+   "order": 112,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "map",
+     "keep_negative": false
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 89
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 89
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ]
+  },
+  {
+   "code": 13,
+   "name": "Change event chances",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Map number",
+    "One event number (0 for none)",
+    "New chance",
+    "First event of a range (0 for none)",
+    "Last event of the range"
+   ],
+   "evidence": "native-verified",
+   "label": "Change event chances",
+   "family": "world",
+   "order": 113,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "map",
+     "keep_negative": false
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 99
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 99
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 99
+    }
+   ]
+  },
+  {
+   "code": 14,
+   "name": "Pick warriors",
+   "id_text": "The number of warriors to pick. The sign of the ID decides whether fallen warriors can be picked (see Options).",
+   "id_class": "direct",
+   "options": "With a positive ID, only warriors who are up can be picked, and the count is lowered if fewer are available. With a negative ID, the count is its value without the sign and everyone can be picked.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Pick party members",
+   "family": "flow",
+   "order": 7,
+   "takes": "Count 1–6; below 0 lets fallen warriors be picked",
+   "authorable": true,
+   "id": {
+    "kind": "soft",
+    "inner": {
+     "kind": "signed_count",
+     "min": 1,
+     "max": 6
+    },
+    "hard": {
+     "kind": "signed_count",
+     "min": 1,
+     "max": 32767
+    }
+   }
+  },
+  {
+   "code": 15,
+   "name": "Heal or hurt the picked warriors",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Multiplier",
+    "Lowest random number",
+    "Highest random number",
+    "Sound (0 for none)",
+    "Text (0 for none)"
+   ],
+   "evidence": "native-verified",
+   "label": "Heal or hurt the picked warriors",
+   "family": "party",
+   "order": 115,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "text_or_zero"
+    }
+   ]
+  },
+  {
+   "code": 16,
+   "name": "Heal or hurt the whole party",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Multiplier",
+    "Lowest random number",
+    "Highest random number",
+    "Sound (0 for none)",
+    "Text (0 for none)"
+   ],
+   "evidence": "native-verified",
+   "label": "Heal or hurt the whole party",
+   "family": "party",
+   "order": 116,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "text_or_zero"
+    }
+   ]
+  },
+  {
+   "code": 17,
+   "name": "Cast a scan on the picked warriors",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Scan number",
+    "Power level",
+    "Saving throw adjustment",
+    "Force the effect",
+    null
+   ],
+   "evidence": "source-ported",
+   "label": "Cast a scan on the picked warriors",
+   "family": "party",
+   "order": 117,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "spell"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 18,
+   "name": "Cast a scan on the whole party",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Scan number",
+    "Power level",
+    "Saving throw adjustment",
+    "Force the effect",
+    null
+   ],
+   "evidence": "source-ported",
+   "label": "Cast a scan on the whole party",
+   "family": "party",
+   "order": 118,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "spell"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 19,
+   "name": "Show a random text",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Lowest text number",
+    "Highest text number",
+    null,
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Show a random text",
+   "family": "message",
+   "order": 119,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 20,
+   "name": "Move the party and start the event there",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Map number",
+    "Column (x)",
+    "Row (y)",
+    "Sound (0 for none)",
+    "Text (0 for none)"
+   ],
+   "evidence": "native-verified",
+   "label": "Move the party and start the event there",
+   "family": "world",
+   "order": 120,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "map",
+     "keep_negative": true
+    },
+    {
+     "kind": "range",
+     "min": -32768,
+     "max": 89
+    },
+    {
+     "kind": "range",
+     "min": -32768,
+     "max": 89
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "text_or_zero"
+    }
+   ]
+  },
+  {
+   "code": 21,
+   "name": "Branch if the party has an item",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Item number",
+    "Where to go if the item is found",
+    "What to do if it is not found",
+    "Target if the item is found",
+    "Script to run if it is not found"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch if the party has an item",
+   "family": "flow",
+   "order": 121,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 999
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 22,
+   "name": "Change items held by the party",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Item number",
+    "How many to affect",
+    "Action",
+    "Charges to add",
+    "Replacement item"
+   ],
+   "evidence": "source-ported",
+   "label": "Change items held by the party",
+   "family": "party",
+   "order": 122,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 999
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "enum",
+     "values": [
+      1,
+      2,
+      3
+     ]
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 999
+    }
+   ]
+  },
+  {
+   "code": 23,
+   "name": "Change a region's random battles",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Map number",
+    "Region number",
+    "New encounter chance",
+    "New lowest battle number",
+    "New highest battle number"
+   ],
+   "evidence": "source-ported",
+   "label": "Change a region's random battles",
+   "family": "world",
+   "order": 123,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "map",
+     "keep_negative": false
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 19
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "record",
+     "file": "Data BD",
+     "stride": 1372,
+     "sign": "negative_ok"
+    },
+    {
+     "kind": "record",
+     "file": "Data BD",
+     "stride": 1372,
+     "sign": "negative_ok"
+    }
+   ]
+  },
+  {
+   "code": 24,
+   "name": "End the script and keep the event",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "End script",
+   "family": "flow",
+   "order": 8,
+   "takes": "Nothing; the operand is retained",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 25,
+   "name": "Remember the party's position for the event",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Remember the party's position",
+   "family": "flow",
+   "order": 125,
+   "takes": "Nothing",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 26,
+   "name": "Wait for a click",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Wait for a click",
+   "family": "media",
+   "order": 126,
+   "takes": "Nothing",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 27,
+   "name": "Show a picture",
+   "id_text": "A picture number.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Show a picture",
+   "family": "media",
+   "order": 127,
+   "takes": "Picture number",
+   "authorable": true,
+   "id": {
+    "kind": "number"
+   }
+  },
+  {
+   "code": 28,
+   "name": "Redraw the screen",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Redraw the screen",
+   "family": "media",
+   "order": 128,
+   "takes": "Nothing",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 29,
+   "name": "Give or show a map note",
+   "id_text": "A note number.",
+   "id_class": "direct",
+   "options": "With a positive ID, a short \"gained\" message flashes and the note can be viewed later from the notes menu. With a negative ID, the note is shown at once and the script waits until the player closes it.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Give or show a map note",
+   "family": "world",
+   "order": 129,
+   "takes": "Note number; below 0 shows it at once",
+   "authorable": true,
+   "id": {
+    "kind": "record",
+    "file": "Data MD2",
+    "stride": 340,
+    "sign": "magnitude"
+   }
+  },
+  {
+   "code": 30,
+   "name": "Pick warriors by a test",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Special skill number or attribute number",
+    "Kind of test",
+    "Who is tested",
+    "Invert the result",
+    "Attribute threshold"
+   ],
+   "evidence": "source-ported",
+   "label": "Pick warriors by a test",
+   "family": "party",
+   "order": 130,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 1,
+       "min": 1,
+       "max": 32767
+      }
+     ],
+     "then": [
+      {
+       "word": 0,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 6
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "min": -32768,
+       "max": -1
+      }
+     ],
+     "then": [
+      {
+       "word": 0,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 6
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 31,
+   "name": "Ask the player to pick a warrior and test them",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Special skill number or attribute number",
+    "Threshold",
+    "Kind of test",
+    "Script on a pass",
+    "Script on a fail"
+   ],
+   "evidence": "native-verified",
+   "label": "Ask the player to pick a warrior and test them",
+   "family": "party",
+   "order": 131,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "nonnegative"
+    }
+   ]
+  },
+  {
+   "code": 33,
+   "name": "Charge credits and branch",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Cost in credits",
+    "Condition",
+    "Jump type",
+    "Jump target",
+    "Step to start at in the target"
+   ],
+   "evidence": "source-ported",
+   "label": "Charge credits and branch",
+   "family": "flow",
+   "order": 133,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        1,
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 3
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 7
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 34,
+   "name": "Leave the encounter",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Leave the encounter",
+   "family": "encounter",
+   "order": 134,
+   "takes": "Nothing",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 35,
+   "name": "Remove a choice from the running simple encounter",
+   "id_text": "The choice to remove, 1 to 4.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Remove a choice from this simple encounter",
+   "family": "encounter",
+   "order": 135,
+   "takes": "Choice 1 to 4",
+   "authorable": true,
+   "id": {
+    "kind": "range",
+    "min": 1,
+    "max": 4
+   }
+  },
+  {
+   "code": 36,
+   "name": "Take or return the party's belongings",
+   "id_text": "Nonzero to take, 0 to return.",
+   "id_class": "direct",
+   "options": "A nonzero ID does nothing if goods are already stored. 0 does nothing if nothing is stored.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Take or return the party's belongings",
+   "family": "party",
+   "order": 136,
+   "takes": "Nonzero takes them, 0 returns them",
+   "authorable": true,
+   "id": {
+    "kind": "number"
+   }
+  },
+  {
+   "code": 38,
+   "name": "Branch if the party has an item (standard jump)",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Item number",
+    "Condition",
+    "Jump type",
+    "Jump target",
+    "Step to start at in the target"
+   ],
+   "evidence": "source-ported",
+   "label": "Branch if the party has an item (standard jump)",
+   "family": "flow",
+   "order": 138,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 999
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        1,
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 3
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 7
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 39,
+   "name": "Replace the script",
+   "id_text": "A script number.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Replace program from story",
+   "family": "flow",
+   "order": 9,
+   "link": true,
+   "takes": "Story replacement ID",
+   "authorable": true,
+   "id": {
+    "kind": "record",
+    "file": "Data ED3",
+    "stride": 42,
+    "sign": "nonnegative"
+   }
+  },
+  {
+   "code": 40,
+   "name": "Branch on a party condition",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Jump when set or clear",
+    "Jump type",
+    "Target",
+    "Condition number",
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on a party condition",
+   "family": "flow",
+   "order": 140,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 19
+    },
+    {
+     "kind": "unused"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 2,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 2,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        3
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 2,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 41,
+   "name": "Remove a choice from any simple encounter",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Simple encounter number",
+    "Choice number",
+    null,
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Remove a choice from any simple encounter",
+   "family": "encounter",
+   "order": 141,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "record",
+     "file": "Data ED",
+     "stride": 426,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "soft",
+     "inner": {
+      "kind": "range",
+      "min": 1,
+      "max": 4
+     },
+     "hard": {
+      "kind": "range",
+      "min": 0,
+      "max": 10
+     }
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 42,
+   "name": "Branch on a percent chance",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Chance percent",
+    "What a success does",
+    "Jump type",
+    "Jump target",
+    "Step to start at in the target"
+   ],
+   "evidence": "source-ported",
+   "label": "Branch on a percent chance",
+   "family": "flow",
+   "order": 142,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "word": 2,
+       "values": [
+        1,
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 3
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 7
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 43,
+   "name": "Give Condition",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Who is affected",
+    "Condition number",
+    "Duration",
+    "Sound number",
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Give a condition",
+   "family": "party",
+   "order": 143,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "soft",
+     "inner": {
+      "kind": "enum",
+      "values": [
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 39
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 44,
+   "name": "Eliminate Typed Encounter Choice",
+   "id_text": "The number of the choice to remove, 1 to 4.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Remove a typed encounter choice",
+   "family": "encounter",
+   "order": 144,
+   "takes": "Choice 1 to 4",
+   "authorable": true,
+   "id": {
+    "kind": "range",
+    "min": 1,
+    "max": 4
+   }
+  },
+  {
+   "code": 45,
+   "name": "Teleport Only",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Map number",
+    "X position",
+    "Y position",
+    "Sound number",
+    "Text number"
+   ],
+   "evidence": "native-verified",
+   "label": "Teleport only",
+   "family": "world",
+   "order": 145,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "map",
+     "keep_negative": true
+    },
+    {
+     "kind": "range",
+     "min": -32768,
+     "max": 89
+    },
+    {
+     "kind": "range",
+     "min": -32768,
+     "max": 89
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "text_or_zero"
+    }
+   ]
+  },
+  {
+   "code": 46,
+   "name": "Branch on Mission Flag",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Mission flag number",
+    "When to branch",
+    "Branch type",
+    "Branch number",
+    "Start action"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on a mission flag",
+   "family": "flow",
+   "order": 146,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 127
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        1,
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 3
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 7
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 47,
+   "name": "Set or Clear Mission Flag",
+   "id_text": "The flag number. A positive number sets the flag. Zero or a negative number clears the flag whose number is the ID without its sign.",
+   "id_class": "direct",
+   "options": "An ID of 0 clears flag 0.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Set or clear a mission flag",
+   "family": "world",
+   "order": 147,
+   "takes": "Flag 1 to 127 sets it; 0 or below clears the flag of that number",
+   "authorable": true,
+   "id": {
+    "kind": "signed_count",
+    "min": 0,
+    "max": 127
+   }
+  },
+  {
+   "code": 48,
+   "name": "Selected Battle",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Battle number",
+    "Highest battle number",
+    "Sound number",
+    "Text number",
+    "Treasure number"
+   ],
+   "evidence": "native-verified",
+   "label": "Selected-party battle",
+   "family": "combat",
+   "order": 5,
+   "link": true,
+   "takes": "Selected battle EXTRA row ID, 0 and up",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "battle"
+    },
+    {
+     "kind": "battle_or_zero"
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "text_or_zero"
+    },
+    {
+     "kind": "treasure_or_zero"
+    }
+   ]
+  },
+  {
+   "code": 50,
+   "name": "Pick by Race, Gender, M.O.S. or Class",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "What to test",
+    "Gender",
+    "Race, M.O.S. or class number",
+    null,
+    "Living only"
+   ],
+   "evidence": "native-verified",
+   "label": "Pick by race, gender, M.O.S. or class",
+   "family": "party",
+   "order": 150,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "soft",
+     "inner": {
+      "kind": "enum",
+      "values": [
+       0,
+       1,
+       2,
+       3,
+       4
+      ]
+     }
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "number"
+    }
+   ]
+  },
+  {
+   "code": 51,
+   "name": "Alter Shop",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Shop number",
+    "Price change",
+    "Item number",
+    "Stock change",
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Alter a shop",
+   "family": "shop",
+   "order": 151,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "record",
+     "file": "Data SD",
+     "stride": 3002,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 999
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 52,
+   "name": "Pick on Test",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "The test",
+    "The test value",
+    "Which warriors are tested",
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Pick on a test",
+   "family": "party",
+   "order": 152,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "enum",
+     "values": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ]
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 53,
+   "name": "Pick by M.O.S.",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "M.O.S. number",
+    "Group",
+    "Which warriors are tested",
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Pick by M.O.S.",
+   "family": "party",
+   "order": 153,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "enum",
+     "values": [
+      0,
+      1,
+      2,
+      3
+     ]
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 54,
+   "name": "Alter Calendar Entry",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Calendar entry number",
+    "Chance in percent",
+    "Interval in days",
+    "Reset to today",
+    "Days to add"
+   ],
+   "evidence": "native-verified",
+   "label": "Alter a calendar entry",
+   "family": "world",
+   "order": 154,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "record",
+     "file": "Data TD3",
+     "stride": 40,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ]
+  },
+  {
+   "code": 55,
+   "name": "Branch on Picked Warriors",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "What to check",
+    "If the check fails",
+    null,
+    "Script if the check passes",
+    "Script if the check fails"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on picked warriors",
+   "family": "flow",
+   "order": 155,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "nonnegative"
+    }
+   ]
+  },
+  {
+   "code": 56,
+   "name": "Battle with Retreat Script",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Battle number",
+    "Highest battle number",
+    "Retreat script",
+    "Sound number",
+    "Text number"
+   ],
+   "evidence": "native-verified",
+   "label": "Battle with a retreat script",
+   "family": "combat",
+   "order": 156,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "battle"
+    },
+    {
+     "kind": "battle_or_zero"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "minus_one_ok"
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "text_or_zero"
+    }
+   ]
+  },
+  {
+   "code": 57,
+   "name": "Change Map Look",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Look number",
+    "Dark",
+    "Map number",
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Change the map look",
+   "family": "world",
+   "order": 157,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "enum",
+     "values": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      15,
+      16,
+      17,
+      18,
+      19
+     ]
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "enum",
+     "values": [
+      0
+     ]
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 58,
+   "name": "Branch on Difficulty",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Difficulty level",
+    "What to do when it passes",
+    "Branch type (as in code 46)",
+    "Branch number",
+    "Start action"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on difficulty",
+   "family": "flow",
+   "order": 158,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "word": 2,
+       "values": [
+        1,
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 3
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 7
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 59,
+   "name": "Branch on Tile",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Tile number",
+    "What to do",
+    "Branch type (as in code 46)",
+    "Branch number",
+    "Start action"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on tile",
+   "family": "flow",
+   "order": 159,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "ignored"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "word": 2,
+       "values": [
+        1,
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 3
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "range",
+        "min": 0,
+        "max": 7
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 60,
+   "name": "Drop Carried Credits",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    null,
+    "Who loses credits",
+    null,
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Drop carried credits",
+   "family": "party",
+   "order": 160,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 61,
+   "name": "Shift Position",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    null,
+    "Squares across (X)",
+    "Squares down (Y)",
+    "Random",
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Shift position",
+   "family": "world",
+   "order": 161,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 62,
+   "name": "Show Scrolling Text",
+   "id_text": "The number of the text to show.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Show scrolling text",
+   "family": "media",
+   "order": 162,
+   "takes": "Text number",
+   "authorable": true,
+   "id": {
+    "kind": "number"
+   }
+  },
+  {
+   "code": 63,
+   "name": "Alter Game Time",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Mode",
+    "Days",
+    "Hours",
+    "Minutes",
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Alter the game time",
+   "family": "world",
+   "order": 163,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 64,
+   "name": "Branch on Game Time",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Day",
+    "Hour",
+    "Hour (second test)",
+    "Script if on time",
+    "Script if late"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on game time",
+   "family": "flow",
+   "order": 164,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "nonnegative"
+    }
+   ]
+  },
+  {
+   "code": 65,
+   "name": "Award Random Items",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Number of items",
+    "Lowest item number",
+    "Highest item number",
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Award random items",
+   "family": "reward",
+   "order": 165,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "soft",
+     "inner": {
+      "kind": "signed_count",
+      "min": 0,
+      "max": 20
+     },
+     "hard": {
+      "kind": "signed_count",
+      "min": 0,
+      "max": 40
+     }
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 999
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 999
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 66,
+   "name": "Allow or Forbid Camping",
+   "id_text": "0 allows camping. Any other number forbids it.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Allow or forbid camping",
+   "family": "world",
+   "order": 166,
+   "takes": "0 allows camping; anything else forbids it (use 0 or 1)",
+   "authorable": true,
+   "id": {
+    "kind": "number"
+   }
+  },
+  {
+   "code": 67,
+   "name": "Branch on Item Charges",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Item number",
+    "Target type",
+    "Charges needed",
+    "Target if enough",
+    "Target if not enough"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on item charges",
+   "family": "flow",
+   "order": 167,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 999
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 68,
+   "name": "Alter Squad Fatigue",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Mode",
+    null,
+    "Percent",
+    null,
+    null
+   ],
+   "evidence": "source-ported",
+   "label": "Alter squad fatigue",
+   "family": "party",
+   "order": 168,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 69,
+   "name": "Set Psi Restrictions",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "The squad cannot use Psi",
+    "Monsters cannot use scans",
+    "Psi points do not recover",
+    null,
+    null
+   ],
+   "evidence": "source-ported",
+   "label": "Set psi restrictions",
+   "family": "world",
+   "order": 169,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "enum",
+     "values": [
+      0,
+      1
+     ]
+    },
+    {
+     "kind": "enum",
+     "values": [
+      0,
+      1
+     ]
+    },
+    {
+     "kind": "enum",
+     "values": [
+      0,
+      1
+     ]
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 70,
+   "name": "Save or Restore Squad Position",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Save or restore",
+    null,
+    null,
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Save or restore the squad's position",
+   "family": "world",
+   "order": 170,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 71,
+   "name": "Show or Hide Coordinates",
+   "id_text": "0 shows the X and Y coordinates. 1 hides them.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Show or hide coordinates",
+   "family": "world",
+   "order": 171,
+   "takes": "0 shows them, 1 hides them",
+   "authorable": true,
+   "id": {
+    "kind": "enum",
+    "values": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "code": 72,
+   "name": "Branch on Range of Mission Flags",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "First flag",
+    "Last flag",
+    null,
+    "Target type",
+    "Target"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on a range of mission flags",
+   "family": "flow",
+   "order": 172,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 127
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 127
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 3,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 3,
+       "values": [
+        1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 3,
+       "values": [
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 73,
+   "name": "Delay",
+   "id_text": "The number of ticks to wait.",
+   "id_class": "direct",
+   "options": "An ID of 0 is meant to wait as long as the player's animation-delay setting; test this in your scenario.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Delay",
+   "family": "media",
+   "order": 173,
+   "takes": "Ticks to wait",
+   "authorable": true,
+   "id": {
+    "kind": "range",
+    "min": 0,
+    "max": 32767
+   }
+  },
+  {
+   "code": 74,
+   "name": "Give or Take Psi Points of Picked Warriors",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Rolls and direction",
+    "Lowest roll",
+    "Highest roll",
+    "Play a sound",
+    "Text number"
+   ],
+   "evidence": "native-verified",
+   "label": "Give or take psi points of picked warriors",
+   "family": "party",
+   "order": 174,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "text_or_zero"
+    }
+   ]
+  },
+  {
+   "code": 75,
+   "name": "Branch on Psi Points",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Who is tested",
+    "Psi points needed",
+    "If nobody has enough",
+    "Target type",
+    "Target"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on psi points",
+   "family": "flow",
+   "order": 175,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 3,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 3,
+       "values": [
+        1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 3,
+       "values": [
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 76,
+   "name": "Change Mission Value",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Flag number",
+    "Amount to add",
+    "Branch type",
+    "Threshold",
+    "Target"
+   ],
+   "evidence": "native-verified",
+   "label": "Change a mission value",
+   "family": "world",
+   "order": 176,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 99
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        3
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 77,
+   "name": "Branch on Mission Value",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Flag number",
+    "Value to compare with",
+    "Target type",
+    "Target if the flag is less",
+    "Target if the flag is equal or greater"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on a mission value",
+   "family": "flow",
+   "order": 177,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 127
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 81,
+   "name": "Branch on Character Condition",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Condition number",
+    "Who is tested",
+    null,
+    "Script if all have it",
+    "Script if not all do"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on a character condition",
+   "family": "flow",
+   "order": 181,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 39
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "nonnegative"
+    }
+   ]
+  },
+  {
+   "code": 84,
+   "name": "Check Registration",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Check registration",
+   "family": "flow",
+   "order": 184,
+   "takes": "Nothing",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 85,
+   "name": "Branch at Random",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Target type",
+    "Lowest target",
+    "Highest target",
+    "Sound number",
+    "Text number"
+   ],
+   "evidence": "source-ported",
+   "label": "Branch at random",
+   "family": "flow",
+   "order": 185,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "text_or_zero"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 0,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 1,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 2,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 0,
+       "values": [
+        1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 1,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 2,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 0,
+       "values": [
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 1,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 2,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 86,
+   "name": "Branch on Miscellaneous Test",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "A negative E2 limits tests 0, 1, 2, 5 and 6 to the picked warriors.",
+   "ecodes": [
+    "The test",
+    "The value tested",
+    "Target type",
+    "Target if true",
+    "Target if false"
+   ],
+   "evidence": "native-verified",
+   "label": "Branch on a miscellaneous test",
+   "family": "flow",
+   "order": 186,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      },
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 87,
+   "name": "Branch on Ally Present",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Monster number of the ally",
+    "Target type",
+    "If absent",
+    "Target if present",
+    "Target if absent"
+   ],
+   "evidence": "source-ported",
+   "label": "Branch on ally present",
+   "family": "flow",
+   "order": 187,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 127
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 3,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        0
+       ]
+      },
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED",
+        "stride": 426,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    },
+    {
+     "when": [
+      {
+       "word": 1,
+       "values": [
+        2
+       ]
+      },
+      {
+       "word": 2,
+       "values": [
+        0
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED2",
+        "stride": 516,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 88,
+   "name": "Remove Ally",
+   "id_text": "The monster number of the ally.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Remove an ally",
+   "family": "ally",
+   "order": 188,
+   "takes": "Monster number of the ally",
+   "authorable": true,
+   "id": {
+    "kind": "record",
+    "file": "Data MD",
+    "stride": 288,
+    "sign": "nonnegative"
+   }
+  },
+  {
+   "code": 89,
+   "name": "Add Ally",
+   "id_text": "The monster number of the ally.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Add an ally",
+   "family": "ally",
+   "order": 189,
+   "takes": "Monster number of the ally",
+   "authorable": true,
+   "id": {
+    "kind": "record",
+    "file": "Data MD",
+    "stride": 288,
+    "sign": "nonnegative"
+   }
+  },
+  {
+   "code": 90,
+   "name": "Take away victory points",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Amount of points",
+    "Who is affected",
+    null,
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Take away victory points",
+   "family": "reward",
+   "order": 190,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 91,
+   "name": "Drop all equipment",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Drop all equipment",
+   "family": "party",
+   "order": 191,
+   "takes": "Nothing",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 92,
+   "name": "Change a random-encounter rectangle",
+   "id_text": "An Extra Codes number. The record that follows it (ID + 1) is also read.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Land number",
+    "Rectangle number",
+    null,
+    "Amount added to the rectangle's encounter chance",
+    "How the sides change"
+   ],
+   "evidence": "native-verified",
+   "label": "Change a random-encounter rectangle",
+   "family": "world",
+   "order": 192,
+   "takes": "An Extra Codes row; the row after it is read too",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "map",
+     "keep_negative": false
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 19
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "companion": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    }
+   ],
+   "companion_labels": [
+    "Left side",
+    "Right side",
+    "Top side",
+    "Bottom side",
+    null
+   ]
+  },
+  {
+   "code": 98,
+   "name": "Require registration",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Require registration",
+   "family": "flow",
+   "order": 198,
+   "takes": "Nothing",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 99,
+   "name": "Scenario registration check",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Scenario registration check",
+   "family": "flow",
+   "order": 199,
+   "takes": "Nothing",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 100,
+   "name": "End a battle and give out rewards",
+   "id_text": "The reward kind. The game doubles it before use.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "End combat, give rewards",
+   "family": "combat",
+   "order": 6,
+   "takes": "Reward kind: 0 ordinary, 1 survivors only, 5 recover loot",
+   "authorable": true,
+   "id": {
+    "kind": "enum",
+    "values": [
+     0,
+     1,
+     5
+    ]
+   }
+  },
+  {
+   "code": 101,
+   "name": "Back up the squad",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Back up the squad",
+   "family": "party",
+   "order": 201,
+   "takes": "Nothing",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 102,
+   "name": "Reset experience of picked warriors",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Reset experience of picked warriors",
+   "family": "party",
+   "order": 202,
+   "takes": "Nothing",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 103,
+   "name": "Boat and camping check",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Boat test",
+    "Camping test",
+    "Set the boat",
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Boat and camping check",
+   "family": "world",
+   "order": 203,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "enum",
+     "values": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "kind": "enum",
+     "values": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "kind": "enum",
+     "values": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 104,
+   "name": "Turn random battles on or off",
+   "id_text": "1 allows random battles. 0 stops them.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Turn random battles on or off",
+   "family": "world",
+   "order": 204,
+   "takes": "1 allows random battles, 0 stops them",
+   "authorable": true,
+   "id": {
+    "kind": "number"
+   }
+  },
+  {
+   "code": 105,
+   "name": "Suspend or restore allies",
+   "id_text": "0 lets held-over allies take part. Any other value suspends them.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "source-ported",
+   "label": "Suspend or restore allies",
+   "family": "ally",
+   "order": 205,
+   "takes": "0 restores held-over allies; anything else suspends them",
+   "authorable": true,
+   "id": {
+    "kind": "number"
+   }
+  },
+  {
+   "code": 106,
+   "name": "Set daylight or darkness",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Light level",
+    "Stop if unchanged",
+    null,
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Set daylight or darkness",
+   "family": "world",
+   "order": 206,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "soft",
+     "inner": {
+      "kind": "enum",
+      "values": [
+       1,
+       2
+      ]
+     }
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 107,
+   "name": "Battle with a choice of battles",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Battle number, or the first of a range",
+    "Last of a range",
+    "Sound number",
+    "Text number",
+    "Script to run when the battle was not won"
+   ],
+   "evidence": "source-ported",
+   "label": "Battle with a choice of battles",
+   "family": "combat",
+   "order": 207,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "battle"
+    },
+    {
+     "kind": "battle_or_zero"
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "text_or_zero"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "nonnegative"
+    }
+   ]
+  },
+  {
+   "code": 108,
+   "name": "Change statistics of picked warriors",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Which statistic",
+    "Amount to add",
+    null,
+    null,
+    null
+   ],
+   "evidence": "native-verified",
+   "label": "Change statistics of picked warriors",
+   "family": "party",
+   "order": 208,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 109,
+   "name": "Add to the mission score",
+   "id_text": "The amount, a whole number. It may be negative.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Add to the mission score",
+   "family": "world",
+   "order": 209,
+   "takes": "Amount; may be negative",
+   "authorable": true,
+   "id": {
+    "kind": "number"
+   }
+  },
+  {
+   "code": 110,
+   "name": "Go to the next stage of the mission",
+   "id_text": "The stage, counted from 1, with a sign. The stage is the ID without its sign: 1 or -1 is the first stage. A positive ID asks the player to confirm. A negative ID goes straight on. Do not use 0, which names no stage.",
+   "id_class": "direct",
+   "options": "A positive ID first asks a yes or no question. If the player says no, the map is redrawn and the script ends.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Stage transition",
+   "family": "flow",
+   "order": 10,
+   "link": true,
+   "takes": "Stage 1–20; negative skips confirmation",
+   "authorable": true,
+   "id": {
+    "kind": "stage"
+   }
+  },
+  {
+   "code": 111,
+   "name": "Limited shop or treasure",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Treasure or shop",
+    "Limit",
+    "Limit mode",
+    null,
+    null
+   ],
+   "evidence": "source-ported",
+   "label": "Limited shop or treasure",
+   "family": "shop",
+   "order": 211,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "treasure_or_shop"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 113,
+   "name": "Set the map picture",
+   "id_text": "The picture number, a whole number.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Set the map picture",
+   "family": "world",
+   "order": 213,
+   "takes": "Picture number; 0 draws the squad marker as usual",
+   "authorable": true,
+   "id": {
+    "kind": "number"
+   }
+  },
+  {
+   "code": 119,
+   "name": "Rescue after a battle",
+   "id_text": "None.",
+   "id_class": "none",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Rescue after a battle",
+   "family": "combat",
+   "order": 219,
+   "takes": "Nothing",
+   "authorable": true,
+   "id": {
+    "kind": "ignored"
+   }
+  },
+  {
+   "code": 120,
+   "name": "Replace the monster in the battle",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "New monster record",
+    null,
+    "Sound",
+    "Text before",
+    "Text after"
+   ],
+   "evidence": "source-ported",
+   "label": "Replace the monster in the battle",
+   "family": "combat",
+   "order": 220,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "record",
+     "file": "Data MD",
+     "stride": 288,
+     "sign": "minus_one_ok"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "text_or_zero"
+    },
+    {
+     "kind": "text_or_zero"
+    }
+   ]
+  },
+  {
+   "code": 121,
+   "name": "Destroy monsters by category",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Category",
+    "Category",
+    "Category",
+    "Category",
+    "Category"
+   ],
+   "evidence": "native-verified",
+   "label": "Destroy monsters by category",
+   "family": "combat",
+   "order": 221,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 8
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 8
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 8
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 8
+    },
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 8
+    }
+   ]
+  },
+  {
+   "code": 122,
+   "name": "Make monsters neutral",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Monster number",
+    "Reverse",
+    null,
+    null,
+    null
+   ],
+   "evidence": "source-ported",
+   "label": "Make monsters neutral",
+   "family": "combat",
+   "order": 222,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "record",
+     "file": "Data MD",
+     "stride": 288,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 123,
+   "name": "Rout monsters",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Monster numbers. 0 means the entry is not used",
+    "Monster numbers. 0 means the entry is not used",
+    "Monster numbers. 0 means the entry is not used",
+    "Monster numbers. 0 means the entry is not used",
+    "Monster numbers. 0 means the entry is not used"
+   ],
+   "evidence": "native-verified",
+   "label": "Rout monsters",
+   "family": "combat",
+   "order": 223,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "record",
+     "file": "Data MD",
+     "stride": 288,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "record",
+     "file": "Data MD",
+     "stride": 288,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "record",
+     "file": "Data MD",
+     "stride": 288,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "record",
+     "file": "Data MD",
+     "stride": 288,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "record",
+     "file": "Data MD",
+     "stride": 288,
+     "sign": "nonnegative"
+    }
+   ]
+  },
+  {
+   "code": 124,
+   "name": "Add monsters to the battle",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    null,
+    "Monster record number",
+    "How many",
+    "Sound",
+    null
+   ],
+   "evidence": "source-ported",
+   "label": "Add monsters to the battle",
+   "family": "combat",
+   "order": 224,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "record",
+     "file": "Data MD",
+     "stride": 288,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "sound"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 125,
+   "name": "Destroy monsters of one kind",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Monster number",
+    "How many",
+    "Distance",
+    null,
+    null
+   ],
+   "evidence": "source-ported",
+   "label": "Destroy monsters of one kind",
+   "family": "combat",
+   "order": 225,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "record",
+     "file": "Data MD",
+     "stride": 288,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "range",
+     "min": -32767,
+     "max": 32767
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "unused"
+    },
+    {
+     "kind": "unused"
+    }
+   ]
+  },
+  {
+   "code": 126,
+   "name": "Change a round script",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Kind of test",
+    "Round or percent",
+    "Repeat",
+    "Script",
+    "Last script of a range"
+   ],
+   "evidence": "native-verified",
+   "label": "Change a round script",
+   "family": "combat",
+   "order": 226,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "number"
+    },
+    {
+     "kind": "record",
+     "file": "Data ED3",
+     "stride": 42,
+     "sign": "nonnegative"
+    },
+    {
+     "kind": "number"
+    }
+   ],
+   "rules": [
+    {
+     "when": [
+      {
+       "word": 2,
+       "values": [
+        2
+       ]
+      }
+     ],
+     "then": [
+      {
+       "word": 4,
+       "kind": {
+        "kind": "record",
+        "file": "Data ED3",
+        "stride": 42,
+        "sign": "nonnegative"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": 127,
+   "name": "Continue if a monster is present",
+   "id_text": "A monster number.",
+   "id_class": "direct",
+   "options": "None.",
+   "ecodes": [],
+   "evidence": "native-verified",
+   "label": "Continue if a monster is present",
+   "family": "combat",
+   "order": 227,
+   "takes": "Monster number",
+   "authorable": true,
+   "id": {
+    "kind": "soft",
+    "inner": {
+     "kind": "record",
+     "file": "Data MD",
+     "stride": 288,
+     "sign": "nonnegative"
+    },
+    "hard": {
+     "kind": "range",
+     "min": -128,
+     "max": 127
+    }
+   }
+  },
+  {
+   "code": 128,
+   "name": "Show an animation on the map",
+   "id_text": "An Extra Codes number.",
+   "id_class": "extra",
+   "options": "None.",
+   "ecodes": [
+    "Animation number",
+    "Column on the map",
+    "Row on the map",
+    "Size",
+    "Delay between frames"
+   ],
+   "evidence": "source-ported",
+   "label": "Show an animation on the map",
+   "family": "media",
+   "order": 228,
+   "takes": "An Extra Codes row",
+   "authorable": true,
+   "id": {
+    "kind": "extra"
+   },
+   "extra": [
+    {
+     "kind": "range",
+     "min": 0,
+     "max": 2595
+    },
+    {
+     "kind": "soft",
+     "inner": {
+      "kind": "range",
+      "min": -1,
+      "max": 89
+     },
+     "hard": {
+      "kind": "range",
+      "min": -1000,
+      "max": 1000
+     }
+    },
+    {
+     "kind": "soft",
+     "inner": {
+      "kind": "range",
+      "min": -1,
+      "max": 89
+     },
+     "hard": {
+      "kind": "range",
+      "min": -1000,
+      "max": 1000
+     }
+    },
+    {
+     "kind": "soft",
+     "inner": {
+      "kind": "range",
+      "min": 1,
+      "max": 256
+     },
+     "hard": {
+      "kind": "range",
+      "min": 0,
+      "max": 29919
+     }
+    },
+    {
+     "kind": "soft",
+     "inner": {
+      "kind": "range",
+      "min": 0,
+      "max": 60
+     },
+     "hard": {
+      "kind": "range",
+      "min": 0,
+      "max": 32767
+     }
+    }
+   ]
+  }
+ ]
+}

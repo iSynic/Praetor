@@ -1,0 +1,1954 @@
+{
+ "_provenance": {
+  "source": "evidence/capability-map.json of the Centurions reconstruction (read only)",
+  "sha256": "1d0fa2bf1997dffd82319bbaee412bc88946e70826a45d5ef5e3e0b3a57c00f4",
+  "schema_version": 1,
+  "authority": "Centurions 1.3.2. Rows are derived from current source, the original newland dispatch and the unsupported ledger; statuses other than the generated defaults come only from evidence/capability-map-notes.json.",
+  "extracted": "2026-11-10",
+  "kept": "the opcode rows: operation, status, editor treatment, behavior, evidence, diagnostic counts and routes"
+ },
+ "opcodes": [
+  {
+   "value": null,
+   "operation": "Unarmed",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": "values without an arm leave the switch without effect",
+   "evidence": "Native: evidence/fixtures/story-trivial.json (crates/core/tests/native/binary_story_opcodes.rs::random_battles_monster_test_and_unarmed_opcodes_match_original_newland). bounded original newland mode -1 for values without a switch arm (-1, 32, 37, 200)",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {}
+  },
+  {
+   "value": -32,
+   "operation": "Clinic",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": -14,
+   "operation": "ChoosePartyInverted",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-picks.json (crates/core/tests/native/binary_story_opcodes.rs::party_picks_and_complex_branch_elimination_match_original_newland). bounded original newland mode -1 with getchoice on scripted portrait clicks",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": -12,
+   "operation": "ClearObjects",
+   "status": "native-verified",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/object-rectangle-edge.json (crates/core/tests/native/binary_story_opcodes.rs::object_rectangle_column90_matches_original_event_word_aliases). bounded original newland -12 instructions 14371c..143754, stopped before saveland",
+   "diagnostics": 2,
+   "open_diagnostics": 1,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 1,
+   "operation": "Dialogue",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "battle_round": "handler",
+    "exploration": "handler",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared",
+    "enemy_turn": "literal"
+   }
+  },
+  {
+   "value": 2,
+   "operation": "Battle",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 3,
+   "operation": "Question",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 4,
+   "operation": "Menu",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 5,
+   "operation": "TypedMenu",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 6,
+   "operation": "Shop",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 7,
+   "operation": "ReplaceMapEvent",
+   "status": "native-verified",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/map-actions.json (crates/core/tests/native/binary_travel.rs::normal_secret_search_matches_original_full_map_and_rng, crates/core/tests/native/binary_travel.rs::scripted_map_mutations_match_original_complete_map_layers). bounded original newland12/13/7 map mutation instructions with in-memory save/loadland",
+   "diagnostics": 5,
+   "open_diagnostics": 3,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 8,
+   "operation": "CopyMapEvent",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/header-dispatch.json (crates/core/tests/native/binary_travel.rs::scripted_map_mutations_match_original_complete_map_layers). bounded original opcode8 1434d4..14352c to 1402fa",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 9,
+   "operation": "Sound",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "battle_round": "handler",
+    "exploration": "handler",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared",
+    "enemy_turn": "literal"
+   }
+  },
+  {
+   "value": 10,
+   "operation": "Treasure",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/treasure-rewards.json (crates/core/tests/native/binary_treasure_rewards.rs::original_treasure_eight_preserves_participation_and_awards_experience). bounded original opcode10 caller 143540..1435bc and booty to the first loot UI allocation",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 11,
+   "operation": "Experience",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 12,
+   "operation": "ChangeTiles",
+   "status": "native-verified",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/map-actions.json (crates/core/tests/native/binary_travel.rs::normal_secret_search_matches_original_full_map_and_rng, crates/core/tests/native/binary_travel.rs::scripted_map_mutations_match_original_complete_map_layers). bounded original newland12/13/7 map mutation instructions with in-memory save/loadland",
+   "diagnostics": 5,
+   "open_diagnostics": 4,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 13,
+   "operation": "SetEventChances",
+   "status": "native-verified",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/map-actions.json (crates/core/tests/native/binary_travel.rs::normal_secret_search_matches_original_full_map_and_rng, crates/core/tests/native/binary_travel.rs::scripted_map_mutations_match_original_complete_map_layers). bounded original newland12/13/7 map mutation instructions with in-memory save/loadland",
+   "diagnostics": 5,
+   "open_diagnostics": 4,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 14,
+   "operation": "ChooseParty",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-picks.json (crates/core/tests/native/binary_story_opcodes.rs::party_picks_and_complex_branch_elimination_match_original_newland). bounded original newland mode -1 with getchoice on scripted portrait clicks",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 15,
+   "operation": "SelectedHealth",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-health.json (crates/core/tests/native/binary_story_health.rs::outdoor_heal_and_party_callers_match_original_records_effect_order_and_rng). bounded original opcode15 selected-mask and opcode16 all-member heal callers",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 16,
+   "operation": "PartyHealth",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-health.json (crates/core/tests/native/binary_story_health.rs::outdoor_heal_and_party_callers_match_original_records_effect_order_and_rng). bounded original opcode15 selected-mask and opcode16 all-member heal callers",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 17,
+   "operation": "SelectedSpell",
+   "status": "source-ported",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 5,
+   "open_diagnostics": 5,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 18,
+   "operation": "PartySpell",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 19,
+   "operation": "DisplayRandomString",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-text.json (crates/core/tests/native/binary_story_opcodes.rs::random_string_picked_psi_and_registered_check_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 20,
+   "operation": "TeleportActivate",
+   "status": "native-verified",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-chain.json (crates/core/tests/native/binary_story_opcodes.rs::chaining_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 1,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 21,
+   "operation": "PartyItemBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/item-condition.json (crates/core/tests/native/binary_story_variables.rs::party_item_conditions_match_original_complete_warriors_and_continuations). bounded original newland21 block 143ce4 with checkforitem 112650",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 22,
+   "operation": "ConsumePartyItems",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 23,
+   "operation": "ChangeRegion",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 24,
+   "operation": "EndScript",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/header-destination.json (crates/core/tests/native/binary_header_destination.rs::door_destinations_and_suppression_match_original_finish). bounded original opcode24/25 through finish 146782..14694c",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "battle_round": "handler",
+    "exploration": "handler",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 25,
+   "operation": "PersistEvent",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/header-destination.json (crates/core/tests/native/binary_header_destination.rs::door_destinations_and_suppression_match_original_finish). bounded original opcode24/25 through finish 146782..14694c",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 26,
+   "operation": "Pause",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 27,
+   "operation": "DrawPicture",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-picture.json (crates/core/tests/native/binary_story_opcodes.rs::picture_and_encounter_choice_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 28,
+   "operation": "RedrawScreen",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-map.json (crates/core/tests/native/binary_story_opcodes.rs::redraw_shift_boat_camping_and_light_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 29,
+   "operation": "RevealNote",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 30,
+   "operation": "FilterParty",
+   "status": "source-ported",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 2,
+   "open_diagnostics": 2,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 31,
+   "operation": "ChooseWarrior",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-skill.json (crates/core/tests/native/binary_story_skill.rs::chosen_warrior_checks_match_original_signed_comparisons_and_dispatch). bounded original opcode31 144a66..144bca",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 33,
+   "operation": "PaymentBranch",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 5,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 34,
+   "operation": "BreakEncounter",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-chain.json (crates/core/tests/native/binary_story_opcodes.rs::chaining_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 35,
+   "operation": "DisableMenuEntry",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 36,
+   "operation": "Confiscate",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 38,
+   "operation": "ItemPrerequisiteBranch",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 5,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 39,
+   "operation": "ReplaceScript",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 40,
+   "operation": "PartyConditionBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-branch.json (crates/core/tests/native/binary_story_opcodes.rs::branch_opcodes_take_the_original_extra_action_point). bounded original newland mode -1 on constructed records; branch taken compared by the extra action point's sounds",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 41,
+   "operation": "DisableEncounterChoice",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-picture.json (crates/core/tests/native/binary_story_opcodes.rs::picture_and_encounter_choice_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 42,
+   "operation": "ChanceBranch",
+   "status": "source-ported",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 7,
+   "open_diagnostics": 2,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 43,
+   "operation": "GiveCondition",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-effects.json (crates/core/tests/native/binary_story_opcodes.rs::party_shop_treasure_and_battle_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 44,
+   "operation": "EliminateComplexBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-picks.json (crates/core/tests/native/binary_story_opcodes.rs::party_picks_and_complex_branch_elimination_match_original_newland). bounded original newland mode -1 with getchoice on scripted portrait clicks",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 45,
+   "operation": "Travel",
+   "status": "native-verified",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/stage-travel.json (crates/core/tests/native/binary_stage_travel.rs::accepted_stage_restoration_matches_complete_original_warriors, crates/core/tests/native/binary_stage_travel.rs::packed_map_records_match_original_stage_and_travel_io). bounded original newland45 block 143bd6 with loadland and saveland",
+   "diagnostics": 1,
+   "open_diagnostics": 1,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 46,
+   "operation": "FlagBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-flags.json (crates/core/tests/native/binary_story_flags.rs::mission_flag_condition_matches_original_branch_decision, crates/core/tests/native/binary_story_flags.rs::mission_flag_mutations_match_complete_original_flag_table, crates/core/tests/native/binary_story_flags.rs::mission_score_addition_matches_original_word_arithmetic). bounded original opcode47 1454de, opcode46 145490 and opcode109 14191c",
+   "diagnostics": 5,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 47,
+   "operation": "SetMissionFlag",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-flags.json (crates/core/tests/native/binary_story_flags.rs::mission_flag_condition_matches_original_branch_decision, crates/core/tests/native/binary_story_flags.rs::mission_flag_mutations_match_complete_original_flag_table, crates/core/tests/native/binary_story_flags.rs::mission_score_addition_matches_original_word_arithmetic). bounded original opcode47 1454de, opcode46 145490 and opcode109 14191c",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 48,
+   "operation": "SelectedBattle",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/selected-battle-treasure.json (crates/core/tests/native/binary_encounter_battle.rs::selected_battle_bonus_has_two_saved_reward_windows_and_matches_native_preparations, crates/core/tests/native/binary_encounter_battle.rs::selected_parent_returns_after_saved_death_and_round_child_battles, crates/core/tests/native/binary_encounter_battle.rs::selected_reward_rereads_shared_extra_after_saved_first_window, crates/core/tests/native/binary_encounter_battle.rs::selected_reward_return, crates/core/tests/native/binary_encounter_battle.rs::selected_reward_start). bounded original newland48 145514..1456f0 with both booty calls; combat is a controlled boundary",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 50,
+   "operation": "PickByTrait",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-selection.json (crates/core/tests/native/binary_story_opcodes.rs::selection_difficulty_time_and_points_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 2,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 51,
+   "operation": "AlterShop",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-effects.json (crates/core/tests/native/binary_story_opcodes.rs::party_shop_treasure_and_battle_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 52,
+   "operation": "SelectPartyBySave",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-party.json (crates/core/tests/native/binary_story_party.rs::group_encounters_match_original_selection_and_post_combat_continuations, crates/core/tests/native/binary_story_party.rs::late_group_filter_matches_original_tiles_formation_order_and_complete_warriors, crates/core/tests/native/binary_story_party.rs::party_selection_matches_original_masks_complete_records_and_randomness). bounded original newland52 block 1458e8..14673c",
+   "diagnostics": 2,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 53,
+   "operation": "PickByCaste",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-selection.json (crates/core/tests/native/binary_story_opcodes.rs::selection_difficulty_time_and_points_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 54,
+   "operation": "EditSchedule",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/schedule-edit.json (crates/core/tests/native/binary_schedule_edit.rs::scheduled_record_edits_match_original_complete_table_and_wrapping_day, crates/core/tests/native/binary_schedule_edit.rs::unsigned_native_seek_boundaries_reject_without_changing_the_table). bounded original dispatcher 140336 through opcode54 block 145c82..145d74",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 55,
+   "operation": "PickedBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-chain.json (crates/core/tests/native/binary_story_opcodes.rs::chaining_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 56,
+   "operation": "NpcBattle",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/npc-battle-caller.json (crates/core/tests/native/binary_npc_battle.rs::npc_battle_caller_matches_original_order_and_all_party_bytes). bounded original opcode56 caller 145efc..146108; the battle itself is a separate boundary",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 57,
+   "operation": "ChangeLandTiles",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-land.json (crates/core/tests/native/binary_story_opcodes.rs::land_light_saved_position_and_rectangle_edits_match_original_newland); evidence/fixtures/story-tile-set.json (crates/core/tests/native/binary_story_opcodes.rs::land_light_saved_position_and_rectangle_edits_match_original_newland). bounded original newland mode -1 with saveland, loadland and loadpixmap over an emulated land store",
+   "diagnostics": 3,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 58,
+   "operation": "DifficultyBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-selection.json (crates/core/tests/native/binary_story_opcodes.rs::selection_difficulty_time_and_points_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 5,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 59,
+   "operation": "TileBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-selection.json (crates/core/tests/native/binary_story_opcodes.rs::selection_difficulty_time_and_points_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 5,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 60,
+   "operation": "DropMemberCredits",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-selection.json (crates/core/tests/native/binary_story_opcodes.rs::selection_difficulty_time_and_points_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 61,
+   "operation": "ShiftParty",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-map.json (crates/core/tests/native/binary_story_opcodes.rs::redraw_shift_boat_camping_and_light_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 62,
+   "operation": "Movie",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 63,
+   "operation": "AlterGameTime",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-selection.json (crates/core/tests/native/binary_story_opcodes.rs::selection_difficulty_time_and_points_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 64,
+   "operation": "GameTimeBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-branch.json (crates/core/tests/native/binary_story_opcodes.rs::branch_opcodes_take_the_original_extra_action_point). bounded original newland mode -1 on constructed records; branch taken compared by the extra action point's sounds",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 65,
+   "operation": "RandomTreasure",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-effects.json (crates/core/tests/native/binary_story_opcodes.rs::party_shop_treasure_and_battle_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 66,
+   "operation": "SetCampingAbility",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/camp-fatigue.json (crates/core/tests/native/binary_story_opcodes.rs::exhausted_movement_and_camping_flag_match_original). bounded original newland opcode 66 in mode -1 with old flag 0/1 and parameter 0/1/2",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 67,
+   "operation": "ItemChargesBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-branch.json (crates/core/tests/native/binary_story_opcodes.rs::branch_opcodes_take_the_original_extra_action_point). bounded original newland mode -1 on constructed records; branch taken compared by the extra action point's sounds",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 68,
+   "operation": "ChangeFatigue",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 69,
+   "operation": "SetRecoveryRestrictions",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 70,
+   "operation": "PartyPosition",
+   "status": "native-verified",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-land.json (crates/core/tests/native/binary_story_opcodes.rs::land_light_saved_position_and_rectangle_edits_match_original_newland). bounded original newland mode -1 over two constructed lands",
+   "diagnostics": 1,
+   "open_diagnostics": 1,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 71,
+   "operation": "CoordinateDisplay",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-effects.json (crates/core/tests/native/binary_story_opcodes.rs::party_shop_treasure_and_battle_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 72,
+   "operation": "QuestRangeBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-branch.json (crates/core/tests/native/binary_story_opcodes.rs::branch_opcodes_take_the_original_extra_action_point). bounded original newland mode -1 on constructed records; branch taken compared by the extra action point's sounds",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 73,
+   "operation": "Delay",
+   "status": "native-verified",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-delay.json (crates/core/tests/native/binary_story_delay.rs::native_tick_delay_uses_zero_default_strict_unsigned_elapsed_and_wrapping_ticks). native dispatch 140336 opcode73 and delay body 1205f8..120632 with controlled TickCount",
+   "diagnostics": 1,
+   "open_diagnostics": 1,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 74,
+   "operation": "AdjustPickedPsi",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-text.json (crates/core/tests/native/binary_story_opcodes.rs::random_string_picked_psi_and_registered_check_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 75,
+   "operation": "PsiPointsBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-branch.json (crates/core/tests/native/binary_story_opcodes.rs::branch_opcodes_take_the_original_extra_action_point). bounded original newland mode -1 on constructed records; branch taken compared by the extra action point's sounds",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 76,
+   "operation": "UpdateVariable",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-variables.json (crates/core/tests/native/binary_story_variables.rs::variable_predicates_match_original_signed_comparisons_and_targets, crates/core/tests/native/binary_story_variables.rs::variable_updates_match_original_complete_bytes_and_continuations). bounded original opcode76 block 14433c and opcode77 block 1443f8",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 77,
+   "operation": "VariableBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-variables.json (crates/core/tests/native/binary_story_variables.rs::variable_predicates_match_original_signed_comparisons_and_targets, crates/core/tests/native/binary_story_variables.rs::variable_updates_match_original_complete_bytes_and_continuations). bounded original opcode76 block 14433c and opcode77 block 1443f8",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 81,
+   "operation": "CharacterConditionBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-branch.json (crates/core/tests/native/binary_story_opcodes.rs::branch_opcodes_take_the_original_extra_action_point). bounded original newland mode -1 on constructed records; branch taken compared by the extra action point's sounds",
+   "diagnostics": 2,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 84,
+   "operation": "CheckRegisteredScenario",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-text.json (crates/core/tests/native/binary_story_opcodes.rs::random_string_picked_psi_and_registered_check_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 85,
+   "operation": "RandomBranch",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 86,
+   "operation": "MiscellaneousBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-chain.json (crates/core/tests/native/binary_story_opcodes.rs::chaining_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 2,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 87,
+   "operation": "AllyClassBranch",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 88,
+   "operation": "RemoveAllies",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/remove-allies.json (crates/core/tests/native/binary_remove_allies.rs::removals_match_original_record_copying_and_menu_normalization). bounded original opcode88 142146..1421b2 with updatenpcmenu 1046e0",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 89,
+   "operation": "AddAlly",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-allies.json (crates/core/tests/native/binary_story_allies.rs::joined_biologists_match_complete_original_records_and_rng). bounded original newland89 block 141eb6..142142 with updatenpcmenu 1046e0",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 90,
+   "operation": "TakeVictoryPoints",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-selection.json (crates/core/tests/native/binary_story_opcodes.rs::selection_difficulty_time_and_points_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 91,
+   "operation": "DropAllEquipment",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-effects.json (crates/core/tests/native/binary_story_opcodes.rs::party_shop_treasure_and_battle_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 92,
+   "operation": "ResizeRegion",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-land.json (crates/core/tests/native/binary_story_opcodes.rs::land_light_saved_position_and_rectangle_edits_match_original_newland). bounded original newland mode -1 over two constructed lands",
+   "diagnostics": 2,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 98,
+   "operation": "Registration",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 99,
+   "operation": "ScenarioRegistration",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 100,
+   "operation": "CombatCleanup",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-cleanup.json (crates/core/tests/native/binary_round_stories.rs::surrender_question_cleanup_and_saved_script_return_match_native_early_exit); evidence/fixtures/round-surrender.json (crates/core/tests/native/binary_round_stories.rs::original_round_surrender_enters_question_then_declines_or_cleans_without_rewards); evidence/fixtures/scripted-cleanup-return.json (crates/core/tests/native/binary_cleanup_return.rs::scripted_cleanup_records_rewards_and_outer_suppression_match_native). bounded original newland100 1412fe..14133c into booty mode 2",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 101,
+   "operation": "UndoLastStep",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 102,
+   "operation": "ResetExperience",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-experience-reset.json (crates/core/tests/native/binary_story_opcodes.rs::experience_reset_matches_native_preparation_and_resumes_once_after_saved_close). bounded original newland102 141358..1413e2 with booty 105748..1064c2",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 103,
+   "operation": "BoatCampingBranch",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-map.json (crates/core/tests/native/binary_story_opcodes.rs::redraw_shift_boat_camping_and_light_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 104,
+   "operation": "SetRandomBattles",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-trivial.json (crates/core/tests/native/binary_story_opcodes.rs::random_battles_monster_test_and_unarmed_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 105,
+   "operation": "SuppressAllies",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 106,
+   "operation": "SetLandLight",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-map.json (crates/core/tests/native/binary_story_opcodes.rs::redraw_shift_boat_camping_and_light_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 107,
+   "operation": "GroupBattle",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 108,
+   "operation": "AdjustStatistics",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-statistics.json (crates/core/tests/native/live_story_transactions.rs::failed_story_transaction_discards_mutations_and_ordered_effects). bounded original newland108 1414e2..141918",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 109,
+   "operation": "AddMissionScore",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-flags.json (crates/core/tests/native/binary_story_flags.rs::mission_flag_condition_matches_original_branch_decision, crates/core/tests/native/binary_story_flags.rs::mission_flag_mutations_match_complete_original_flag_table, crates/core/tests/native/binary_story_flags.rs::mission_score_addition_matches_original_word_arithmetic). bounded original opcode47 1454de, opcode46 145490 and opcode109 14191c",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 110,
+   "operation": "StageTransition",
+   "status": "native-verified",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/stage-travel.json (crates/core/tests/native/binary_stage_travel.rs::accepted_stage_restoration_matches_complete_original_warriors, crates/core/tests/native/binary_stage_travel.rs::packed_map_records_match_original_stage_and_travel_io). bounded original newland110 block 14192a with Displaymissionname, loadland and saveland",
+   "diagnostics": 1,
+   "open_diagnostics": 1,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 111,
+   "operation": "LimitedShopOrTreasure",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 113,
+   "operation": "SetMapPicture",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/map-picture.json (crates/core/tests/native/binary_map_picture.rs::original_map_picture_word_assignment_precedes_the_redraw_boundary). bounded original opcode113 141af0",
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 119,
+   "operation": "EndCombat",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/mission-deaths.json (crates/core/tests/native/binary_mission_deaths.rs::altered_death_script_and_invalid_actor_are_transactional_diagnostics, crates/core/tests/native/binary_mission_deaths.rs::child_roster_retains_native_story_actor_and_saved_inactive_record, crates/core/tests/native/binary_mission_deaths.rs::original_direct_and_queued_death_story_phases_match_complete_native_state). complete original killbody 12e4e4 and emptyque running authored death scripts through native newland119/123; death-script context only",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "combat_story": "handler",
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 120,
+   "operation": "ReplaceActor",
+   "status": "source-ported",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 1,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared",
+    "enemy_turn": "literal"
+   }
+  },
+  {
+   "value": 121,
+   "operation": "DestroyCategories",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-effects.json (crates/core/tests/native/binary_story_opcodes.rs::party_shop_treasure_and_battle_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 3,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 122,
+   "operation": "NeutralizeActors",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "battle_round": "handler",
+    "combat_story": "handler",
+    "exploration": "handler",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 123,
+   "operation": "SetFactionCondition",
+   "status": "native-verified",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/mission-deaths.json (crates/core/tests/native/binary_mission_deaths.rs::altered_death_script_and_invalid_actor_are_transactional_diagnostics, crates/core/tests/native/binary_mission_deaths.rs::child_roster_retains_native_story_actor_and_saved_inactive_record, crates/core/tests/native/binary_mission_deaths.rs::original_direct_and_queued_death_story_phases_match_complete_native_state). complete original killbody 12e4e4 and emptyque running authored death scripts through native newland119/123; death-script context only",
+   "diagnostics": 1,
+   "open_diagnostics": 1,
+   "routes": {
+    "combat_story": "handler",
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 124,
+   "operation": "SummonActors",
+   "status": "source-ported",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 5,
+   "open_diagnostics": 3,
+   "routes": {
+    "battle_round": "handler",
+    "combat_story": "handler",
+    "exploration": "handler",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared",
+    "enemy_turn": "literal"
+   }
+  },
+  {
+   "value": 125,
+   "operation": "RemoveActorClass",
+   "status": "source-ported",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 1,
+   "open_diagnostics": 1,
+   "routes": {
+    "battle_round": "handler",
+    "combat_story": "handler",
+    "exploration": "handler",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 126,
+   "operation": "ReplaceRoundScript",
+   "status": "native-verified",
+   "editor": "warn",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/thunder-round-replacement.json (crates/core/tests/native/command_thunder_branches.rs::authored_item_variable_ally_and_random_branches_resume_without_repeating_effects); evidence/fixtures/retained-getup-round.json (crates/core/tests/native/binary_retained_getup.rs::detached_getup_matches_native_records_work_and_saved_script_return). bounded original newland126 141040 over authored Thunder extras and Getup's round macro",
+   "diagnostics": 1,
+   "open_diagnostics": 1,
+   "routes": {
+    "battle_round": "handler",
+    "exploration": "handler",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 127,
+   "operation": "ContinueIfMonster",
+   "status": "native-verified",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": "Native: evidence/fixtures/story-trivial.json (crates/core/tests/native/binary_story_opcodes.rs::random_battles_monster_test_and_unarmed_opcodes_match_original_newland). bounded original newland mode -1 on constructed records",
+   "diagnostics": 1,
+   "open_diagnostics": 0,
+   "routes": {
+    "battle_round": "handler",
+    "exploration": "handler",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 128,
+   "operation": "MapEffect",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 2,
+   "open_diagnostics": 0,
+   "routes": {
+    "exploration": "handler",
+    "battle_round": "shared",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared"
+   }
+  },
+  {
+   "value": 0,
+   "operation": "NoAction",
+   "status": "source-ported",
+   "editor": "allow",
+   "behavior": null,
+   "evidence": null,
+   "diagnostics": 0,
+   "open_diagnostics": 0,
+   "routes": {
+    "battle_round": "handler",
+    "exploration": "handler",
+    "death_script": "shared",
+    "getup": "shared",
+    "nested_callback": "shared",
+    "enemy_turn": "literal"
+   }
+  }
+ ]
+}

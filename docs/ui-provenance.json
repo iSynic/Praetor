@@ -1,0 +1,154 @@
+{
+  "license": "GPL-3.0-or-later",
+  "inputs": [
+    {
+      "donor": "C:\\Users\\Eric\\Documents\\ChatGPT\\New project 2\\godot\\theme\\providence_theme.tres",
+      "sha256": "396fcd7179f18dd99994cd657b41050599f634cc1e4593af4b1b9581a25fd34f",
+      "destination": "godot/theme/providence_theme.tres",
+      "decision": "Generic presentation or transport only; no Realmz semantics",
+      "retired": "2026-11-09: removed; godot/theme/editor_theme.tres replaces it and reuses none of its values"
+    },
+    {
+      "donor": "C:\\Users\\Eric\\Documents\\ChatGPT\\New project 2\\godot\\src\\map_paint_stroke.gd",
+      "sha256": "7c2d1c2234b572ba9a5295758c872cb6e29b7707259d54283aa4805797692c30",
+      "destination": "godot/src/map_paint_stroke.gd",
+      "decision": "Generic presentation or transport only; no Realmz semantics"
+    },
+    {
+      "donor": "C:\\Users\\Eric\\Documents\\ChatGPT\\New project 2\\godot\\src\\native_json_line_reader.gd",
+      "sha256": "4aecb9190e030173d75ef15f716d02a217f0ea2a0c021c542949f4af0b84e694",
+      "destination": "godot/src/native_json_line_reader.gd",
+      "decision": "Generic presentation or transport only; no Realmz semantics"
+    },
+    {
+      "donor": "C:\\Users\\Eric\\Documents\\ChatGPT\\New project 2\\godot\\src\\editor_shell.tscn",
+      "sha256": "5f1b94ea6f30eeb24d8161855cb905e6c3b9725b031cd54379983c24f6d580b8",
+      "decision": "Adapt scene composition and interaction patterns; replace controllers, resource identities and record semantics",
+      "note": "2026-11-09: the shell scene was rebuilt from the editor design (see design below); the guard, dialog and draft patterns adapted from this donor remain in godot/src/editor_shell.gd"
+    },
+    {
+      "donor": "C:\\Users\\Eric\\Documents\\ChatGPT\\New project 2\\godot\\src\\command_bar.tscn",
+      "sha256": "febe0f5b11152217b1e158bff1b74ee546daa3f930bc39ad029ec913900a08ee",
+      "decision": "Adapt scene composition and interaction patterns; replace controllers, resource identities and record semantics"
+    },
+    {
+      "donor": "C:\\Users\\Eric\\Documents\\ChatGPT\\New project 2\\godot\\src\\string_editor.tscn",
+      "sha256": "744ef6caa30b840fbf291297029b36663f0e83d886142dd1d0594eea5655e105",
+      "decision": "Adapt scene composition and interaction patterns; replace controllers, resource identities and record semantics"
+    },
+    {
+      "donor": "C:\\Users\\Eric\\Documents\\ChatGPT\\New project 2\\godot\\src\\land_editor.tscn",
+      "sha256": "3d3c4234328391524735ba22e6d8c9ff2998e222c30043fb38d1d4597b13f168",
+      "decision": "Adapt scene composition and interaction patterns; replace controllers, resource identities and record semantics"
+    },
+    {
+      "donor": "C:\\Users\\Eric\\Documents\\ChatGPT\\New project 2\\godot\\src\\map_canvas.gd",
+      "sha256": "09ec208aa565be18701f37a6ab29de27ed3782535b63b99ae6f169652b1f448d",
+      "decision": "Adapt scene composition and interaction patterns; replace controllers, resource identities and record semantics"
+    },
+    {
+      "donor": "D:\\The New Centurions Codex\\crates\\content\\src\\graphics.rs",
+      "sha256": "76a2513fa0d7cc594ee20cfad296ba5a1f50f738ed98639e85234710f9a529b4",
+      "destination": "crates/centurions-format/src/graphics.rs",
+      "decision": "Generic PICT and masked cicn raster routines only; independent resource ownership, signed IDs, default-floor and tile lookup"
+    },
+    {
+      "donor": "C:\\Users\\Eric\\Documents\\ChatGPT\\New project 2\\godot\\src\\map_ap_placement_inspector.tscn",
+      "sha256": "c593e806b47faae8bf7081241b5217d9db4a98c266fff6f0a266f8acd0e33cd0",
+      "destination": "godot/src/map_ap_placement_inspector.tscn",
+      "decision": "Exact presentation scene reused; existing-slot Centurions placement controller replaces Realmz placement logic",
+      "retired": "2026-11-10: removed; the trigger controls are written for this editor in godot/src/maps/map_toolbar.gd and map_inspector.gd"
+    }
+  ],
+  "design": {
+    "source": "The owner's private design canvas for this editor (design/editor.canvas with its build scripts, 45 frames). It is not committed and not distributed.",
+    "date": "2026-11-09",
+    "outputs": [
+      {
+        "path": "godot/theme/editor_tokens.gd",
+        "sha256": "1772664999b9db02c3cd558ecf284f48b84c11c7cdefab1a4ae628aeaa8bd1e6",
+        "from": "Canvas tokens: colours ink to accent, state, overlay and family colours, radii, 13 px base text, 11 px caps captions",
+        "decision": "Values copied from the canvas; names are this editor's own"
+      },
+      {
+        "path": "godot/theme/editor_theme.tres",
+        "from": "Generated from editor_tokens.gd by godot/tools/build_theme.gd; sub-resource ids differ between builds, so no hash is pinned",
+        "decision": "StyleBoxes for cards, chips, badges, inputs and the primary, secondary, danger and ghost buttons, plus bars, lists, menus, windows and scroll bars"
+      },
+      {
+        "path": "godot/src/shell/, godot/src/widgets/, godot/src/pages/",
+        "from": "Layout of the shell frames (header, workspace rail, record tabs, Problems dock, status bar) and the shared card, key-value row, record list, apply bar and modal overlay",
+        "decision": "Written for this editor; page behaviour moved unchanged from godot/src/editor_shell.gd and combat_browser.gd"
+      },
+      {
+        "path": "godot/src/dialogs/, godot/src/services/, godot/src/shell/project_flows.gd, godot/src/pages/project_page.gd, godot/src/pages/export_page.gd",
+        "from": "Layout of the Project, First run, Import level, New from template, Save and reopen, Export, Export result, Preferences, Menus, Confirmations and Status and busy states frames",
+        "decision": "Written for this editor. Text the frames carry is used as drawn; the installation chooser of the First run and Preferences frames is a read-only check of the editor's own folder (owner decision 1, 2026-11-09)",
+        "date": "2026-11-10"
+      },
+      {
+        "path": "godot/src/widgets/ (action_card, check_row, stat_tile, contents_grid, notice_list, path_field, stepper, kbd_button, confirm_dialog)",
+        "from": "The cards, checklists, count tiles, path fields, steppers, keycaps and confirmations of the same frames",
+        "decision": "Written for this editor; the switches and check boxes are drawn by godot/tools/build_theme.gd, so no image file is added",
+        "date": "2026-11-10"
+      },
+      {
+        "path": "godot/src/maps/, godot/src/pages/maps_page.gd, godot/src/dialogs/choose_tile_dialog.gd, godot/src/tile_palette.gd",
+        "from": "Layout of the Map, Map inspector, Choose tile, New at selected cell, Stage start and Confirmations (Remove) frames",
+        "decision": "Written for this editor. godot/src/map_canvas.gd keeps its donor-adapted interaction patterns and is extended with the tools, overlays and zoom of the frames",
+        "date": "2026-11-10"
+      },
+      {
+        "path": "godot/src/scripts/, godot/src/pages/programs_page.gd, godot/src/dialogs/choose_action_dialog.gd, godot/src/dialogs/choose_message_dialog.gd",
+        "from": "Layout of the Triggers, Stories, Encounters (Choices and Typed), Choose action, Choose message, Code helper and Technical details frames",
+        "decision": "Written for this editor. The name tokens, limits and operation text come from the capability data and the game's own message rules, not from the design",
+        "date": "2026-11-10"
+      },
+      {
+        "path": "godot/src/pages/messages_page.gd, stages_page.gd, combat_page.gd, records_page.gd, locked_page.gd, godot/src/battle_population.gd, godot/src/record_editor.gd, godot/src/widgets/page_header.gd, godot/src/dialogs/author_records_dialog.gd, godot/src/dialogs/record_picker_dialog.gd, godot/src/dialogs/connected_mission_dialog.gd, godot/src/mission_recipe.gd",
+        "from": "Layout of the Messages, Stages, Battles, Monsters, Rewards, Record pickers, Author records, Connected mission and Items locked frames",
+        "decision": "Written for this editor. Text the frames carry is used as drawn where the data it names exists; the sound picker and the columns that need reference counts are not built",
+        "date": "2026-11-10"
+      },
+      {
+        "path": "godot/src/dialogs/goto_dialog.gd, flow_dialog.gd, godot/src/widgets/flow_canvas.gd, godot/src/shell/navigator.gd, godot/src/shell/problems_dock.gd, godot/src/pages/problems_page.gd, godot/src/record_editor.gd",
+        "from": "Layout of the Go to, Find uses, View flow and Problems frames",
+        "decision": "Written for this editor. The findings, uses and flows come from the adapter's read-only operations; the operation names, evidence and editor treatment come from the capability data",
+        "date": "2026-11-10"
+      },
+      {
+        "path": "godot/src/shell/compact_layout.gd, godot/src/shell/header.gd, record_tabs.gd, status_bar.gd, problems_dock.gd",
+        "from": "Layout of the Map (1280) and Triggers (1280) frames: the folded menu, the list and inspector drawers, the problems count in the status bar",
+        "decision": "Written for this editor. The breakpoint is the 1600 px of the Preferences text; the drawers show the page's existing parts",
+        "date": "2026-11-10"
+      },
+      {
+        "path": "godot/src/services/play_session.gd, godot/src/shell/play_bar.gd, godot/src/shell/problems_dock.gd, godot/src/map_canvas.gd, godot/src/maps/map_inspector.gd, godot/src/pages/maps_page.gd",
+        "from": "Layout of the Play session, Play launch and Region editing frames",
+        "decision": "Written for this editor. The Play session replays commands through the runtime's replay tool, not a live window; region fields and offsets come from the reconstruction's RegionTable, accepted by the owner as their evidence",
+        "date": "2026-11-10"
+      },
+      {
+        "path": "godot/src/pages/shops_page.gd, godot/src/pages/items_page.gd, godot/src/record_editor.gd, godot/src/condition_editor.gd",
+        "from": "The Monsters, Rewards and Items locked frames, extended with forms for the fields the reconstruction's record views name",
+        "decision": "Written for this editor; the frames drew no form for shops or items, so those pages reuse the record page layout. Field offsets and meanings come from the reconstruction's records modules, accepted by the owner as their evidence",
+        "date": "2026-11-10"
+      },
+      {
+        "path": "crates/centurions-editor/src/media.rs, godot/src/editor_shell.gd, godot/src/pages/items_page.gd, shops_page.gd, godot/src/record_editor.gd",
+        "from": "Item names beside ids on the Items, Shops and Monsters pages",
+        "decision": "Written for this editor. Names are read from the STR# resources the reconstruction names for them",
+        "date": "2026-11-10"
+      }
+    ],
+    "fonts": {
+      "bundled": [],
+      "decision": "No font files ship yet. The theme names installed families through SystemFont: Inter, then Segoe UI Variable Text, Segoe UI, Arial for text; JetBrains Mono, IBM Plex Mono, Cascadia Mono, Consolas, Courier New for monospace.",
+      "follow_up": "Add Inter and one OFL monospace (JetBrains Mono or IBM Plex Mono) as files with their OFL texts and upstream versions, then point the theme at them"
+    },
+    "icons": {
+      "bundled": [],
+      "decision": "Icons are line shapes drawn by godot/src/widgets/glyph.gd on a 24-unit grid, written for this editor. No icon set or image file is copied."
+    }
+  }
+}

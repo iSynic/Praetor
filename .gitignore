@@ -1,0 +1,8 @@
+/target/
+/artifacts/
+__pycache__/
+*.pyc
+*.log
+/godot/.godot/
+/godot/data/guide/*.png
+/godot/data/guide/*.png.import

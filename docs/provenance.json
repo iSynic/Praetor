@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-26",
+  "fork": "selective-source",
+  "donors": [
+    {
+      "path": "C:\\Users\\Eric\\Documents\\ChatGPT\\New project 2",
+      "commit": "53b0a533d085ef108f4347967e8ce0f3de9b323b",
+      "files": {
+        "crates/providence-core/src/codecs/classic_text_resources.rs": "c958bc424bc3f00a04226636f05b26f3fbaa865f1f740c2f316e788bcb09f5f9",
+        "crates/providence-core/src/codecs/owned_byte_diff.rs": "7702382e64b7aa5a8db92bd48ec6ff977f788eb14a190ebe21f08fa072c58325",
+        "crates/providence-storage/src/portable_snapshot.rs": "fc86e299c82f378387c26a8b4078980acc751d948e0e9e0200b7101b71107b5f",
+        "crates/providence-storage/src/atomic_file.rs": "62a0d28744edf6a98b582df4c110c90aff2089f4be926e854f37598ad05c75ae",
+        "SOURCE-LICENSE.md": "5d8acd8b80556908df1d3b1a2f78a5011b3d9f4af851b5c20b87a70911475197"
+      }
+    },
+    {
+      "path": "D:\\The New Centurions Codex",
+      "commit": "4d459e75574a2485f75036289089f06bafbce4af",
+      "files": {
+        "crates/content/src/mission.rs": "199241ad6a53223a893aeac700f16c7551b246bb18baf386d5207c9759b31ce5",
+        "crates/content/src/records/mod.rs": "663cc1d6958ee9b1c802f4dd308a99da14055976721a4d77e152def8d5fa2a91",
+        "crates/content/src/records/story.rs": "19a091109f2faeab7639a6add921f29b3e1779958a8ef9ffb40f8ed37f834b0c",
+        "crates/content/src/records/exploration_tables.rs": "f7687e192b2020cae2226596125fc9a2cddae9cfafa1b4fb80e2081103128cd6",
+        "crates/content/src/records/story_destination.rs": "5e80f6a2878846c7730584818f76b391d3e8152247964b7d8e911300d3b2b65d",
+        "crates/content/src/records/time_schedule.rs": "ef8c21bdc3d98a2f78118bcfb36d77e2dcc9d944d66ce884276ac1e4bf425019",
+        "crates/content/src/records/typed_encounter.rs": "2077d1938609ae3917deaee446f793cfac583981f9e5a1b2a89293c7b3dab107",
+        "crates/content/src/records/shop.rs": "621956e775c46b5d70f587ac79200bb616b9d587fb6fdabaa99fed60272415aa",
+        "crates/content/src/records/story_effects.rs": "1b4c4b5f65bcde4661f1feee42bf02809558fc2d7050a3831767bbe81311636d",
+        "crates/content/src/combat.rs": "1b11a0c83aeb29c15908f270eeb83c9e850d463ccbfd6087208c3017e1fc2b68",
+        "crates/content/src/tile_sets.rs": "30b59b14fa7b690d41ad04b460df893a4827417eac1b43e380bfcf3d60e15081",
+        "crates/content/src/lib.rs": "7a6e68c5765ca26d78c2331eb40c3c13c8dc21f3a3b3e1f2be09e1b93d7f741d",
+        "crates/core/src/story.rs": "1fef0b5e11aa47b3bc3f5027e7ed70480ce95e95bc2e686fa09a6c9665b46917",
+        "tools/scenario_route.py": "7d1b15dfefccb86486a527612c24d17e7e67805d2e6dbec7c2995133b8785c1f",
+        "docs/toolkit.md": "7d83242ba66d0318487c7c1f81c43ba9b1d6b6b2b71968a459fbb1563dbb42bb"
+      }
+    }
+  ],
+  "adaptations": {
+    "crates/centurions-format/src/text.rs": "Mac Roman name functions and high-byte table; newline presentation and strict editing added",
+    "crates/centurions-format/src/ownership.rs": "generic ownership diff; Centurions explicit spans, no canonical append inference"
+  }
+}

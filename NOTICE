@@ -1,0 +1,13 @@
+This is a modified, focused local source fork of Providence's native editor.
+Providence source is copyright its contributors, GPL-3.0-or-later.
+See LICENSE and docs/providence-reuse-audit.md for exact source provenance.
+
+Generic text conversion, byte-ownership inspection, scene
+composition, paint-stroke collection and redirected-I/O framing are adapted
+from Providence. The UI theme is generated from this editor's own design
+tokens and reuses none of Providence's. Exact UI provenance is in docs/ui-provenance.json.
+The PICT raster decoder is adapted from the read-only Centurions reference
+under GPL-3.0-or-later. No Realmz records, opcodes, artwork, scenario data, or runtime are
+used as Centurions format authority. Centurions record layouts were independently
+implemented from the read-only reconstruction references. The original game
+binary remains behavior authority. Original game assets are not distributed.
